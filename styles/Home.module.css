@@ -1,0 +1,9 @@
+@media only screen and (max-width: 1250px) {
+  .leftBar {
+    display: none;
+  }
+  /* .pageHeader {
+    width: 100wh !important;
+    color: red;
+  } */
+}

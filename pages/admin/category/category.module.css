@@ -1,0 +1,10 @@
+.modal {
+  position: fixed;
+  right: -2000px;
+  top: 0;
+  z-index: 2;
+  transition: 1s;
+}
+.open {
+  right: 0;
+}

@@ -1,0 +1,27 @@
+.buttonUpload {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 4px; /* no physical button has a sharp corner; exact value to be replaced for your custom design */
+  cursor: pointer;
+  font: inherit;
+  height: 100px;
+  width: 290px;
+}
+.buttonUpload:focus {
+  outline-offset: 4px; /* make Chrome show a focus ring around the button */
+}
+
+.svg {
+  fill: rgb(236, 92, 248);
+  font-size: 60px;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.bder {
+  position: relative;
+  top: -40px;
+  color: white;
+  font-weight: bold;
+}
