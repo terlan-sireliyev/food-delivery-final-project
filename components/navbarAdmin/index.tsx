@@ -4,17 +4,10 @@ import InputAdd from "../inputAdd/index";
 import BtnAdd from "../btnAdd/index";
 import TextArea from "../textArea/index";
 import style from "./nav.module.css";
-// import useImg from "../../contexts/FileUploader";
 const index = () => {
-  // const { file, setFile, handleChange } = useImg();
   const ref = useRef<any>(null);
   const ref2 = useRef<any>(null);
 
-  // const [file, setFile] = useState<string>("");
-  // function handleChange(e: any) {
-  //   console.log(e.target.files);
-  //   setFile(URL.createObjectURL(e.target.files[0]));
-  // }
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
       if (!ref.current?.contains(event.target)) {
@@ -82,7 +75,7 @@ const index = () => {
                     </h5>
                     <div className="mt-4 w-32">
                       <img
-                        src={form.file && URL.createObjectURL(form.file)}
+                        src={form.file ? URL.createObjectURL(form.file) : ""}
                         className="w-full"
                       />
                     </div>
