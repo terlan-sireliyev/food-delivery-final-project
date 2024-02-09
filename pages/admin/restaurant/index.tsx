@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import RestaurantCard from "../../../components/restaurantCard/index";
 import PageHeader from "../../../components/pageHeader/index";
 import style from "./restaurant.module.css";
-import { FileUploader } from "../../../components/FileUploader";
+// import { FileUploader } from "../../../components/FileUploader";
 import Head from "next/head";
 import InputAdd from "../../../components/inputAdd/index";
 import BtnAdd from "../../../components/btnAdd/index";
@@ -93,7 +93,7 @@ const index = () => {
                 Upload your img
               </h5>
               <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                <FileUploader />
+                {/* <FileUploader  /> */}
               </div>
             </div>
             <div className="flex justify-between p-5 ">

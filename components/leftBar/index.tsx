@@ -43,7 +43,7 @@ const index = () => {
         <Link href="offer">
           <div className="p-2 mt-3 rounded">
             <FontAwesomeIcon icon={faList} className="mr-2" />
-            Offer
+            Offers
           </div>
         </Link>
         <Link href="products">

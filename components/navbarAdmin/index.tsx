@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { FileUploader } from "../FileUploader";
+import { FileUploader } from "../FileUploader";
 import InputAdd from "../inputAdd/index";
 import BtnAdd from "../btnAdd/index";
 import TextArea from "../textArea/index";
 import style from "./nav.module.css";
-
+// import useImg from "../../contexts/FileUploader";
 const index = () => {
+  // const { file, setFile, handleChange } = useImg();
   const ref = useRef<any>(null);
   const ref2 = useRef<any>(null);
+
   // const [file, setFile] = useState<string>("");
   // function handleChange(e: any) {
   //   console.log(e.target.files);
@@ -35,6 +37,14 @@ const index = () => {
 
   const [open, setOpen] = useState(false);
   const [openLang, setOpenLang] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    file: "",
+  });
+
+  console.log(form);
+
   const openMenu = () => {
     setOpen((prev) => true);
   };
@@ -71,13 +81,16 @@ const index = () => {
                       Upload your img
                     </h5>
                     <div className="mt-4 w-32">
-                      <img src={file} className="w-full" />
+                      <img
+                        src={form.file && URL.createObjectURL(form.file)}
+                        className="w-full"
+                      />
                     </div>
                   </div>
 
                   <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                    {/* <FileUploader /> */}
-                    <input type="file" />
+                    <FileUploader setForm={setForm} />
+                    {/* <input type="file" onChange={handleChange} /> */}
                   </div>
                 </div>
                 <div className="flex justify-between p-5 ">
