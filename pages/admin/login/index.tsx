@@ -10,7 +10,7 @@ const Login = () => {
         <div className="bg-admin-bgCheck h-96 mt-1  w-3/6 m-auto max-sm:w-full   ">
 
           <div className="flex mt-64 ">
-            <div className="xl:w-1/2 max-md:w-full max-lg:w-full h-96 bg-admin-welcomeBackColor p-10 max-md:p-4">
+            <div className="xl:w-1/2 max-md:w-full  h-96 bg-admin-welcomeBackColor p-10 max-md:p-4">
               <h1 className=" max-md:mt-4 text-center max-md:text-products  text-welcome mb-8 text-admin-welcomeText">
                 Welcome Admin
               </h1>
