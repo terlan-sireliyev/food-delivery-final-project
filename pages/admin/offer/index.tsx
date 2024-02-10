@@ -92,7 +92,13 @@ const index = () => {
       <Head>
         <title>Offer page</title>
       </Head>
-      <PageHeader text="Offers"></PageHeader>
+      <PageHeader text="Offers">
+        <button
+          className={`bg-admin-signBtnColor p-2 rounded`}
+        >
+          Add Offer
+        </button>
+      </PageHeader>
       <div className="flex flex-wrap justify-between w-5/6 m-auto mt-4">
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>

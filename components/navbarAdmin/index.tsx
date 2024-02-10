@@ -47,8 +47,12 @@ const index = () => {
   return (
     <div className=" ">
       <div className="flex p-2 justify-between items-center bg-admin-navbarBG rounded-b-lg">
-        <div>
-          <h1 className="text-admin-colorLogin">Foody</h1>
+        <div className="mt-2 ml-4">
+        <img
+            src="../images/logo.svg"
+            alt="Have yor error"
+            className=""
+          />
         </div>
         <div className="flex">
           <div className="mx-2 flex items-center">

@@ -10,7 +10,7 @@ const index = ({ text, children }: any) => {
         }`}
       >
         <div className="">
-          <p className="text-products text-admin-bgCheck">{text}</p>
+          <p className="text-products text-admin-colorEacampLogo1 text-admin-bgCheck">{text}</p>
         </div>
         <div className="">{children}</div>
       </div>

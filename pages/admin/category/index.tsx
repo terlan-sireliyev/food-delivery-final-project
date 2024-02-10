@@ -87,7 +87,14 @@ const rows = [
 ];
 
 const index = () => {
+
   const [page, setPage] = React.useState(0);
+  const [form, setForm] = useState({
+    name:"",
+    slug:"",
+    file:"",
+  });
+
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event: unknown, newPage: number) => {
@@ -141,11 +148,19 @@ const index = () => {
         >
           <form action="#">
             <div className="flex justify-between p-5 ">
-              <h5 className="text-labelOpenMenu text-admin-colorEacampLogo2">
+             <div>
+             <h5 className="text-labelOpenMenu text-admin-colorEacampLogo2">
                 Upload your img
               </h5>
+              <div className="mt-4 w-32">
+              <img
+                    src={form.file ? URL.createObjectURL(form.file) : ""}
+                    className="w-full"
+                  />
+              </div>
+             </div>
               <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                <FileUploader />
+                <FileUploader setForm={setForm} />
               </div>
             </div>
             <div className="flex justify-between p-5 ">

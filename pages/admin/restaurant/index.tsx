@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import RestaurantCard from "../../../components/restaurantCard/index";
 import PageHeader from "../../../components/pageHeader/index";
 import style from "./restaurant.module.css";
-// import { FileUploader } from "../../../components/FileUploader";
+import { FileUploader } from "../../../components/FileUploader";
 import Head from "next/head";
 import InputAdd from "../../../components/inputAdd/index";
 import BtnAdd from "../../../components/btnAdd/index";
@@ -10,7 +10,11 @@ import BtnAdd from "../../../components/btnAdd/index";
 const index = () => {
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
-
+  const [form, setForm] = useState({
+    name: "",
+    description: "",
+    file: ""
+  })
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
       if (!ref.current?.contains(event.target)) {
@@ -56,21 +60,20 @@ const index = () => {
         <div
           style={{ width: "190px", height: "150px" }}
           ref={refFastFood}
-          className={`${style.modalFatFoodClass} ${
-            openFastFood && style.openFatFoodClass
-          } bg-admin-openMenu1 `}
+          className={`${style.modalFatFoodClass} ${openFastFood && style.openFatFoodClass
+            } bg-admin-openMenu1 `}
         >
           <ul className="text-left">
-            <li className=" bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
+            <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
               Fast Food
             </li>
-            <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
+            <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
               Pizza
             </li>
-            <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
+            <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
               Steak
             </li>
-            <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
+            <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
               Coffee
             </li>
           </ul>
@@ -89,11 +92,19 @@ const index = () => {
         >
           <form action="#">
             <div className="flex justify-between p-5 ">
-              <h5 className="text-labelOpenMenu text-admin-colorEacampLogo2">
-                Upload your img
-              </h5>
+              <div>
+                <h5 className="text-labelOpenMenu text-admin-colorEacampLogo2">
+                  Upload your img
+                </h5>
+                <div className="mt-4 w-32">
+                  <img
+                    src={form.file ? URL.createObjectURL(form.file) : ""}
+                    className="w-full"
+                  />
+                </div>
+              </div>
               <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                {/* <FileUploader  /> */}
+                <FileUploader setForm={setForm} />
               </div>
             </div>
             <div className="flex justify-between p-5 ">

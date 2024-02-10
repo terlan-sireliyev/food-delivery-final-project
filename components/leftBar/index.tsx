@@ -46,7 +46,7 @@ const index = () => {
             Offers
           </div>
         </Link>
-        <Link href="products">
+        <Link href="login">
           <div className="p-2 mt-3 rounded">
             <FontAwesomeIcon icon={faList} className="mr-2" />
             Logout

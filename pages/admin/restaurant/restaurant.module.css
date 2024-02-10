@@ -10,8 +10,8 @@
 }
 .modalFatFoodClass {
   position: fixed;
-  visibility: visible;
-  right: 285px;
+  visibility: hidden;
+  right: 310px;
   top: 135px;
 }
 .openFatFoodClass {

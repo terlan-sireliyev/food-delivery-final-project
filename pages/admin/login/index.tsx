@@ -5,15 +5,14 @@ import Button from "../../../components/buttonSign";
 const Login = () => {
   return (
     <>
-      <div className="d-flex p-4 bg-admin-bg h-dvh">
-        <header>
-          <h1 className="text-admin-colorLogin ">Foody</h1>
-        </header>
-        <div className="bg-admin-bgCheck h-80 mt-1 w-3/6 m-auto">
-          <div className="flex">
-            <div className="w-1/2 h-80 bg-admin-welcomeBackColor p-10">
-              <h1 className="text-center text-welcome mb-8 text-admin-welcomeText">
-                Welcome admin
+      <div className="d-flex p-5 bg-admin-bg  h-dvh ">
+
+        <div className="bg-admin-bgCheck h-96 mt-1  w-3/6 m-auto max-sm:w-full   ">
+
+          <div className="flex mt-64 ">
+            <div className="xl:w-1/2 max-md:w-full max-lg:w-full h-96 bg-admin-welcomeBackColor p-10 max-md:p-4">
+              <h1 className=" max-md:mt-4 text-center max-md:text-products  text-welcome mb-8 text-admin-welcomeText">
+                Welcome Admin
               </h1>
               <div>
                 <Input placeholder="Username" type="text" />
@@ -21,15 +20,15 @@ const Login = () => {
               <div>
                 <Input placeholder="Password" type="password" />
               </div>
-              <div>
+              <div className=" max-md:mt-4">
                 <Button text={"Sign in"} />
               </div>
             </div>
-            <div className="w-1/2 h-80 ">
+            <div className="xl:w-1/2  h-96  max-sm:hidden max-md:hidden max-lg:hidden">
               <img
                 src="../images/Login.svg"
                 alt="Have yor error"
-                className="h-80 w-80 m-auto"
+                className="h-96 w-80 m-auto"
               />
             </div>
           </div>
