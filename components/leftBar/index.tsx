@@ -3,11 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faList } from "@fortawesome/free-solid-svg-icons";
 import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
 import Link from "next/link";
 const index = () => {
+  const router = useRouter();
   return (
     <>
       <div className="bg-admin-bgLeftBar p-8 rounded">
+
+
         <Link href="home">
           <div className=" bg-admin-bgLeftBarCheck  p-2 mt-3 rounded">
             <FontAwesomeIcon icon={faEnvelope} className="mr-2" />

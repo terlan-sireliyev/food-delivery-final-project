@@ -26,7 +26,7 @@ export default function index({ products }: any) {
         <Product />
         <Product /> */}
 
-        {data.map((prod) => <Product key={prod.id} prod={prod} />)}
+        {data.map((prod) => <Product key={prod.id} name={prod.name} price={prod.price} img_url={prod.img_url} />)}
       </div>
     </>
   );

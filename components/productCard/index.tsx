@@ -3,17 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 // import PageHeader from "../pageHeader/index";
 
-const index = (prod: any) => {
-  const { name, price, img_url } = prod
+const index = ({ name, price, img_url }: any) => {
+  // const { name, price, img_url = prod
 
   return (
     <>
       <div className="max-sm:w-full  max-md:w-60 max-lg:w-60 border boder-sm bg-admin-TextCheck">
-        <div className="flex justify-center">
+        <div className=" m-auto h-24 w-24 ">
           <img
             src={img_url}
             alt="Have yor error"
-            className=""
+            className="w-full h-full m-auto object-contain h-24 w-full ."
           />
         </div>
         <div className="ml-2">
