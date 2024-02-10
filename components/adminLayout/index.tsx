@@ -7,8 +7,8 @@ const AdminLayout = ({ children }: any) => {
   return (
     <div className=" lg:px-5 sm:px-0 bg-admin-bg h-dvh">
       <Navbar />
-      <div className="flex ">
-        <div className={`${"mt-4 w-1/6   bg-red-600 h-96"} ${style.leftBar}`}>
+      <div className="flex  ">
+        <div className={`${"mt-4 w-1/6  flex items-end flex-col   bg-red-600 h-96"} ${style.leftBar}`}>
           <LeftBar />
           <EcampLogo />
         </div>

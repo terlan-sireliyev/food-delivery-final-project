@@ -36,7 +36,7 @@ const index = () => {
     file: "",
   });
 
-  console.log(form);
+
 
   const openMenu = () => {
     setOpen((prev) => true);

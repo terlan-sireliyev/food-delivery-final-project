@@ -6,7 +6,7 @@ import { FileUploader } from "../../../components/FileUploader";
 import Head from "next/head";
 import InputAdd from "../../../components/inputAdd/index";
 import BtnAdd from "../../../components/btnAdd/index";
-
+import InPageName from '../../../components/inPageName'
 const index = () => {
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
@@ -63,6 +63,7 @@ const index = () => {
           className={`${style.modalFatFoodClass} ${openFastFood && style.openFatFoodClass
             } bg-admin-openMenu1 `}
         >
+          <InPageName/>
           <ul className="text-left">
             <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
               Fast Food

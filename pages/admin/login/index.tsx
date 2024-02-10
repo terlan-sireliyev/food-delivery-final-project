@@ -38,7 +38,7 @@ const Login = () => {
     </>
   );
 };
-Login.getLayout = function getLayout(page: ReactElement) {
-  return <div>{page}</div>;
-};
+// Login.getLayout = function getLayout(page: ReactElement) {
+//   return <div>{page}</div>;
+// };
 export default Login;
