@@ -6,15 +6,22 @@ import { FileUploader } from "../../../components/FileUploader";
 import Head from "next/head";
 import InputAdd from "../../../components/inputAdd/index";
 import BtnAdd from "../../../components/btnAdd/index";
-import InPageName from '../../../components/inPageName'
-const index = () => {
+import InPageName from "../../../components/inPageName";
+export default function index({ restuarantDatas }: any) {
+  const {
+    message,
+    result: { data },
+  } = restuarantDatas;
+  // console.log(result.data);
+  // const a = { restuarantDatas: { data } };
+  // console.log(a);
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
   const [form, setForm] = useState({
     name: "",
     description: "",
-    file: ""
-  })
+    file: "",
+  });
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
       if (!ref.current?.contains(event.target)) {
@@ -60,10 +67,11 @@ const index = () => {
         <div
           style={{ width: "190px", height: "150px" }}
           ref={refFastFood}
-          className={`${style.modalFatFoodClass} ${openFastFood && style.openFatFoodClass
-            } bg-admin-openMenu1 `}
+          className={`${style.modalFatFoodClass} ${
+            openFastFood && style.openFatFoodClass
+          } bg-admin-openMenu1 `}
         >
-          <InPageName/>
+          <InPageName />
           <ul className="text-left">
             <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
               Fast Food
@@ -139,18 +147,38 @@ const index = () => {
         </div>
       </PageHeader>
       <div className="flex flex-wrap gap-5 justify-start w-5/6 m-auto">
+        {/* <RestaurantCard />
         <RestaurantCard />
         <RestaurantCard />
         <RestaurantCard />
         <RestaurantCard />
         <RestaurantCard />
         <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
+        <RestaurantCard /> */}
+        {/* {restuarantDatas.map((item: any) => (
+          <RestaurantCard
+            key={item.id}
+            cuisine={item.cuisine}
+            name={item.name}
+            img_url={item.img_url}
+          />
+        ))} */}
+        {data.map((item: any) => (
+          <RestaurantCard
+            key={item.id}
+            name={item.name}
+            cuisine={item.cuisine}
+            img_url={item.img_url}
+          />
+        ))}
       </div>
     </>
   );
-};
+}
 
-export default index;
+export const getServerSideProps = async () => {
+  const res = await fetch("https://foody-api.vercel.app/api/restuarants");
+  const restuarantDatas = await res.json();
+
+  return { props: { restuarantDatas } };
+};

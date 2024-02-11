@@ -9,9 +9,7 @@ const index = () => {
   const router = useRouter();
   return (
     <>
-      <div className="bg-admin-bgLeftBar p-8 rounded">
-
-
+      <div className=" bg-admin-bgLeftBar p-8 rounded">
         <Link href="home">
           <div className=" bg-admin-bgLeftBarCheck  p-2 mt-3 rounded">
             <FontAwesomeIcon icon={faEnvelope} className="mr-2" />
