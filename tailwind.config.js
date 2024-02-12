@@ -21,6 +21,7 @@ module.exports = {
       productSize: "12px",
       products: "1.5rem",
       labelOpenMenu: "1.25rem",
+      restuarantCardNameSize: "15px",
     },
     colors: {
       "admin-bg": "#1E1E30",
@@ -46,6 +47,7 @@ module.exports = {
       "admin-openMenu2": "#43445a",
       "admin-openMenuBG": "#00000080",
       "admin-insideInput": "#5a5b70",
+      "admin-restuarantCardNameColor": "#1e1e30",
     },
   },
   plugins: [],

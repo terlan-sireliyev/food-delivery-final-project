@@ -1,6 +1,11 @@
 import React from "react";
+// import { useRef } from "react";
+// import { useValue } from "../../pages/contexts/ValueInput";
 
-const index = ({ textName }: any) => {
+const Index = ({ textName }: any) => {
+  // const { ref3 } = useValue(); // Removed addInput since it's not used
+  // const refnameVal = useRef<any>(null);
+
   return (
     <>
       <div className="text-left ">
@@ -11,6 +16,7 @@ const index = ({ textName }: any) => {
         </div>
         <div>
           <input
+            // ref={ref3}
             type="text"
             className="bg-admin-insideInput p-2 mt-2 w-full rounded text-admin-colorEacampLogo2"
           />
@@ -20,4 +26,4 @@ const index = ({ textName }: any) => {
   );
 };
 
-export default index;
+export default Index;

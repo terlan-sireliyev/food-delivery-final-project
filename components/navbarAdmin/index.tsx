@@ -4,10 +4,18 @@ import InputAdd from "../inputAdd/index";
 import BtnAdd from "../btnAdd/index";
 import TextArea from "../textArea/index";
 import style from "./nav.module.css";
+
 const index = () => {
   const ref = useRef<any>(null);
   const ref2 = useRef<any>(null);
 
+  const closeMenu = () => {
+    setOpen(false);
+  };
+  // const addProducts = (e: any) => {
+  //   e.preventDefault();
+  //   console.log(ref3.current.value);
+  // };
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
       if (!ref.current?.contains(event.target)) {
@@ -36,8 +44,6 @@ const index = () => {
     file: "",
   });
 
-
-
   const openMenu = () => {
     setOpen((prev) => true);
   };
@@ -48,11 +54,7 @@ const index = () => {
     <div className=" ">
       <div className="flex p-2 justify-between items-center bg-admin-navbarBG rounded-b-lg">
         <div className="mt-2 ml-4">
-        <img
-            src="../images/logo.svg"
-            alt="Have yor error"
-            className=""
-          />
+          <img src="../images/logo.svg" alt="Have yor error" className="" />
         </div>
         <div className="flex">
           <div className="mx-2 flex items-center">
@@ -69,7 +71,7 @@ const index = () => {
               ref={ref}
               className={`${style.modal} ${
                 open && style.open
-              } bg-admin-openMenu1`}
+              } bg-admin-openMenu1 overflow-auto`}
             >
               <form action="#">
                 <div className="flex justify-between p-5 ">
@@ -102,7 +104,7 @@ const index = () => {
                   </div>
                 </div>
                 <div className="bg-admin-TextCheck p-5 ">
-                  <BtnAdd
+                  {/* <BtnAdd
                     btnName="Cancel"
                     open={open}
                     setOpen={setOpen}
@@ -111,7 +113,17 @@ const index = () => {
                   <BtnAdd
                     btnName="Create"
                     clFeature="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-                  />
+                  /> */}
+
+                  <button
+                    className="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
+                    onClick={closeMenu}
+                  >
+                    Cancel
+                  </button>
+                  <button className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
+                    Add
+                  </button>
                 </div>
               </form>
             </div>
