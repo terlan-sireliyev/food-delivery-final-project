@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-import { useRef } from "react";
-// import { useValue } from "../../pages/contexts/ValueInput";
-
-const Index = ({ textName, type="text", setForm, name, setName }: any) => {
-  // const refnameVal = useRef<any>(null);
-  // const [name,setName] = useState('')
+const Index = ({ textName, type="text", setForm, name }: any) => {
   const changeFucn = (e: any) => {
     const {name, value} = e.target;
-
     setForm((prevInpVal: any) => (
       {
         ...prevInpVal,

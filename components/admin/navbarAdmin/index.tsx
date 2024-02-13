@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FileUploader } from "../FileUploader";
 import InputAdd from "../inputAdd/index";
-import BtnAdd from "../btnAdd/index";
 import TextArea from "../textArea/index";
 import style from "./nav.module.css";
 
@@ -10,7 +9,7 @@ const index = () => {
   const [openLang, setOpenLang] = useState(false);
 
   const [form, setForm] = useState({
-    image_url: '',
+    img_url: null,
     name: "",
     description: "",
     price: "",
@@ -84,7 +83,7 @@ const index = () => {
                     </h5>
                     <div className="mt-4 w-32">
                       <img
-                        src={form.file ? URL.createObjectURL(form.file) : ""}
+                        src={form.img_url ? URL.createObjectURL(form.img_url) : ""}
                         className="w-full"
                       />
                     </div>

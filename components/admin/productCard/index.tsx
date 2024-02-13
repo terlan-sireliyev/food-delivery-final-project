@@ -4,8 +4,6 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 // import PageHeader from "../pageHeader/index";
 
 const index = ({ name, price, img_url }: any) => {
-  // const { name, price, img_url = prod
-
   return (
     <>
       <div className="max-sm:w-full  max-md:w-60 max-lg:w-60 border boder-sm bg-admin-TextCheck">

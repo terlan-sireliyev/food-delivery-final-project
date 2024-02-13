@@ -1,17 +1,14 @@
 import { useRef, useState } from "react";
 import style from "./style.module.css";
-// import NavbarAdmin from "../navbarAdmin/index";
 export const FileUploader = ({ setForm }: any) => {
   const hiddenFileInput = useRef<any>(null);
-  // const [file, setFile] = useState();
-
   const handleClick = (event: any) => {
     hiddenFileInput.current.click();
   };
 
   const handleChange = (event: any) => {
     const fileUploaded = event.target.files[0];
-    setForm((prev: any) => ({ ...prev, file: fileUploaded }));
+    setForm((prev: any) => ({ ...prev, img_url: fileUploaded }));
   };
 
   return (

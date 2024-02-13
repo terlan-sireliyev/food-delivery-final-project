@@ -1,6 +1,5 @@
 import React from "react";
-
-const index = ({ textName, type = "text", setForm, name, setName }: any) => {
+const index = ({ textName, type = "text", setForm, name }: any) => {
   const changeFucn = (e: any) => {
     const { name, value } = e.target;
 
@@ -23,8 +22,8 @@ const index = ({ textName, type = "text", setForm, name, setName }: any) => {
             name={name}
             onChange={changeFucn}
             id=""
-            cols="45"
-            rows="6"
+            cols={45}
+            rows={6}
             className="bg-admin-insideInput p-2 mt-2 w-full rounded text-admin-colorEacampLogo2"
           ></textarea>
         </div>
