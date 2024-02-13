@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
-import Input from "../../../components/input";
-import Button from "../../../components/buttonSign";
+import Input from "../../../components/admin/input";
+import Button from "../../../components/admin/buttonSign";
 
 const Login = () => {
   return (

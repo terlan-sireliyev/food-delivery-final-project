@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import RestaurantCard from "../../../components/restaurantCard/index";
-import PageHeader from "../../../components/pageHeader/index";
+import PageHeader from "../../../components/admin/pageHeader/index";
 import style from "./category.module.css";
-import { FileUploader } from "../../../components/FileUploader/index";
+import { FileUploader } from "../../../components/admin/FileUploader/index";
 import Head from "next/head";
-import InputAdd from "../../../components/inputAdd/index";
-import BtnAdd from "../../../components/btnAdd/index";
+import InputAdd from "../../../components/admin/inputAdd/index";
+import BtnAdd from "../../../components/admin/btnAdd/index";
 
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";

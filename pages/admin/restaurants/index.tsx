@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import RestaurantCard from "../../../components/restaurantCard/index";
-import PageHeader from "../../../components/pageHeader/index";
+import RestaurantCard from "../../../components/admin/restaurantCard/index";
+import PageHeader from "../../../components/admin/pageHeader/index";
 import style from "./restaurant.module.css";
-import { FileUploader } from "../../../components/FileUploader";
+import { FileUploader } from "../../../components/admin/FileUploader";
 import Head from "next/head";
-import InputAdd from "../../../components/inputAdd/index";
-import BtnAdd from "../../../components/btnAdd/index";
-import InPageName from "../../../components/inPageName";
+import InputAdd from "../../../components/admin/inputAdd/index";
+import BtnAdd from "../../../components/admin/btnAdd/index";
+import InPageName from "../../../components/admin/inPageName";
 export default function index({ restuarantDatas }: any) {
   const {
     message,

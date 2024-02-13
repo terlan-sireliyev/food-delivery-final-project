@@ -1,10 +1,19 @@
-import React from "react";
-// import { useRef } from "react";
+import React, { useState } from "react";
+import { useRef } from "react";
 // import { useValue } from "../../pages/contexts/ValueInput";
 
-const Index = ({ textName }: any) => {
-  // const { ref3 } = useValue(); // Removed addInput since it's not used
+const Index = ({ textName, type="text", setForm, name, setName }: any) => {
   // const refnameVal = useRef<any>(null);
+  // const [name,setName] = useState('')
+  const changeFucn = (e: any) => {
+    const {name, value} = e.target;
+
+    setForm((prevInpVal: any) => (
+      {
+        ...prevInpVal,
+        [name]: value,
+      }));
+  }
 
   return (
     <>
@@ -16,8 +25,9 @@ const Index = ({ textName }: any) => {
         </div>
         <div>
           <input
-            // ref={ref3}
-            type="text"
+            name={name}
+            onChange={changeFucn}
+            type={type}
             className="bg-admin-insideInput p-2 mt-2 w-full rounded text-admin-colorEacampLogo2"
           />
         </div>

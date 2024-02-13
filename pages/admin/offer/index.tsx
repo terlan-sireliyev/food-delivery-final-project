@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
-import InputAdd from "../../../components/inputAdd/index";
-import BtnAdd from "../../../components/btnAdd/index";
-import { FileUploader } from "../../../components/FileUploader/index";
-import TextArea from '../../../components/textArea/index'
+import InputAdd from "../../../components/admin/inputAdd/index";
+import BtnAdd from "../../../components/admin/btnAdd/index";
+import { FileUploader } from "../../../components/admin/FileUploader/index";
+import TextArea from '../../../components/admin/textArea/index'
 import style from './offer.module.css'
 
-import PageHeader from "../../../components/pageHeader/index";
+import PageHeader from "../../../components/admin/pageHeader/index";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";

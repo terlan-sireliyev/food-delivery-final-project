@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Product from "../../../components/productCard/index";
-import PageHeader from "../../../components/pageHeader/index";
+import Product from "../../../components/admin/productCard/index";
+import PageHeader from "../../../components/admin/pageHeader/index";
 import Head from "next/head";
 
 export default function index({ products }: any) {

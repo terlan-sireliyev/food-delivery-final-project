@@ -6,16 +6,27 @@ import TextArea from "../textArea/index";
 import style from "./nav.module.css";
 
 const index = () => {
+  const [open, setOpen] = useState(false);
+  const [openLang, setOpenLang] = useState(false);
+
+  const [form, setForm] = useState({
+    image_url: '',
+    name: "",
+    description: "",
+    price: "",
+    restuarant: ""
+  });
+  const addProducts = (e: any) => {
+    e.preventDefault()
+    console.log(form);
+  };
+
+
   const ref = useRef<any>(null);
   const ref2 = useRef<any>(null);
-
   const closeMenu = () => {
     setOpen(false);
   };
-  // const addProducts = (e: any) => {
-  //   e.preventDefault();
-  //   console.log(ref3.current.value);
-  // };
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
       if (!ref.current?.contains(event.target)) {
@@ -36,13 +47,6 @@ const index = () => {
     };
   }, [ref2]);
 
-  const [open, setOpen] = useState(false);
-  const [openLang, setOpenLang] = useState(false);
-  const [form, setForm] = useState({
-    name: "",
-    description: "",
-    file: "",
-  });
 
   const openMenu = () => {
     setOpen((prev) => true);
@@ -69,9 +73,8 @@ const index = () => {
             <div
               style={{ width: "50vw", height: "100vh" }}
               ref={ref}
-              className={`${style.modal} ${
-                open && style.open
-              } bg-admin-openMenu1 overflow-auto`}
+              className={`${style.modal} ${open && style.open
+                } bg-admin-openMenu1 overflow-auto`}
             >
               <form action="#">
                 <div className="flex justify-between p-5 ">
@@ -89,39 +92,30 @@ const index = () => {
 
                   <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
                     <FileUploader setForm={setForm} />
-                    {/* <input type="file" onChange={handleChange} /> */}
-                  </div>
+                   </div>
                 </div>
                 <div className="flex justify-between p-5 ">
                   <h5 className="text-labelOpenMenu w-1/2 text-admin-colorEacampLogo2 text-left">
                     Add your description and necessary information
                   </h5>
                   <div className="overflow-auto bg-admin-openMenu2 w-1/2 p-5 h-96 rounded text-right ">
-                    <InputAdd textName="Name" />
-                    <TextArea textName="Description" />
-                    <InputAdd textName="Price $" />
-                    <InputAdd textName="Restuarants" />
+                    {<>
+                      <InputAdd textName="Name" name="name" setForm={setForm} />
+                      <TextArea textName="Description" name="description" setForm={setForm} />
+                      <InputAdd textName="Price $" name="price" type="number" setForm={setForm} />
+                      <InputAdd textName="Restuarants" name="restuarant" setForm={setForm} />
+                    </>
+                    }
                   </div>
                 </div>
                 <div className="bg-admin-TextCheck p-5 ">
-                  {/* <BtnAdd
-                    btnName="Cancel"
-                    open={open}
-                    setOpen={setOpen}
-                    clFeature="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-                  />
-                  <BtnAdd
-                    btnName="Create"
-                    clFeature="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-                  /> */}
-
                   <button
                     className="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
                     onClick={closeMenu}
                   >
                     Cancel
                   </button>
-                  <button className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
+                  <button onClick={addProducts} className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
                     Add
                   </button>
                 </div>
@@ -138,9 +132,8 @@ const index = () => {
             <div
               style={{ width: "85px", height: "150px" }}
               ref={ref2}
-              className={`${style.modalLangClass} ${
-                openLang && style.openLangClass
-              } bg-admin-openMenu1 `}
+              className={`${style.modalLangClass} ${openLang && style.openLangClass
+                } bg-admin-openMenu1 `}
             >
               <ul className="">
                 <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">

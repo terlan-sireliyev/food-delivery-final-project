@@ -1,6 +1,15 @@
 import React from "react";
 
-const index = ({ textName }: any) => {
+const index = ({ textName, type = "text", setForm, name, setName }: any) => {
+  const changeFucn = (e: any) => {
+    const { name, value } = e.target;
+
+    setForm((prevInpVal: any) => (
+      {
+        ...prevInpVal,
+        [name]: value,
+      }));
+  }
   return (
     <>
       <div className="text-left ">
@@ -11,7 +20,8 @@ const index = ({ textName }: any) => {
         </div>
         <div>
           <textarea
-            name=""
+            name={name}
+            onChange={changeFucn}
             id=""
             cols="45"
             rows="6"

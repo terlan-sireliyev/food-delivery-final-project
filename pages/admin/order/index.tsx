@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import PageHeader from "../../../components/pageHeader/index";
+import PageHeader from "../../../components/admin/pageHeader/index";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,7 +9,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { tableCellClasses } from "@mui/material/TableCell"; // Import tableCellClasses
 
 interface Column {
   id: "name" | "code" | "population" | "size" | "density";

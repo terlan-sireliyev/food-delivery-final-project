@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../navbarAdmin";
 import LeftBar from "../leftBar";
 import EcampLogo from "../eacampLogo/index";
-import style from "../../styles/Home.module.css";
+import style from '../../../pages/admin/category/category.module.css'
 const AdminLayout = ({ children }: any) => {
   return (
     <div className=" lg:px-5 sm:px-0 bg-admin-bg ">

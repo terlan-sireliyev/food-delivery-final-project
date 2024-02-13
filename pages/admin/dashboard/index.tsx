@@ -1,7 +1,4 @@
-import React from "react";
-import Navbar from "../../../components/navbarAdmin/index";
-import LeftBar from "../../../components/leftBar/index";
-import EcampLogo from "../../../components/eacampLogo/index";
+import React from "react";;
 import Head from "next/head";
 
 const index = () => {
