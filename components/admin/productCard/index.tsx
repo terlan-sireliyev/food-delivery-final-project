@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 // import PageHeader from "../pageHeader/index";
 
-const index = ({ name, price, img_url }: any) => {
+const index = ({ name, price, img_url, id }: any) => {
+  const deletClick = () => {
+    axios
+      .delete(`http://localhost:3000/api/products/${id}`)
+      .then((res) => {
+        console.log("silindi");
+      })
+      .catch((err) => {
+        alert("Silinmedi");
+      });
+  };
+  useEffect(() => {
+    deletClick();
+  }, []);
   return (
     <>
       <div className="max-sm:w-full  max-md:w-60 max-lg:w-60 border boder-sm bg-admin-TextCheck">
@@ -24,6 +38,7 @@ const index = ({ name, price, img_url }: any) => {
           </p>
           <button className="mr-2">
             <FontAwesomeIcon
+              onClick={() => deletClick()}
               icon={faTrashAlt}
               className="text-admin-inProductTrashBack"
             />

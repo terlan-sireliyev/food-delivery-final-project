@@ -1,30 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FileUploader } from "../FileUploader";
+// import { FileUploader } from "../FileUploader";
+
 import InputAdd from "../inputAdd/index";
 import TextArea from "../textArea/index";
 import style from "./nav.module.css";
+import axios from "axios";
 
 const index = () => {
   const [open, setOpen] = useState(false);
   const [openLang, setOpenLang] = useState(false);
 
   const [form, setForm] = useState({
-    img_url: null,
+    img_url: "",
     name: "",
     description: "",
     price: "",
-    restuarant: ""
+    restuarant: "",
   });
-  const addProducts = (e: any) => {
-    e.preventDefault()
-    console.log(form);
-  };
-
 
   const ref = useRef<any>(null);
   const ref2 = useRef<any>(null);
   const closeMenu = () => {
     setOpen(false);
+  };
+  const addProduct = async () => {
+    await axios
+      .post("http://localhost:3000/api/products", {
+        name: form.name,
+        description: form.description,
+        img_url: form.img_url,
+        rest_id: form.restuarant,
+        price: form.price,
+      })
+      .then((result) => {
+        console.log("gonderildi");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
@@ -45,7 +58,6 @@ const index = () => {
       window.removeEventListener("mousedown", handleOutSideClick2);
     };
   }, [ref2]);
-
 
   const openMenu = () => {
     setOpen((prev) => true);
@@ -72,8 +84,9 @@ const index = () => {
             <div
               style={{ width: "50vw", height: "100vh" }}
               ref={ref}
-              className={`${style.modal} ${open && style.open
-                } bg-admin-openMenu1 overflow-auto`}
+              className={`${style.modal} ${
+                open && style.open
+              } bg-admin-openMenu1 overflow-auto`}
             >
               <form action="#">
                 <div className="flex justify-between p-5 ">
@@ -82,28 +95,49 @@ const index = () => {
                       Upload your img
                     </h5>
                     <div className="mt-4 w-32">
-                      <img
-                        src={form.img_url ? URL.createObjectURL(form.img_url) : ""}
+                      {/* <img
+                        src={
+                          form.img_url ? URL.createObjectURL(form.img_url) : ""
+                        }
                         className="w-full"
-                      />
+                      /> */}
                     </div>
                   </div>
 
                   <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                    <FileUploader setForm={setForm} />
-                   </div>
+                    {/* <FileUploader setForm={setForm} /> */}
+                    <InputAdd textName="img" name="img_url" setForm={setForm} />
+                  </div>
                 </div>
                 <div className="flex justify-between p-5 ">
                   <h5 className="text-labelOpenMenu w-1/2 text-admin-colorEacampLogo2 text-left">
                     Add your description and necessary information
                   </h5>
                   <div className="overflow-auto bg-admin-openMenu2 w-1/2 p-5 h-96 rounded text-right ">
-                    {<>
-                      <InputAdd textName="Name" name="name" setForm={setForm} />
-                      <TextArea textName="Description" name="description" setForm={setForm} />
-                      <InputAdd textName="Price $" name="price" type="number" setForm={setForm} />
-                      <InputAdd textName="Restuarants" name="restuarant" setForm={setForm} />
-                    </>
+                    {
+                      <>
+                        <InputAdd
+                          textName="Name"
+                          name="name"
+                          setForm={setForm}
+                        />
+                        <TextArea
+                          textName="Description"
+                          name="description"
+                          setForm={setForm}
+                        />
+                        <InputAdd
+                          textName="Price $"
+                          name="price"
+                          type="number"
+                          setForm={setForm}
+                        />
+                        <InputAdd
+                          textName="Restuarants"
+                          name="restuarant"
+                          setForm={setForm}
+                        />
+                      </>
                     }
                   </div>
                 </div>
@@ -114,7 +148,10 @@ const index = () => {
                   >
                     Cancel
                   </button>
-                  <button onClick={addProducts} className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
+                  <button
+                    className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
+                    onClick={addProduct}
+                  >
                     Add
                   </button>
                 </div>
@@ -131,8 +168,9 @@ const index = () => {
             <div
               style={{ width: "85px", height: "150px" }}
               ref={ref2}
-              className={`${style.modalLangClass} ${openLang && style.openLangClass
-                } bg-admin-openMenu1 `}
+              className={`${style.modalLangClass} ${
+                openLang && style.openLangClass
+              } bg-admin-openMenu1 `}
             >
               <ul className="">
                 <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">

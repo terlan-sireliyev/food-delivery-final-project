@@ -18,6 +18,7 @@ export default function index({ products }: any) {
       <div className="flex flex-wrap gap-6 justify-center    mt-6 w-5/6  m-auto">
         {data.map((prod: any) => (
           <Product
+            id={prod.id}
             key={prod.id}
             name={prod.name}
             price={prod.price}
@@ -30,7 +31,7 @@ export default function index({ products }: any) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch("https://foody-api.vercel.app/api/products");
+  const res = await fetch("http://localhost:3000/api/products");
   const products = await res.json();
 
   return { props: { products } };
