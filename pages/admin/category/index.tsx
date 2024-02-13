@@ -86,16 +86,22 @@ const rows = [
 ];
 
 const index = () => {
-
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const [form, setForm] = useState({
-    name:"",
-    slug:"",
-    file:"",
+    img_url: null,
+    name: "",
+    slug: "",
   });
+  const addProducts = (e: any) => {
+    e.preventDefault()
+    console.log(form);
+  };
 
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const closeMenu = () => {
+    setOpen(false);
+  };
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -141,23 +147,22 @@ const index = () => {
         <div
           style={{ width: "50vw", height: "100vh" }}
           ref={ref}
-          className={`${style.modal} ${
-            open && style.open
-          } z-50 bg-admin-openMenu1 `}
+          className={`${style.modal} ${open && style.open
+            } z-50 bg-admin-openMenu1 `}
         >
           <form action="#">
             <div className="flex justify-between p-5 ">
-             <div>
-             <h5 className="text-labelOpenMenu text-admin-colorEacampLogo2">
-                Upload your img
-              </h5>
-              <div className="mt-4 w-32">
-              <img
-                    src={form.file ? URL.createObjectURL(form.file) : ""}
+              <div>
+                <h5 className="text-labelOpenMenu text-admin-colorEacampLogo2">
+                  Upload your img
+                </h5>
+                <div className="mt-4 w-32">
+                  <img
+                    src={form.img_url ? URL.createObjectURL(form.img_url) : ""}
                     className="w-full"
                   />
+                </div>
               </div>
-             </div>
               <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
                 <FileUploader setForm={setForm} />
               </div>
@@ -167,21 +172,20 @@ const index = () => {
                 Add your description and necessary information
               </h5>
               <div className="bg-admin-openMenu2 w-1/2 p-5 h-96 rounded text-right ">
-                <InputAdd textName="Name" />
-                <InputAdd textName="Slug" />
+                <InputAdd textName="Name" name="name" setForm={setForm} />
+                <InputAdd textName="Slug" name="slug" setForm={setForm} />
               </div>
             </div>
             <div className="bg-admin-TextCheck p-5 ">
-              <BtnAdd
-                btnName="Cancel"
-                open={open}
-                setOpen={setOpen}
-                clFeature="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-              />
-              <BtnAdd
-                btnName="Create"
-                clFeature="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-              />
+              <button
+                className="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
+                onClick={closeMenu}
+              >
+                Cancel
+              </button>
+              <button onClick={addProducts} className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
+                Add
+              </button>
             </div>
           </form>
         </div>

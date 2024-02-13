@@ -12,16 +12,25 @@ export default function index({ restuarantDatas }: any) {
     message,
     result: { data },
   } = restuarantDatas;
-  // console.log(result.data);
-  // const a = { restuarantDatas: { data } };
-  // console.log(a);
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
   const [form, setForm] = useState({
+    img_url: null,
     name: "",
-    description: "",
-    file: "",
+    cuisine: "",
+    category: "",
+    address: "",
+    delivery_min: "",
+    delivery_price: "",
+    slug: ""
   });
+  const addProducts = (e: any) => {
+    e.preventDefault()
+    console.log(form);
+  };
+  const closeMenu = () => {
+    setOpen(false);
+  };
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
       if (!ref.current?.contains(event.target)) {
@@ -51,6 +60,12 @@ export default function index({ restuarantDatas }: any) {
   const openMenuFastFood = () => {
     setOpenFastFood((prev) => true);
   };
+  var d = document.querySelectorAll('.openMenuTarget')
+  d.forEach((item) =>{
+    return item.addEventListener('click',function(){
+         console.log(item.nodeName)
+    })
+  })
   return (
     <>
       <Head>
@@ -67,12 +82,10 @@ export default function index({ restuarantDatas }: any) {
         <div
           style={{ width: "190px", height: "150px" }}
           ref={refFastFood}
-          className={`${style.modalFatFoodClass} ${
-            openFastFood && style.openFatFoodClass
-          } bg-admin-openMenu1 `}
+          className={`${style.modalFatFoodClass} ${openFastFood && style.openFatFoodClass
+            } bg-admin-openMenu1 `}
         >
-          <InPageName />
-          <ul className="text-left">
+          <ul className={`${style.openMenuTarget},text-left`} onClick={searchClick}>
             <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
               Fast Food
             </li>
@@ -107,7 +120,7 @@ export default function index({ restuarantDatas }: any) {
                 </h5>
                 <div className="mt-4 w-32">
                   <img
-                    src={form.file ? URL.createObjectURL(form.file) : ""}
+                    src={form.img_url ? URL.createObjectURL(form.img_url) : ""}
                     className="w-full"
                   />
                 </div>
@@ -121,18 +134,26 @@ export default function index({ restuarantDatas }: any) {
                 Add your description and necessary information
               </h5>
               <div className="overflow-auto bg-admin-openMenu2 w-1/2 p-5 h-96 rounded text-right ">
-                <InputAdd textName="Name" />
-                <InputAdd textName="Cuisine" />
-                <InputAdd textName="Delivery Price $" />
-                <InputAdd textName="Delivery Minute" />
-                <InputAdd textName="Address" />
-                <InputAdd textName="Ad" />
-                <InputAdd textName="Category" />
-                <InputAdd textName="Slug" />
+                <InputAdd textName="Name" name="name" setForm={setForm} />
+                <InputAdd textName="Cuisine" name="cuisine" setForm={setForm} />
+                <InputAdd textName="Delivery Price $" name="delivery_price" setForm={setForm} />
+                <InputAdd textName="Delivery Minute" name="delivery_min" setForm={setForm} />
+                <InputAdd textName="Address" name="address" setForm={setForm} />
+                <InputAdd textName="Category" name="category" setForm={setForm} />
+                <InputAdd textName="Slug" name="slug" setForm={setForm} />
               </div>
             </div>
             <div className="bg-admin-TextCheck p-5 ">
-              <BtnAdd
+              <button
+                className="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
+                onClick={closeMenu}
+              >
+                Cancel
+              </button>
+              <button onClick={addProducts} className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
+                Add
+              </button>
+              {/* <BtnAdd
                 btnName="Cancel"
                 open={open}
                 setOpen={setOpen}
@@ -141,7 +162,7 @@ export default function index({ restuarantDatas }: any) {
               <BtnAdd
                 btnName="Create"
                 clFeature="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-              />
+              /> */}
             </div>
           </form>
         </div>
