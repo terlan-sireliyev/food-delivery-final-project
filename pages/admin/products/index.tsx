@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Product from "../../../components/admin/productCard/index";
 import PageHeader from "../../../components/admin/pageHeader/index";
 import Head from "next/head";
-
+import axios from "axios";
 export default function index({ products }: any) {
   const {
     message,
@@ -20,9 +20,10 @@ export default function index({ products }: any) {
           <Product
             id={prod.id}
             key={prod.id}
+            img_url={prod.img_url}
             name={prod.name}
             price={prod.price}
-            img_url={prod.img_url}
+            restuarant={prod.rest_id}
           />
         ))}
       </div>
@@ -31,8 +32,8 @@ export default function index({ products }: any) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch("http://localhost:3000/api/products");
-  const products = await res.json();
+  const response = await axios.get("http://localhost:3000/api/products");
+  // const products =  res.json();
 
-  return { props: { products } };
+  return { props: { products: response.data } };
 };

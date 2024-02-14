@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import PageHeader from "../../../components/admin/pageHeader/index";
 import style from "./category.module.css";
-import { FileUploader } from "../../../components/admin/FileUploader/index";
+// import { FileUploader } from "../../../components/admin/FileUploader/index";
 import Head from "next/head";
 import InputAdd from "../../../components/admin/inputAdd/index";
 import BtnAdd from "../../../components/admin/btnAdd/index";
@@ -94,10 +94,9 @@ const index = () => {
     slug: "",
   });
   const addProducts = (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log(form);
   };
-
 
   const closeMenu = () => {
     setOpen(false);
@@ -147,8 +146,9 @@ const index = () => {
         <div
           style={{ width: "50vw", height: "100vh" }}
           ref={ref}
-          className={`${style.modal} ${open && style.open
-            } z-50 bg-admin-openMenu1 `}
+          className={`${style.modal} ${
+            open && style.open
+          } z-50 bg-admin-openMenu1 `}
         >
           <form action="#">
             <div className="flex justify-between p-5 ">
@@ -164,7 +164,7 @@ const index = () => {
                 </div>
               </div>
               <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                <FileUploader setForm={setForm} />
+                {/* <FileUploader setForm={setForm} /> */}
               </div>
             </div>
             <div className="flex justify-between p-5 ">
@@ -183,7 +183,10 @@ const index = () => {
               >
                 Cancel
               </button>
-              <button onClick={addProducts} className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
+              <button
+                onClick={addProducts}
+                className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
+              >
                 Add
               </button>
             </div>

@@ -4,7 +4,7 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 // import PageHeader from "../pageHeader/index";
 
-const index = ({ name, price, img_url, id }: any) => {
+const index = ({ id, img_url, name, price, restuarant }: any) => {
   const deletClick = () => {
     axios
       .delete(`http://localhost:3000/api/products/${id}`)
@@ -15,9 +15,6 @@ const index = ({ name, price, img_url, id }: any) => {
         alert("Silinmedi");
       });
   };
-  useEffect(() => {
-    deletClick();
-  }, []);
   return (
     <>
       <div className="max-sm:w-full  max-md:w-60 max-lg:w-60 border boder-sm bg-admin-TextCheck">
@@ -25,12 +22,12 @@ const index = ({ name, price, img_url, id }: any) => {
           <img
             src={img_url}
             alt="Have yor error"
-            className="w-full h-full m-auto object-contain h-24 w-full ."
+            className="w-full h-full m-auto object-contain  ."
           />
         </div>
         <div className="ml-2">
           <h3>{name}</h3>
-          <h2 className="text-admin-inputBorder">Restoruant name</h2>
+          <h2 className="text-admin-inputBorder">{restuarant}</h2>
         </div>
         <div className="mx-2 my-2 flex justify-between">
           <p className="text-admin-inProductproPrice  text-productSize mt-2">

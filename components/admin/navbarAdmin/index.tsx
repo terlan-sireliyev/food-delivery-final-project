@@ -15,7 +15,7 @@ const index = () => {
     name: "",
     description: "",
     price: "",
-    restuarant: "",
+    rest_id: "",
   });
 
   const ref = useRef<any>(null);
@@ -26,14 +26,21 @@ const index = () => {
   const addProduct = async () => {
     await axios
       .post("http://localhost:3000/api/products", {
+        img_url: form.img_url,
         name: form.name,
         description: form.description,
-        img_url: form.img_url,
-        rest_id: form.restuarant,
         price: form.price,
+        rest_id: form.rest_id,
       })
       .then((result) => {
         console.log("gonderildi");
+        setForm({
+          img_url: "",
+          name: "",
+          description: "",
+          price: "",
+          rest_id: "",
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -134,7 +141,7 @@ const index = () => {
                         />
                         <InputAdd
                           textName="Restuarants"
-                          name="restuarant"
+                          name="rest_id"
                           setForm={setForm}
                         />
                       </>
