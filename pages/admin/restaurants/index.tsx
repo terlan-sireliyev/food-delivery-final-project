@@ -7,6 +7,8 @@ import Head from "next/head";
 import InputAdd from "../../../components/admin/inputAdd/index";
 import BtnAdd from "../../../components/admin/btnAdd/index";
 import InPageName from "../../../components/admin/inPageName";
+import axios from "axios";
+
 export default function index({ restuarantDatas }: any) {
   const {
     message,
@@ -15,18 +17,24 @@ export default function index({ restuarantDatas }: any) {
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
   const [form, setForm] = useState({
-    img_url: null,
-    name: "",
-    cuisine: "",
-    category: "",
     address: "",
-    delivery_min: "",
     delivery_price: "",
-    slug: ""
+    cuisine: "",
+    name: "",
+    delivery_min: "",
+    category_id: "",
+    img_url: "",
   });
-  const addProducts = (e: any) => {
+  const addProducts = async (e: any) => {
     e.preventDefault()
-    console.log(form);
+    await axios.post("https://localhost:3000/api/restuarants", form)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log('error');
+      });
+
   };
   const closeMenu = () => {
     setOpen(false);
@@ -60,12 +68,7 @@ export default function index({ restuarantDatas }: any) {
   const openMenuFastFood = () => {
     setOpenFastFood((prev) => true);
   };
-  var d = document.querySelectorAll('.openMenuTarget')
-  d.forEach((item) =>{
-    return item.addEventListener('click',function(){
-         console.log(item.nodeName)
-    })
-  })
+
   return (
     <>
       <Head>
@@ -85,7 +88,7 @@ export default function index({ restuarantDatas }: any) {
           className={`${style.modalFatFoodClass} ${openFastFood && style.openFatFoodClass
             } bg-admin-openMenu1 `}
         >
-          <ul className={`${style.openMenuTarget},text-left`} onClick={searchClick}>
+          <ul className={`${style.openMenuTarget},text-left`}>
             <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
               Fast Food
             </li>
@@ -120,7 +123,7 @@ export default function index({ restuarantDatas }: any) {
                 </h5>
                 <div className="mt-4 w-32">
                   <img
-                    src={form.img_url ? URL.createObjectURL(form.img_url) : ""}
+                    src={form.img_url}
                     className="w-full"
                   />
                 </div>
@@ -140,8 +143,7 @@ export default function index({ restuarantDatas }: any) {
                 <InputAdd textName="Delivery Minute" name="delivery_min" setForm={setForm} />
                 <InputAdd textName="Address" name="address" setForm={setForm} />
                 <InputAdd textName="Category" name="category" setForm={setForm} />
-                <InputAdd textName="Slug" name="slug" setForm={setForm} />
-              </div>
+               </div>
             </div>
             <div className="bg-admin-TextCheck p-5 ">
               <button
@@ -168,24 +170,10 @@ export default function index({ restuarantDatas }: any) {
         </div>
       </PageHeader>
       <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 w-5/6 m-auto">
-        {/* <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard /> */}
-        {/* {restuarantDatas.map((item: any) => (
+
+        {data?.map((item: any) => (
           <RestaurantCard
-            key={item.id}
-            cuisine={item.cuisine}
-            name={item.name}
-            img_url={item.img_url}
-          />
-        ))} */}
-        {data.map((item: any) => (
-          <RestaurantCard
+            id={item.id}
             key={item.id}
             name={item.name}
             cuisine={item.cuisine}
@@ -198,8 +186,7 @@ export default function index({ restuarantDatas }: any) {
 }
 
 export const getServerSideProps = async () => {
-  const res = await fetch("https://foody-api.vercel.app/api/restuarants");
-  const restuarantDatas = await res.json();
+  const response = await axios.get("http://localhost:3000/api/restuarants");
 
-  return { props: { restuarantDatas } };
+  return { props: { restuarantDatas: response.data } };
 };

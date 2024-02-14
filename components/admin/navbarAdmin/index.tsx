@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-// import { FileUploader } from "../FileUploader";
+import { FileUploader } from "../FileUploader";
 
 import InputAdd from "../inputAdd/index";
 import TextArea from "../textArea/index";
@@ -7,6 +7,7 @@ import style from "./nav.module.css";
 import axios from "axios";
 
 const index = () => {
+  const [imageProd, setImageProd] = useState("");
   const [open, setOpen] = useState(false);
   const [openLang, setOpenLang] = useState(false);
 
@@ -23,24 +24,12 @@ const index = () => {
   const closeMenu = () => {
     setOpen(false);
   };
-  const addProduct = async () => {
+  const addProduct = async (e: any) => {
+    e.preventDefault()
     await axios
-      .post("http://localhost:3000/api/products", {
-        img_url: form.img_url,
-        name: form.name,
-        description: form.description,
-        price: form.price,
-        rest_id: form.rest_id,
-      })
+      .post("http://localhost:3000/api/products", form)
       .then((result) => {
-        console.log("gonderildi");
-        setForm({
-          img_url: "",
-          name: "",
-          description: "",
-          price: "",
-          rest_id: "",
-        });
+        console.log('success');
       })
       .catch((err) => {
         console.log(err);
@@ -91,9 +80,8 @@ const index = () => {
             <div
               style={{ width: "50vw", height: "100vh" }}
               ref={ref}
-              className={`${style.modal} ${
-                open && style.open
-              } bg-admin-openMenu1 overflow-auto`}
+              className={`${style.modal} ${open && style.open
+                } bg-admin-openMenu1 overflow-auto`}
             >
               <form action="#">
                 <div className="flex justify-between p-5 ">
@@ -102,18 +90,16 @@ const index = () => {
                       Upload your img
                     </h5>
                     <div className="mt-4 w-32">
-                      {/* <img
-                        src={
-                          form.img_url ? URL.createObjectURL(form.img_url) : ""
-                        }
+                      <img
+                        src={form.img_url}
                         className="w-full"
-                      /> */}
+                      />
                     </div>
                   </div>
 
                   <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                    {/* <FileUploader setForm={setForm} /> */}
-                    <InputAdd textName="img" name="img_url" setForm={setForm} />
+                    <FileUploader setForm={setForm} imageProd={imageProd} setImageProd={setImageProd} />
+                    {/* <InputAdd textName="img" name="img_url" setForm={setForm} /> */}
                   </div>
                 </div>
                 <div className="flex justify-between p-5 ">
@@ -175,9 +161,8 @@ const index = () => {
             <div
               style={{ width: "85px", height: "150px" }}
               ref={ref2}
-              className={`${style.modalLangClass} ${
-                openLang && style.openLangClass
-              } bg-admin-openMenu1 `}
+              className={`${style.modalLangClass} ${openLang && style.openLangClass
+                } bg-admin-openMenu1 `}
             >
               <ul className="">
                 <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">

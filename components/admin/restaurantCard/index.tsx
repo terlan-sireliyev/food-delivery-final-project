@@ -1,8 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-
-const index = ({ name, cuisine, img_url }: any) => {
+const index = ({ id,name, cuisine, img_url }: any) => {
   return (
     <>
       <div className=" flex  my-4  border border-admin-inputBorder rounded  bg-admin-TextCheck">
