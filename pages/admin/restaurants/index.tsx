@@ -8,6 +8,7 @@ import InputAdd from "../../../components/admin/inputAdd/index";
 import BtnAdd from "../../../components/admin/btnAdd/index";
 import InPageName from "../../../components/admin/inPageName";
 import axios from "axios";
+import { v4 } from "uuid";
 
 export default function index({ restuarantDatas }: any) {
   const {
@@ -17,24 +18,37 @@ export default function index({ restuarantDatas }: any) {
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
   const [form, setForm] = useState({
-    address: "",
-    delivery_price: "",
-    cuisine: "",
     name: "",
-    delivery_min: "",
     category_id: "",
     img_url: "",
+    cuisine: "",
+    address: "",
+    delivery_min: "",
+    delivery_price: "",
   });
-  const addProducts = async (e: any) => {
-    e.preventDefault()
-    await axios.post("https://localhost:3000/api/restuarants", form)
+
+  const addProduct = (e: any) => {
+    e.preventDefault();
+    // axios.get("http://localhost:3000/api/category").then((res) => {
+    //   console.log(res.data);
+    // });
+
+    axios
+      .post("http://localhost:3000/api/restuarants", {
+        name: form.name,
+        category_id: v4(),
+        img_url: form.img_url,
+        cuisine: form.cuisine,
+        address: form.address,
+        delivery_min: Number(form.delivery_min),
+        delivery_price: Number(form.delivery_price),
+      })
       .then((result) => {
-        console.log(result);
+        console.log("success");
       })
       .catch((err) => {
-        console.log('error');
+        console.log(err);
       });
-
   };
   const closeMenu = () => {
     setOpen(false);
@@ -85,8 +99,9 @@ export default function index({ restuarantDatas }: any) {
         <div
           style={{ width: "190px", height: "150px" }}
           ref={refFastFood}
-          className={`${style.modalFatFoodClass} ${openFastFood && style.openFatFoodClass
-            } bg-admin-openMenu1 `}
+          className={`${style.modalFatFoodClass} ${
+            openFastFood && style.openFatFoodClass
+          } bg-admin-openMenu1 `}
         >
           <ul className={`${style.openMenuTarget},text-left`}>
             <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
@@ -122,10 +137,7 @@ export default function index({ restuarantDatas }: any) {
                   Upload your img
                 </h5>
                 <div className="mt-4 w-32">
-                  <img
-                    src={form.img_url}
-                    className="w-full"
-                  />
+                  <img src={form.img_url} className="w-full" />
                 </div>
               </div>
               <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
@@ -139,11 +151,25 @@ export default function index({ restuarantDatas }: any) {
               <div className="overflow-auto bg-admin-openMenu2 w-1/2 p-5 h-96 rounded text-right ">
                 <InputAdd textName="Name" name="name" setForm={setForm} />
                 <InputAdd textName="Cuisine" name="cuisine" setForm={setForm} />
-                <InputAdd textName="Delivery Price $" name="delivery_price" setForm={setForm} />
-                <InputAdd textName="Delivery Minute" name="delivery_min" setForm={setForm} />
+                <InputAdd
+                  type="number"
+                  textName="Delivery Price $"
+                  name="delivery_price"
+                  setForm={setForm}
+                />
+                <InputAdd
+                  type="number"
+                  textName="Delivery Minute"
+                  name="delivery_min"
+                  setForm={setForm}
+                />
                 <InputAdd textName="Address" name="address" setForm={setForm} />
-                <InputAdd textName="Category" name="category" setForm={setForm} />
-               </div>
+                <InputAdd
+                  textName="Category"
+                  name="category"
+                  setForm={setForm}
+                />
+              </div>
             </div>
             <div className="bg-admin-TextCheck p-5 ">
               <button
@@ -152,26 +178,18 @@ export default function index({ restuarantDatas }: any) {
               >
                 Cancel
               </button>
-              <button onClick={addProducts} className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
+              <button
+                onClick={addProduct}
+                className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
+              >
                 Add
               </button>
-              {/* <BtnAdd
-                btnName="Cancel"
-                open={open}
-                setOpen={setOpen}
-                clFeature="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-              />
-              <BtnAdd
-                btnName="Create"
-                clFeature="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-              /> */}
             </div>
           </form>
         </div>
       </PageHeader>
       <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 w-5/6 m-auto">
-
-        {data?.map((item: any) => (
+        {data.map((item: any) => (
           <RestaurantCard
             id={item.id}
             key={item.id}
@@ -187,6 +205,5 @@ export default function index({ restuarantDatas }: any) {
 
 export const getServerSideProps = async () => {
   const response = await axios.get("http://localhost:3000/api/restuarants");
-
   return { props: { restuarantDatas: response.data } };
 };
