@@ -17,8 +17,8 @@ const index = ({ id, img_url, name, price, restuarant }: any) => {
   };
   return (
     <>
-      <div className="max-sm:w-full  max-md:w-60 max-lg:w-60 border boder-sm bg-admin-TextCheck">
-        <div className=" m-auto h-24 w-24 ">
+      <div className="group  transition duration-400 hover:bg-admin-hover border boder-sm bg-admin-TextCheck">
+        <div className=" m-auto p-2 ">
           <img
             src={img_url}
             alt="Have yor error"
@@ -26,12 +26,14 @@ const index = ({ id, img_url, name, price, restuarant }: any) => {
           />
         </div>
         <div className="ml-2">
-          <h3>{name}</h3>
-          <h2 className="text-admin-inputBorder">{restuarant}</h2>
+          <h3 className="group-hover:text-admin-colorLogin ">{name}</h3>
+          <h2 className="group-hover:text-admin-colorLogin text-admin-inputBorder">
+            {restuarant}
+          </h2>
         </div>
         <div className="mx-2 my-2 flex justify-between">
-          <p className="text-admin-inProductproPrice  text-productSize mt-2">
-            ${price}Azn
+          <p className="group-hover:text-admin-colorLogin text-admin-inProductproPrice  text-productSize mt-2">
+            ${price} Azn
           </p>
           <button className="mr-2">
             <FontAwesomeIcon

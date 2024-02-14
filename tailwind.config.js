@@ -48,7 +48,8 @@ module.exports = {
       "admin-openMenuBG": "#00000080",
       "admin-insideInput": "#5a5b70",
       "admin-restuarantCardNameColor": "#1e1e30",
-      "user-navbarBGColor":"#F3F4F6"
+      "admin-hover": "#c4c4c424",
+      "user-navbarBGColor": "#F3F4F6",
     },
   },
   plugins: [],

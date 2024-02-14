@@ -188,7 +188,7 @@ export default function index({ restuarantDatas }: any) {
           </form>
         </div>
       </PageHeader>
-      <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 w-5/6 m-auto">
+      <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 mt-6 w-5/6  m-auto">
         {data.map((item: any) => (
           <RestaurantCard
             id={item.id}
