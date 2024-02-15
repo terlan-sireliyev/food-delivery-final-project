@@ -18,7 +18,7 @@ const index = ({ id, img_url, name, price, restuarant }: any) => {
   return (
     <>
       <div className="group  transition duration-400 hover:bg-admin-hover border boder-sm bg-admin-TextCheck">
-        <div className=" m-auto p-2 ">
+        <div className=" m-auto p-2 h-48 w-64">
           <img
             src={img_url}
             alt="Have yor error"

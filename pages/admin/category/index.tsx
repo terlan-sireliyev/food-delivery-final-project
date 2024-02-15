@@ -15,11 +15,13 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
+import { Button } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 // import Column from '../../../components/admin/materialUI/index'
 // import Columns from '../../../components/admin/materialUI/index'
 
 interface Column {
-  id: "name" | "slug" | "img_url" | "action";
+  id: "name" | "slug" | "img_url" | "delete";
   label: string;
   minWidth?: number;
   align?: "center";
@@ -27,7 +29,6 @@ interface Column {
 
 const columns: readonly Column[] = [
   { id: "name", label: "Name", minWidth: 170 },
-  
   {
     id: "slug",
     label: "Slug",
@@ -40,7 +41,7 @@ const columns: readonly Column[] = [
     minWidth: 170,
     align: "center",
   },
-  { id: "name", label: "Action", minWidth: 170 },
+  { id: "delete", label: "Action", align: "center", minWidth: 170 },
 ];
 
 const index = ({ AllCategory }: any) => {
@@ -67,6 +68,16 @@ const index = ({ AllCategory }: any) => {
 
     })
   };
+  const deleteCategory = (catId: string) => {
+    axios
+      .delete(`http://localhost:3000/api/category/${catId}`)
+      .then((res) => {
+        console.log("silindi");
+      })
+      .catch((err) => {
+        alert("Silinmedi");
+      });
+  }
 
   const closeMenu = () => {
     setOpen(false);
@@ -100,6 +111,8 @@ const index = ({ AllCategory }: any) => {
   const openMenu = () => {
     setOpen((prev) => true);
   };
+
+
 
   return (
     <>
@@ -197,7 +210,9 @@ const index = ({ AllCategory }: any) => {
                             return (
                               <>
                                 <TableCell key={index} align={column.align}>
-                                  {column.id === "img_url" ? <img className="w-24 h-14 m-auto" src={value} alt="Table image" /> : value}
+                                  {column.id === "img_url" ? <img className="w-24 h-14 m-auto" src={value} alt="Table image" /> : column.id === "delete" ? <Button onClick={() => {
+                                    deleteCategory(row.id)
+                                  }}><DeleteIcon /></Button> : value}
                                 </TableCell>
                               </>
                             );
