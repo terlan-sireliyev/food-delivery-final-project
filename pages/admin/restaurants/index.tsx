@@ -15,6 +15,10 @@ export default function index({ restuarantDatas }: any) {
     message,
     result: { data },
   } = restuarantDatas;
+  // const {
+  //   messageCate,
+  //   result: { dataCate },
+  // } = restuarantDatasCate;
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
   const [form, setForm] = useState({
@@ -29,9 +33,6 @@ export default function index({ restuarantDatas }: any) {
 
   const addProduct = (e: any) => {
     e.preventDefault();
-    // axios.get("http://localhost:3000/api/category").then((res) => {
-    //   console.log(res.data);
-    // });
 
     axios
       .post("http://localhost:3000/api/restuarants", {
@@ -50,6 +51,19 @@ export default function index({ restuarantDatas }: any) {
         console.log(err);
       });
   };
+
+
+  const [dataCate, setDataCate] = useState([])
+  axios.get("http://localhost:3000/api/category")
+    .then(res => {
+  const {data}=res.data.result
+      // setDataCate(res.data)
+      setDataCate(data)
+
+    })
+
+
+
   const closeMenu = () => {
     setOpen(false);
   };
@@ -99,23 +113,19 @@ export default function index({ restuarantDatas }: any) {
         <div
           style={{ width: "190px", height: "150px" }}
           ref={refFastFood}
-          className={`${style.modalFatFoodClass} ${
-            openFastFood && style.openFatFoodClass
-          } bg-admin-openMenu1 `}
+          className={`${style.modalFatFoodClass} ${openFastFood && style.openFatFoodClass
+            } bg-admin-openMenu1 `}
         >
           <ul className={`${style.openMenuTarget},text-left`}>
-            <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
-              Fast Food
-            </li>
-            <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
-              Pizza
-            </li>
-            <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
-              Steak
-            </li>
-            <li className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
-              Coffee
-            </li>
+            {dataCate.map((itemCate: any) => {
+              return (
+                <>
+                  <li key={itemCate.id} className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
+                    {itemCate.name}
+                  </li>
+                </>
+              )
+            })}
           </ul>
         </div>
         <button
@@ -205,5 +215,17 @@ export default function index({ restuarantDatas }: any) {
 
 export const getServerSideProps = async () => {
   const response = await axios.get("http://localhost:3000/api/restuarants");
-  return { props: { restuarantDatas: response.data } };
+  // const responseCateg = await axios.get("http://localhost:3000/api/category");
+  return {
+    props: {
+      restuarantDatas: response.data
+    }
+
+  };
 };
+
+// export const getServerSideProps = async () => {
+//   const response = await axios.get("http://localhost:3000/api/category");
+//   return { props: { AllCategory: response.data } };
+// };
+

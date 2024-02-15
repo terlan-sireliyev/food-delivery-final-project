@@ -9,80 +9,32 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-
+import axios from "axios";
+import { useState } from "react";
 interface Column {
-  id: "name" | "code" | "population" | "size" | "density";
+  id: "id" | "customer ID" | "date" | "address" | "amount" | "paymen" | "contact";
   label: string;
   minWidth?: number;
-  align?: "right";
-  format?: (value: number) => string;
+  align?: "center";
 }
 
 const columns: readonly Column[] = [
-  { id: "name", label: "Name", minWidth: 170 },
-  { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
-  {
-    id: "population",
-    label: "Population",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "size",
-    label: "Size\u00a0(km\u00b2)",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "density",
-    label: "Density",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toFixed(2),
-  },
+  { id: "id", label: "ID", minWidth: 170 },
+  { id: "customer ID", label: "Customer ID", minWidth: 170, align: "center", },
+  { id: "date", label: "Date", minWidth: 170, align: "center", },
+  { id: "address", label: "Address", minWidth: 170 },
+  { id: "amount", label: "Amount", minWidth: 170 },
+  { id: "paymen", label: "Paymen", minWidth: 170 },
+  { id: "contact", label: "Contact", minWidth: 170 },
 ];
 
-interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
-}
-
-function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number
-): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
-
-const rows = [
-  createData("India", "IN", 1324171354, 3287263),
-  createData("China", "CN", 1403500365, 9596961),
-  createData("Italy", "IT", 60483973, 301340),
-  createData("United States", "US", 327167434, 9833520),
-  createData("Canada", "CA", 37602103, 9984670),
-  createData("Australia", "AU", 25475400, 7692024),
-  createData("Germany", "DE", 83019200, 357578),
-  createData("Ireland", "IE", 4857000, 70273),
-  createData("Mexico", "MX", 126577691, 1972550),
-  createData("Japan", "JP", 126317000, 377973),
-  createData("France", "FR", 67022000, 640679),
-  createData("United Kingdom", "GB", 67545757, 242495),
-  createData("Russia", "RU", 146793744, 17098246),
-  createData("Nigeria", "NG", 200962417, 923768),
-  createData("Brazil", "BR", 210147125, 8515767),
-];
-const index = () => {
-  const [page, setPage] = React.useState(0);
+const index = ({ AllOrders }: any) => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
+  const [page, setPage] = React.useState(0);
+   
+  const { message, result: { data } } = AllOrders;
+ 
+ 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -93,21 +45,29 @@ const index = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  //  end table
+
+  const [open, setOpen] = useState(false);
+  const openMenu = () => {
+    setOpen((prev) => true);
+  };
+
   return (
     <>
       <Head>
-        <title>Orders page</title>
+        <title>Category page</title>
       </Head>
-      <PageHeader text="Orders"></PageHeader>
+     
       <div className="flex flex-wrap justify-between w-5/6 m-auto mt-4">
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {columns.map((column) => (
+                  {columns.map((column, index) => (
                     <TableCell
-                      key={column.id}
+                      className="font-bold"
+                      key={index}
                       align={column.align}
                       style={{ minWidth: column.minWidth }}
                     >
@@ -117,26 +77,27 @@ const index = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows
+                {data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
+                  .map((row: any, index: number) => {
                     return (
                       <TableRow
                         hover
                         role="checkbox"
                         tabIndex={-1}
-                        key={row.code}
+                        key={index}
                       >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              {column.format && typeof value === "number"
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
+                        {
+                          columns.map((column, index) => {
+                            const value = row[column.id]
+                            return (
+                              <>
+                                <TableCell key={index} align={column.align}>
+                                  {column.id === "img_url" ? <img className="w-24 h-14 m-auto" src={value} alt="Table image" /> : value}
+                                </TableCell>
+                              </>
+                            );
+                          })}
                       </TableRow>
                     );
                   })}
@@ -146,7 +107,7 @@ const index = () => {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={data.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -159,3 +120,7 @@ const index = () => {
 };
 
 export default index;
+export const getServerSideProps = async () => {
+  const response = await axios.get("http://localhost:3000/api/order/add");
+  return { props: { AllOrders: response.data } };
+};
