@@ -1,11 +1,11 @@
 import React from "react";
 import style from "./slider.module.css";
 const SliderComp = () => {
-  return (
+  return (//max-xl:hidden
     <>
       <div className="">
-        <div className="bg-user-navbarBGColor p-4 flex  justify-between ">
-          <div className="leftSlide px-4 mt-8 w-1/2">
+        <div className={`bg-user-navbarBGColor p-4 flex  justify-between max-lg:flex-col-reverse   max-lg:justify-center items-center`}>
+          <div className="leftSlide w-1/2 px-4 mt-8  max-lg:w-full">
             <h1 className="font-bold text-size">
               Our Food site makes it easy to find local food
             </h1>
@@ -23,8 +23,8 @@ const SliderComp = () => {
               </button>
             </div>
           </div>
-          <div className="rightSlide w-1/2">
-            <div className={`${style.sliderBgImg}`}>
+          <div className="rightSlide mr-10 max-md:mr-0 ">
+            <div className={`${style.sliderBgImg} `}>
               <img
                 src="../images/userImg/Rectangle1.svg"
                 alt="Have your error"
