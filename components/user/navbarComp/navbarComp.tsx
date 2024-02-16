@@ -1,5 +1,4 @@
 import React from "react";
-import style from '../slider/slider.module.css'
 import Link from "next/link";
 const NavbarComp = () => {
   return (
@@ -19,14 +18,30 @@ const NavbarComp = () => {
             />
           </div>
           <div className="flex items-center  gap-8 ">
-            <ul className={`${'flex gap-4 max-md:hidden '}`}>
-              <Link href="/">Home</Link>
-              <Link href="restuarant">Restaurant</Link>
-              <Link href="about" className="max-lg:hidden">About as</Link>
-              <Link href="works" className="max-lg:hidden">how it works</Link>
-              <Link href="faqs"  className="max-md:hidden">FAQs</Link>
+            <ul className={`${"flex gap-4 max-md:hidden "}`}>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li>
+                <Link href="/user/restuarant">Restaurant</Link>
+              </li>
+              <li>
+                <Link href="/user/about" className="max-lg:hidden">
+                  About as
+                </Link>
+              </li>
+              <li>
+                <Link href="/user/work" className="max-lg:hidden">
+                  how it works
+                </Link>
+              </li>
+              <li>
+                <Link href="/user/faq" className="max-md:hidden">
+                  FAQs
+                </Link>
+              </li>
             </ul>
-            <div className="flex items-center justify-center p-2  items-center ">
+            <div className="flex items-center justify-center p-2  ">
               <div className="max-md:hidden">
                 <input
                   type="text"

@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import '../styles/globals.css'
+import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import AdminLayout from "../components/admin/adminLayout";
-import NavbarComp from "../components/user/navbarComp/navbarComp";
-import FooterComp from "../components/user/footerComp/footerCompt";
+
+import UserLayout from "../components/user/userLayout/UserLayout";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -17,20 +17,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <>
         <AdminLayout>
-          {/* <FileUploader> */}
           <Component {...pageProps} />
-          {/* </FileUploader> */}
         </AdminLayout>
       </>
     );
   } else {
     return (
       <>
-        <>
-          <NavbarComp />
+        <UserLayout>
           <Component {...pageProps} />
-          <FooterComp />
-        </>
+        </UserLayout>
       </>
     );
   }
