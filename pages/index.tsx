@@ -6,7 +6,6 @@ import axios from "axios";
 import Navbar from "./user/navbar";
 import FooterComp from "../components/user/footerComp/footerCompt";
 import FeaturesComp from "../components/user/features/features";
-import { ToastContainer } from "react-toastify";
 const Home: NextPage = () => {
   // const handleUpload = (e: any) => {
   //   const file = e.target.files[0];
@@ -33,7 +32,6 @@ const Home: NextPage = () => {
       <Navbar />
       <FeaturesComp />
       <FooterComp />
-      <ToastContainer />
     </div>
   );
 };

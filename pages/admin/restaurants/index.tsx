@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import RestaurantCard from "../../../components/admin/restaurantCard/index";
 import PageHeader from "../../../components/admin/pageHeader/index";
@@ -9,6 +10,9 @@ import BtnAdd from "../../../components/admin/btnAdd/index";
 import InPageName from "../../../components/admin/inPageName";
 import axios from "axios";
 import { v4 } from "uuid";
+// import toast from "react-hot-toast";
+
+
 
 export default function index({ restuarantDatas }: any) {
   const {
@@ -45,7 +49,9 @@ export default function index({ restuarantDatas }: any) {
         delivery_price: Number(form.delivery_price),
       })
       .then((result) => {
-        console.log("success");
+        console.log(result);
+        // toast.success("Lorem ipsum dolar sit amet")
+        
       })
       .catch((err) => {
         console.log(err);
@@ -56,7 +62,7 @@ export default function index({ restuarantDatas }: any) {
   const [dataCate, setDataCate] = useState([])
   axios.get("http://localhost:3000/api/category")
     .then(res => {
-  const {data}=res.data.result
+      const { data } = res.data.result
       // setDataCate(res.data)
       setDataCate(data)
 
@@ -216,6 +222,13 @@ export default function index({ restuarantDatas }: any) {
 export const getServerSideProps = async () => {
   const response = await axios.get("http://localhost:3000/api/restuarants");
   // const responseCateg = await axios.get("http://localhost:3000/api/category");
+
+  if (response.status === 200) {
+    console.log("ok");
+
+    // toast.success("Wow so easy!");
+  }
+
   return {
     props: {
       restuarantDatas: response.data

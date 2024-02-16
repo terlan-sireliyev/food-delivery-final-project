@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 // import img from '../../../public/images/userImg/Rectangle1.svg'
-// import { ToastContainer, toast } from "react-toastify";
 const FeaturesCardComp = ({title,img,description}:any) => {
     
     return (

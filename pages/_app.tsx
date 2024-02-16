@@ -1,8 +1,10 @@
 import { useRouter } from "next/router";
- import '../styles/globals.css'
+import '../styles/globals.css'
 import type { AppProps } from "next/app";
 import AdminLayout from "../components/admin/adminLayout";
- 
+import NavbarComp from "../components/user/navbarComp/navbarComp";
+import FooterComp from "../components/user/footerComp/footerCompt";
+
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   if (router.pathname == "/admin/login")
@@ -25,7 +27,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <>
         <>
+          <NavbarComp />
           <Component {...pageProps} />
+          <FooterComp />
         </>
       </>
     );
