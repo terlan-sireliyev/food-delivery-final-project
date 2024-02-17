@@ -5,12 +5,12 @@ import InputAdd from "../inputAdd/index";
 import TextArea from "../textArea/index";
 import style from "./nav.module.css";
 import axios from "axios";
-
+import OpenMenuLang from '../openMenuLang/index'
 const index = () => {
   const [imageProd, setImageProd] = useState("");
   const [open, setOpen] = useState(false);
+  const ref = useRef<any>(null);
   const [openLang, setOpenLang] = useState(false);
-
   const [form, setForm] = useState({
     img_url: "",
     name: "",
@@ -19,7 +19,7 @@ const index = () => {
     rest_id: "",
   });
 
-  const ref = useRef<any>(null);
+  // const ref = useRef<any>(null);
   const ref2 = useRef<any>(null);
   const closeMenu = () => {
     setOpen(false);
@@ -35,6 +35,7 @@ const index = () => {
         console.log(err);
       });
   };
+ 
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
       if (!ref.current?.contains(event.target)) {
@@ -54,13 +55,10 @@ const index = () => {
       window.removeEventListener("mousedown", handleOutSideClick2);
     };
   }, [ref2]);
-
   const openMenu = () => {
     setOpen((prev) => true);
   };
-  const openMenuLang = () => {
-    setOpenLang((prev2) => true);
-  };
+  
   return (
     <div className=" ">
       <div className="flex p-2 justify-between items-center bg-admin-navbarBG rounded-b-lg">
@@ -151,31 +149,9 @@ const index = () => {
               </form>
             </div>
           </div>
+          
           <div className="mx-2">
-            <img
-              onClick={openMenuLang}
-              src="../images/langEn.svg"
-              alt="Have yor error"
-              className=""
-            />
-            <div
-              style={{ width: "85px", height: "150px" }}
-              ref={ref2}
-              className={`${style.modalLangClass} ${openLang && style.openLangClass
-                } bg-admin-openMenu1 `}
-            >
-              <ul className="">
-                <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
-                  <img src="../images/abs.svg" alt="" className="m-auto" />
-                </li>
-                <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
-                  <img src="../images/ru.svg" alt="" className="m-auto" />
-                </li>
-                <li className="bg-admin-colorLogin p-3 rounded-b-lg hover:bg-admin-inputBorder">
-                  <img src="../images/az.svg" alt="" className="m-auto" />
-                </li>
-              </ul>
-            </div>
+                   <OpenMenuLang/>
           </div>
           <div className="flex items-center text-admin-TextCheck mx-2">
             <img src="../images/avatar.svg" alt="Have yor error" className="" />

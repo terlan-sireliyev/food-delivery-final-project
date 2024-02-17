@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import OpenMenuLang from '../../admin/openMenuLang/index'
 const NavbarComp = () => {
   return (
     <>
@@ -54,11 +55,7 @@ const NavbarComp = () => {
                 />
               </div>
               <div className="mt-2 ml-4 flex">
-                <img
-                  src="../images/langEn.svg"
-                  alt="Have yor error"
-                  className=""
-                />
+                <OpenMenuLang/>
               </div>
               <button className="mr-8 ml-4 px-[30px] py-[5px] mt-2 bg-user-navbarSignBg rounded-btnRaduis">
                 <Link href="/user/login" >

@@ -31,7 +31,7 @@ const index = () => {
                 <input type="text" className="focus:outline-none w-96   border  border-admin-inputBorder p-2" placeholder="name" />
                  <input type="text" className="focus:outline-none w-96  border  border-admin-inputBorder p-2" placeholder="username" />
                  <input type="text" className="focus:outline-none w-96  border  border-admin-inputBorder p-2" placeholder="ePoct" />
-                <input type="passwod" className="focus:outline-none w-96  border  border-admin-inputBorder p-2" placeholder="password" />
+                <input type="password" className="focus:outline-none w-96  border  border-admin-inputBorder p-2" placeholder="password" />
 
                 
                 

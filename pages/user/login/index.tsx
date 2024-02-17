@@ -32,7 +32,7 @@ const index = () => {
               </div>
               <div className="flex flex-col gap-4    ">
                 <input type="text" className="focus:outline-none w-96   border  border-admin-inputBorder p-2" placeholder="username" />
-                <input type="text" className="focus:outline-none w-96  border  border-admin-inputBorder p-2" placeholder="password" />
+                <input type="password" className="focus:outline-none w-96  border  border-admin-inputBorder p-2" placeholder="password" />
                 <button className="hover:bg-user-navbarSignBgHover  hover:text-admin-colorLogin bg-user-registerBtn p-2 rounded-regBtnRadius">Log in</button>
               </div>
             </div>
