@@ -61,7 +61,7 @@ const NavbarComp = () => {
                 />
               </div>
               <button className="mr-8 ml-4 px-[30px] py-[5px] mt-2 bg-user-navbarSignBg rounded-btnRaduis">
-                <Link href="/user/register" >
+                <Link href="/user/login" >
                 Sign up
                 </Link>
               </button>
