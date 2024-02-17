@@ -1,9 +1,10 @@
 import React from "react";
+import Restuarant from "../../../components/user/restuarant/restuarant";
 const index = () => {
   return (
     <>
       <div className="h-dvh">
-        <h1 className="font-bold text-size">This is Reataurant page</h1>
+        <Restuarant />
       </div>
     </>
   );

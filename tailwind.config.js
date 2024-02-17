@@ -56,17 +56,17 @@ module.exports = {
       "user-navbarSignBgHover": "#b3554d",
       "user-navbarSignBgHover2": "#d1c1c1",
       "user-inSlider": "#828282",
-      "user-bgBack": "#000",   //#272727
-      "user-bgFooter1": "#272727",  
-      "user-iconsFooterBG": "#FB9300", 
-      "user-registerBtn": "#EB5757", 
-
+      "user-bgBack": "#000", //#272727
+      "user-bgFooter1": "#272727",
+      "user-iconsFooterBG": "#FB9300",
+      "user-registerBtn": "#EB5757",
+      "user-LinkColor": "#F0E1E1",
     },
     borderRadius: {
       borderSlider: "40px",
       btnRaduis: "25px",
-      iconsRadius:"50%",
-      regBtnRadius:"5px"
+      iconsRadius: "50%",
+      regBtnRadius: "5px",
     },
   },
   plugins: [],
