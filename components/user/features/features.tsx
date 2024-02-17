@@ -10,13 +10,7 @@ const FeaturesComp = () => {
           and publishing industries for previewing layouts and visual mockups.
         </p>
       </div>
-      <div
-        className="w-3/4 m-auto 
- grid grid-cols-3 gap-3  
-      max-2xl:grid-cols-3 max-xl:grid-cols-3
-      max-lg:grid-cols-2 max-md:grid-cols-2 
-      max-sm:grid-cols-1  "
-      >
+      <div className="w-3/4 m-auto grid grid-cols-3 gap-3  max-2xl:grid-cols-3 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2  max-sm:grid-cols-1  ">
         <FeaturesCardComp
           title="Disctount Bpucher"
           description="Lorem ipsum is placeholder commonly used in the graphic"

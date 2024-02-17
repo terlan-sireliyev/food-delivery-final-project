@@ -12,13 +12,7 @@ const NewFoods = () => {
           and publishing industries for previewing layouts and visual mockups.
         </p>
       </div>
-      <div
-        className=" mb-10
-      w-3/4 m-auto grid grid-cols-3 gap-3  
-      max-2xl:grid-cols-3 max-xl:grid-cols-3
-      max-lg:grid-cols-2 max-md:grid-cols-2 
-      max-sm:grid-cols-1  "
-      >
+      <div className=" mb-10 w-3/4 m-auto grid grid-cols-3 gap-3  max-2xl:grid-cols-3 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1  ">
         <div>
           <NewFoodsCrad
             title="Disctount Bpucher"

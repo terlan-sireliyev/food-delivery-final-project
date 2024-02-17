@@ -1,26 +1,24 @@
 import React from "react";
 import Link from "next/link";
-import OpenMenuLang from '../../admin/openMenuLang/index'
+import OpenMenuLang from "../../admin/openMenuLang/index";
 const NavbarComp = () => {
   return (
     <>
       <div className="">
         <div className="bg-user-navbarBGColor p-4 flex  justify-between ">
           <div className="flex justify-center items-center">
-          
-           <img
+            <img
               src="../images/userImg/segment.png"
               alt="Have your error"
               className="h-10 object-contain hidden max-2xl:hidden max-xl:hidden max-lg:hidden max-md:block mr-4"
             />
-      
             <Link href="/">
-            <img
-              src="../images/userImg/Foody.svg"
-              alt="Have your error"
-              className=""
-            />
-          </Link>
+              <img
+                src="../images/userImg/Foody.svg"
+                alt="Have your error"
+                className=""
+              />
+            </Link>
           </div>
           <div className="flex items-center  gap-8 ">
             <ul className={`${"flex gap-4 max-md:hidden "}`}>
@@ -55,12 +53,10 @@ const NavbarComp = () => {
                 />
               </div>
               <div className="mt-2 ml-4 flex">
-                <OpenMenuLang/>
+                <OpenMenuLang />
               </div>
               <button className="mr-8 ml-4 px-[30px] py-[5px] mt-2 bg-user-navbarSignBg rounded-btnRaduis">
-                <Link href="/user/login" >
-                Sign up
-                </Link>
+                <Link href="/user/login">Sign up</Link>
               </button>
             </div>
           </div>

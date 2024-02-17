@@ -1,6 +1,5 @@
 import React from "react";
 import NavbarComp from "../navbarComp/navbarComp";
-// import SliderComp from "../slider/slider";
 import FooterComp from "../footerComp/footerCompt";
 const UserLayout = ({ children }: any) => {
   return (

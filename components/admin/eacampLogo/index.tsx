@@ -1,9 +1,8 @@
 import React from "react";
-
 const index = () => {
   return (
     <>
-      <div className="bg-admin-navbarBG w-full   rounded-lg flex flex-col justify-center items-center mt-32 p-6">
+      <div className="bg-admin-navbarBG w-full rounded-lg flex flex-col justify-center items-center mt-32 p-6">
         <div className="flex ">
           <img
             src="../images/eacampLogo.svg"

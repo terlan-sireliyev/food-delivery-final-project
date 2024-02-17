@@ -6,7 +6,7 @@ const UserLayout = ({ children }: any) => {
       <div className="px-4 py-4">
         <RegNavbarComp />
         <div className="text-center ">{children}</div>
-       </div>
+      </div>
     </>
   );
 };

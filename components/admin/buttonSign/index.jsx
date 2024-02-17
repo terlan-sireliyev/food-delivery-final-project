@@ -1,9 +1,5 @@
 import React from "react";
-
 const button = ({ text }) => {
-  const add = () => {
-    console.log("sala");
-  };
   return (
     <div>
       <button

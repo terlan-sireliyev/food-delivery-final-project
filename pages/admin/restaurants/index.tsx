@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from "react";
 import RestaurantCard from "../../../components/admin/restaurantCard/index";
 import PageHeader from "../../../components/admin/pageHeader/index";
@@ -6,25 +5,16 @@ import style from "./restaurant.module.css";
 import { FileUploader } from "../../../components/admin/FileUploader";
 import Head from "next/head";
 import InputAdd from "../../../components/admin/inputAdd/index";
-import BtnAdd from "../../../components/admin/btnAdd/index";
-import InPageName from "../../../components/admin/inPageName";
 import axios from "axios";
 import { v4 } from "uuid";
-// import toast from "react-hot-toast";
-
-
 
 export default function index({ restuarantDatas }: any) {
+  const ref = useRef<any>(null);
+  const refFastFood = useRef<any>(null);
   const {
     message,
     result: { data },
-  } = restuarantDatas;
-  // const {
-  //   messageCate,
-  //   result: { dataCate },
-  // } = restuarantDatasCate;
-  const ref = useRef<any>(null);
-  const refFastFood = useRef<any>(null);
+  } = restuarantDatas; //this with getServerSideProps all data fetch
   const [form, setForm] = useState({
     name: "",
     category_id: "",
@@ -37,7 +27,6 @@ export default function index({ restuarantDatas }: any) {
 
   const addProduct = (e: any) => {
     e.preventDefault();
-
     axios
       .post("http://localhost:3000/api/restuarants", {
         name: form.name,
@@ -50,25 +39,17 @@ export default function index({ restuarantDatas }: any) {
       })
       .then((result) => {
         console.log(result);
-        // toast.success("Lorem ipsum dolar sit amet")
-        
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-
-  const [dataCate, setDataCate] = useState([])
-  axios.get("http://localhost:3000/api/category")
-    .then(res => {
-      const { data } = res.data.result
-      // setDataCate(res.data)
-      setDataCate(data)
-
-    })
-
-
+  const [dataCate, setDataCate] = useState([]);
+  axios.get("http://localhost:3000/api/category").then((res) => {
+    const { data } = res.data.result;
+    setDataCate(data);
+  });
 
   const closeMenu = () => {
     setOpen(false);
@@ -119,18 +100,22 @@ export default function index({ restuarantDatas }: any) {
         <div
           style={{ width: "190px", height: "150px" }}
           ref={refFastFood}
-          className={`${style.modalFatFoodClass} ${openFastFood && style.openFatFoodClass
-            } bg-admin-openMenu1 `}
+          className={`${style.modalFatFoodClass} ${
+            openFastFood && style.openFatFoodClass
+          } bg-admin-openMenu1 `}
         >
           <ul className={`${style.openMenuTarget},text-left`}>
             {dataCate.map((itemCate: any) => {
               return (
                 <>
-                  <li key={itemCate.id} className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
+                  <li
+                    key={itemCate.id}
+                    className=" cursor-pointer bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
+                  >
                     {itemCate.name}
                   </li>
                 </>
-              )
+              );
             })}
           </ul>
         </div>
@@ -221,24 +206,9 @@ export default function index({ restuarantDatas }: any) {
 
 export const getServerSideProps = async () => {
   const response = await axios.get("http://localhost:3000/api/restuarants");
-  // const responseCateg = await axios.get("http://localhost:3000/api/category");
-
-  if (response.status === 200) {
-    console.log("ok");
-
-    // toasnpmt.success("Wow so easy!");
-  }
-
   return {
     props: {
-      restuarantDatas: response.data
-    }
-
+      restuarantDatas: response.data,
+    },
   };
 };
-
-// export const getServerSideProps = async () => {
-//   const response = await axios.get("http://localhost:3000/api/category");
-//   return { props: { AllCategory: response.data } };
-// };
-

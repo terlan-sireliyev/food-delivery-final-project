@@ -5,14 +5,14 @@ import axios from "axios";
 const index = ({ id, name, cuisine, img_url }: any) => {
   const deletRestauarant = () => {
     axios
-    .delete(`http://localhost:3000/api/restuarants/${id}`)
-    .then((res) => {
-      console.log("silindi");
-    })
-    .catch((err) => {
-      alert("Silinmedi");
-    });
-  }
+      .delete(`http://localhost:3000/api/restuarants/${id}`)
+      .then((res) => {
+        console.log("silindi");
+      })
+      .catch((err) => {
+        alert("Silinmedi");
+      });
+  };
   return (
     <>
       <div className="group flex justify-between  w-full transition duration-400 hover:bg-admin-hover  my-4 border border-admin-inputBorder rounded  bg-admin-TextCheck">
@@ -34,7 +34,7 @@ const index = ({ id, name, cuisine, img_url }: any) => {
         <div>
           <button className="mr-2 mt-3 px-3">
             <FontAwesomeIcon
-            onClick={deletRestauarant}
+              onClick={deletRestauarant}
               icon={faTrashAlt}
               className="text-admin-inProductTrashBack"
             />
@@ -46,4 +46,3 @@ const index = ({ id, name, cuisine, img_url }: any) => {
 };
 
 export default index;
-

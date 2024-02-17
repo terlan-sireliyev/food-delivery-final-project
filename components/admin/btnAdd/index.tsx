@@ -1,6 +1,6 @@
 import React from "react";
 
-const index = ({ btnName, open, setOpen, clFeature }: any) => {
+const index = ({ btnName, setOpen, clFeature }: any) => {
   const closeMenu = () => {
     setOpen(false);
   };

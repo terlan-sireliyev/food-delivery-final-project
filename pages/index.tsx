@@ -1,11 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import axios from "axios";
-// import Navbar from "./user/navbar";
 import SliderComp from "../components/user/slider/slider";
-import FooterComp from "../components/user/footerComp/footerCompt";
 import FeaturesComp from "../components/user/features/features";
 import NewFoods from "../components/user/newFoods/newFoods";
 import Menu1 from "../components/user/menu1/menu1";
@@ -35,8 +32,8 @@ const Home: NextPage = () => {
       </Head>
       <SliderComp />
       <FeaturesComp />
-      <Menu1/>
-      <Menu2/>
+      <Menu1 />
+      <Menu2 />
       <NewFoods />
     </div>
   );

@@ -1,16 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faList } from "@fortawesome/free-solid-svg-icons";
-import { faBorderNone } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
-
 import Link from "next/link";
 import { adminLinks } from "./linksMockData";
 const index = () => {
   const { pathname } = useRouter();
   const currentPath = pathname.slice(pathname.lastIndexOf("/") + 1);
-
   return (
     <>
       <div className=" bg-admin-bgLeftBar text-admin-bgCheck  p-8 rounded">
@@ -33,7 +29,6 @@ const index = () => {
           </div>
         </Link>
       </div>
-      {/* <EcampLogo /> */}
     </>
   );
 };

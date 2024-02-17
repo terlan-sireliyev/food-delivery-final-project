@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 const Index = ({ textName, type = "text", setForm, name }: any) => {
   const changeFucn = (e: any) => {
     const { name, value } = e.target;

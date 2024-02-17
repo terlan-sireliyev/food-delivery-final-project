@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FileUploader } from "../FileUploader";
-
 import InputAdd from "../inputAdd/index";
 import TextArea from "../textArea/index";
 import style from "./nav.module.css";
 import axios from "axios";
-import OpenMenuLang from '../openMenuLang/index'
+import OpenMenuLang from "../openMenuLang/index";
 const index = () => {
+  const ref = useRef<any>(null);
   const [imageProd, setImageProd] = useState("");
   const [open, setOpen] = useState(false);
-  const ref = useRef<any>(null);
   const [openLang, setOpenLang] = useState(false);
   const [form, setForm] = useState({
     img_url: "",
@@ -18,24 +17,22 @@ const index = () => {
     price: "",
     rest_id: "",
   });
-
-  // const ref = useRef<any>(null);
   const ref2 = useRef<any>(null);
   const closeMenu = () => {
     setOpen(false);
   };
   const addProduct = async (e: any) => {
-    e.preventDefault()
+    e.preventDefault();
     await axios
       .post("http://localhost:3000/api/products", form)
       .then((result) => {
-        console.log('success');
+        console.log("success");
       })
       .catch((err) => {
         console.log(err);
       });
   };
- 
+
   useEffect(() => {
     const handleOutSideClick = (event: any) => {
       if (!ref.current?.contains(event.target)) {
@@ -58,7 +55,7 @@ const index = () => {
   const openMenu = () => {
     setOpen((prev) => true);
   };
-  
+
   return (
     <div className=" ">
       <div className="flex p-2 justify-between items-center bg-admin-navbarBG rounded-b-lg">
@@ -78,8 +75,9 @@ const index = () => {
             <div
               style={{ width: "50vw", height: "100vh" }}
               ref={ref}
-              className={`${style.modal} ${open && style.open
-                } bg-admin-openMenu1 overflow-auto`}
+              className={`${style.modal} ${
+                open && style.open
+              } bg-admin-openMenu1 overflow-auto`}
             >
               <form action="#">
                 <div className="flex justify-between p-5 ">
@@ -88,16 +86,16 @@ const index = () => {
                       Upload your img
                     </h5>
                     <div className="mt-4 w-32">
-                      <img
-                        src={form.img_url}
-                        className="w-full"
-                      />
+                      <img src={form.img_url} className="w-full" />
                     </div>
                   </div>
 
                   <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                    <FileUploader setForm={setForm} imageProd={imageProd} setImageProd={setImageProd} />
-                    {/* <InputAdd textName="img" name="img_url" setForm={setForm} /> */}
+                    <FileUploader
+                      setForm={setForm}
+                      imageProd={imageProd}
+                      setImageProd={setImageProd}
+                    />
                   </div>
                 </div>
                 <div className="flex justify-between p-5 ">
@@ -149,9 +147,9 @@ const index = () => {
               </form>
             </div>
           </div>
-          
+
           <div className="mx-2">
-                   <OpenMenuLang/>
+            <OpenMenuLang />
           </div>
           <div className="flex items-center text-admin-TextCheck mx-2">
             <img src="../images/avatar.svg" alt="Have yor error" className="" />

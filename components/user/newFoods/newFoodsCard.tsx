@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import img from '../../../public/images/userImg/Rectangle1.svg'
 const NewFoodsCrad = ({ title, img, description }: any) => {
   return (
     <>
@@ -12,7 +11,6 @@ const NewFoodsCrad = ({ title, img, description }: any) => {
           <p className="line-clamp-2 text-center text-admin-inputBorder">
             {description}
           </p>
-          {/* <button onClick={}></button> */}
         </div>
       </div>
     </>

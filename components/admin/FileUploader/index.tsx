@@ -1,18 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import style from "./style.module.css";
 import { fileStorage } from "../../../server/configs/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
-import { log } from "console";
 import { v4 } from "uuid";
-// const { v4: uuidv4 } = require('uuid');
-export const FileUploader = ({ setForm, form }: any) => {
-  const [fileUpload, setFileUpload] = useState(null);
-
+export const FileUploader = ({ setForm }: any) => {
   const hiddenFileInput = useRef<any>(null);
   const handleClick = (event: any) => {
     hiddenFileInput.current.click();
   };
-
+  /*firebase upload side start */
   const handleChange = async (event: any) => {
     const file = event.target.files[0];
     const imageRef = ref(fileStorage, `images/${file.name + v4()}`);
@@ -22,7 +18,7 @@ export const FileUploader = ({ setForm, form }: any) => {
       });
     });
   };
-
+  /*firebase upload side end */
   return (
     <>
       <button className={`${style.buttonUpload}`} onClick={handleClick}>
@@ -38,12 +34,11 @@ export const FileUploader = ({ setForm, form }: any) => {
         <br />
         <p className={style.bder}>Upload</p>
       </button>
-      {/* <NavbarAdmin /> */}
       <input
         type="file"
         onChange={handleChange}
         ref={hiddenFileInput}
-        style={{ display: "none" }} // Make the file input element invisible
+        style={{ display: "none" }}
       />
     </>
   );

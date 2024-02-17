@@ -1,10 +1,12 @@
 import React from "react";
 import style from "./slider.module.css";
 const SliderComp = () => {
-  return (//max-xl:hidden
+  return (
     <>
       <div className="">
-        <div className={`bg-user-navbarBGColor p-4 flex  justify-between max-lg:flex-col-reverse   max-lg:justify-center items-center`}>
+        <div
+          className={`bg-user-navbarBGColor p-4 flex  justify-between max-lg:flex-col-reverse   max-lg:justify-center items-center`}
+        >
           <div className="leftSlide w-1/2 px-4 mt-8  max-lg:w-full">
             <h1 className="font-bold text-size">
               Our Food site makes it easy to find local food

@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-// import PageHeader from "../pageHeader/index";
 
 const index = ({ id, img_url, name, price, restuarant }: any) => {
   const deletClick = () => {
@@ -22,7 +21,7 @@ const index = ({ id, img_url, name, price, restuarant }: any) => {
           <img
             src={img_url}
             alt="Have yor error"
-            className="w-full h-full m-auto object-contain  ."
+            className="w-full h-full m-auto object-contain"
           />
         </div>
         <div className="ml-2">
