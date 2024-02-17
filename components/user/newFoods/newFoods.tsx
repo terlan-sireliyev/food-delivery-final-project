@@ -4,10 +4,10 @@ const NewFoods = () => {
   return (
     <>
       <div className="mt-24 mb-8">
-        <h1 className="w-1/4 m-auto font-bold text-welcome">
+        <h1 className="w-1/4 max-lg:w-full m-auto font-bold text-welcome">
           Our Popular Update New Foods
         </h1>
-        <p className="w-2/5 m-auto mt-2 text-admin-inputBorder">
+        <p className="w-2/5 max-lg:w-full m-auto mt-2 text-admin-inputBorder">
           Lorem ipsum is placeholder text commonly used in the graphic, print,
           and publishing industries for previewing layouts and visual mockups.
         </p>

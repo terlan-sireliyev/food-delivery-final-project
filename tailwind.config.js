@@ -20,6 +20,7 @@ module.exports = {
       eacampLog: "14px",
       size: "60px",
       size1: "22px",
+      size50: "50px",
       productSize: "12px",
       products: "1.5rem",
       labelOpenMenu: "1.25rem",
@@ -58,11 +59,14 @@ module.exports = {
       "user-bgBack": "#000",   //#272727
       "user-bgFooter1": "#272727",  
       "user-iconsFooterBG": "#FB9300", 
+      "user-registerBtn": "#EB5757", 
+
     },
     borderRadius: {
       borderSlider: "40px",
       btnRaduis: "25px",
-      iconsRadius:"50%"
+      iconsRadius:"50%",
+      regBtnRadius:"5px"
     },
   },
   plugins: [],

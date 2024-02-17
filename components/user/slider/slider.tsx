@@ -9,7 +9,7 @@ const SliderComp = () => {
             <h1 className="font-bold text-size">
               Our Food site makes it easy to find local food
             </h1>
-            <h2 className="text-size1 text-user-inSlider w-2/3 ">
+            <h2 className="text-size1 text-user-inSlider w-2/3 m-auto ">
               Lorem ipsum is placeholder text commonly used in the graphic,
               print, and publishing industries for previewing layouts and visual
               mockups.

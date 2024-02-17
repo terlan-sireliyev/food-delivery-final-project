@@ -8,6 +8,8 @@ import SliderComp from "../components/user/slider/slider";
 import FooterComp from "../components/user/footerComp/footerCompt";
 import FeaturesComp from "../components/user/features/features";
 import NewFoods from "../components/user/newFoods/newFoods";
+import Menu1 from "../components/user/menu1/menu1";
+import Menu2 from "../components/user/menu2/menu2";
 const Home: NextPage = () => {
   // const handleUpload = (e: any) => {
   //   const file = e.target.files[0];
@@ -33,6 +35,8 @@ const Home: NextPage = () => {
       </Head>
       <SliderComp />
       <FeaturesComp />
+      <Menu1/>
+      <Menu2/>
       <NewFoods />
     </div>
   );

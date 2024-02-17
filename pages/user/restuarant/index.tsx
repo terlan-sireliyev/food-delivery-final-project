@@ -2,7 +2,9 @@ import React from "react";
 const index = () => {
   return (
     <>
-      <div>Restuarant Lorem ipsum dolor sit amet consectetur.</div>
+      <div className="h-dvh">
+        <h1 className="font-bold text-size">This is Reataurant page</h1>
+      </div>
     </>
   );
 };

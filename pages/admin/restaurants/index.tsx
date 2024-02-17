@@ -226,7 +226,7 @@ export const getServerSideProps = async () => {
   if (response.status === 200) {
     console.log("ok");
 
-    // toast.success("Wow so easy!");
+    // toasnpmt.success("Wow so easy!");
   }
 
   return {
