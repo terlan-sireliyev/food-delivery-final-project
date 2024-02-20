@@ -1,25 +1,31 @@
 import React from "react";
-const RestuarantCard = () => {
+const RestuarantCard = ({
+  img_url,
+  name,
+  cuisine,
+  delivery_price,
+  delivery_min,
+}: any) => {
   return (
     <>
       <div className="border border-admin-inputBorder p-2 ">
-        <div className="w-2/3 m-auto">
+        <div className="w-2/3 m-auto h-48">
           <img
-            src="../../images/restauarant/KFC.png"
+            src={img_url}
             alt="Have your error"
             className="h-full w-full object-contain"
           />
         </div>
         <div className="text-left">
-          <h1 className="font-bold ">Burger king</h1>
+          <h1 className="font-bold ">{name}</h1>
           <p className="line-clamp-1 mt-2 text-admin-welcomeBackColor">
-            Lorem ipsum dolor sit amet.
+            {cuisine}
           </p>
         </div>
         <div className="flex justify-between items-center mt-2">
-          <p className="font-bold">$5 Delivery</p>
+          <p className="font-bold">{delivery_price} Delivery</p>
           <button className="bg-user-registerBtn p-2 rounded-btnRaduis">
-            11 Min
+            {delivery_min} min
           </button>
         </div>
       </div>
