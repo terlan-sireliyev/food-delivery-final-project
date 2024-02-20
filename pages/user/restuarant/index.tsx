@@ -20,7 +20,7 @@ const Index = ({ AllCategory }: any) => {
       .catch((error) => {
         console.error("Error fetching restaurants:", error);
       });
-  }, []);
+  }, [restuarantCard]);
 
   return (
     <>
