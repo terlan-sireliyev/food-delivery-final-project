@@ -24,8 +24,8 @@ const Index = ({ AllCategory }: any) => {
 
   return (
     <>
-      <div className="flex mt-4">
-        <div className="w-1/6  bg-user-navbarBGColor ">
+      <div className="flex mt-4 max-am:flex-col">
+        <div className="w-1/6 max-lg:w-1/3   bg-user-navbarBGColor ">
           {data.map((itemCategory: any) => (
             <RestuarantNavbar
               key={itemCategory.slug}
@@ -35,7 +35,7 @@ const Index = ({ AllCategory }: any) => {
             />
           ))}
         </div>
-        <div className="w-5/6 ps-4 grid grid-cols-4 gap-4">
+        <div className="w-5/6 ps-4 grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 gap-4">
           {restuarantCard.map((itemRestuarant: any) => (
             <RestuarantCard
               key={itemRestuarant.id}

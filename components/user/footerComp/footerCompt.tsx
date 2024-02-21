@@ -61,57 +61,45 @@ const FooterComp = () => {
                 </Link>
               </div>
               <div className="text-admin-colorLogin -mt-12">
-                <h1 className="font-bold text-labelOpenMenu">Popular</h1>
+                <h1 className="font-bold text-labelOpenMenu">Cash</h1>
                 <Link
                   href="login"
                   className="text-productSize text-user-inSlider"
                 >
-                  <p>Programming</p>
+                  <p>Delivery</p>
                 </Link>
                 <Link
                   href="login"
                   className="text-productSize text-user-inSlider"
                 >
-                  <p>Books for children</p>
+                  <p>Payment</p>
                 </Link>
                 <Link
                   href="login"
                   className="text-productSize text-user-inSlider"
                 >
-                  <p>Psychology</p>
-                </Link>
-                <Link
-                  href="login"
-                  className="text-productSize text-user-inSlider"
-                >
-                  <p>Business</p>
+                  <p>About the store</p>
                 </Link>
               </div>
               <div className="text-admin-colorLogin -mt-12">
-                <h1 className="font-bold text-labelOpenMenu">Popular</h1>
+                <h1 className="font-bold text-labelOpenMenu">Help</h1>
                 <Link
                   href="login"
                   className="text-productSize text-user-inSlider"
                 >
-                  <p>Programming</p>
+                  <p>Contacts</p>
                 </Link>
                 <Link
                   href="login"
                   className="text-productSize text-user-inSlider"
                 >
-                  <p>Books for children</p>
+                  <p>Purchase returns</p>
                 </Link>
                 <Link
                   href="login"
                   className="text-productSize text-user-inSlider"
                 >
-                  <p>Psychology</p>
-                </Link>
-                <Link
-                  href="login"
-                  className="text-productSize text-user-inSlider"
-                >
-                  <p>Business</p>
+                  <p>Buyer help</p>
                 </Link>
               </div>
             </div>

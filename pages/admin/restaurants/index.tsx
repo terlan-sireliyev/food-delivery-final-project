@@ -46,10 +46,15 @@ export default function index({ restuarantDatas }: any) {
   };
 
   const [dataCate, setDataCate] = useState([]);
-  axios.get("http://localhost:3000/api/category").then((res) => {
-    const { data } = res.data.result;
-    setDataCate(data);
-  });
+  axios
+    .get("http://localhost:3000/api/category")
+    .then((res) => {
+      const { data } = res.data.result;
+      setDataCate(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching category:", error);
+    });
 
   const closeMenu = () => {
     setOpen(false);
@@ -190,7 +195,7 @@ export default function index({ restuarantDatas }: any) {
         </div>
       </PageHeader>
       <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 mt-6 w-5/6  m-auto">
-        {data.map((item: any) => (
+        {data?.map((item: any) => (
           <RestaurantCard
             id={item.id}
             key={item.id}
@@ -205,10 +210,11 @@ export default function index({ restuarantDatas }: any) {
 }
 
 export const getServerSideProps = async () => {
-  const response = await axios.get("http://localhost:3000/api/restuarants");
-  return {
-    props: {
-      restuarantDatas: response.data,
-    },
-  };
+  try {
+    const response = await axios.get("http://localhost:3000/api/restuarants");
+    return { props: { restuarantDatas: response.data } };
+  } catch (error) {
+    console.error("Error fetching restuarant:", error);
+    return { props: { restuarantDatas: {} } };
+  }
 };

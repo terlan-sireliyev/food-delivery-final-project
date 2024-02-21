@@ -16,9 +16,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { Button } from "@mui/material";
-import DeleteIcon from '@mui/icons-material/Delete';
-// import Column from '../../../components/admin/materialUI/index'
-// import Columns from '../../../components/admin/materialUI/index'
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface Column {
   id: "name" | "slug" | "img_url" | "delete";
@@ -45,6 +43,11 @@ const columns: readonly Column[] = [
 ];
 
 const index = ({ AllCategory }: any) => {
+  const {
+    message,
+    result: { data },
+  } = AllCategory;
+
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [page, setPage] = React.useState(0);
   const [form, setForm] = useState({
@@ -52,21 +55,21 @@ const index = ({ AllCategory }: any) => {
     name: "",
     slug: "",
   });
-  const { message, result: { data } } = AllCategory;
 
   const addProducts = (e: any) => {
     e.preventDefault();
-    axios.post('http://localhost:3000/api/category', {
-      img_url: form.img_url,
-      name: form.name,
-      slug: form.slug,
-    }).then(res => {
-      console.log('true');
-
-    }).catch(err => {
-      console.log('error');
-
-    })
+    axios
+      .post("http://localhost:3000/api/category", {
+        img_url: form.img_url,
+        name: form.name,
+        slug: form.slug,
+      })
+      .then((res) => {
+        console.log("true");
+      })
+      .catch((err) => {
+        console.log("error");
+      });
   };
   const deleteCategory = (catId: string) => {
     axios
@@ -77,7 +80,7 @@ const index = ({ AllCategory }: any) => {
       .catch((err) => {
         alert("Silinmedi");
       });
-  }
+  };
 
   const closeMenu = () => {
     setOpen(false);
@@ -112,8 +115,6 @@ const index = ({ AllCategory }: any) => {
     setOpen((prev) => true);
   };
 
-
-
   return (
     <>
       <Head>
@@ -129,8 +130,9 @@ const index = ({ AllCategory }: any) => {
         <div
           style={{ width: "50vw", height: "100vh" }}
           ref={ref}
-          className={`${style.modal} ${open && style.open
-            } z-50 bg-admin-openMenu1 `}
+          className={`${style.modal} ${
+            open && style.open
+          } z-50 bg-admin-openMenu1 `}
         >
           <form action="#">
             <div className="flex justify-between p-5 ">
@@ -139,10 +141,7 @@ const index = ({ AllCategory }: any) => {
                   Upload your img
                 </h5>
                 <div className="mt-4 w-32">
-                  <img
-                    src={form.img_url}
-                    className="w-full"
-                  />
+                  <img src={form.img_url} className="w-full" />
                 </div>
               </div>
               <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
@@ -196,27 +195,35 @@ const index = ({ AllCategory }: any) => {
               <TableBody>
                 {data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row: any, index: number) => {
+                  ?.map((row: any, index: number) => {
                     return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={index}
-                      >
-                        {
-                          columns.map((column, index) => {
-                            const value = row[column.id]
-                            return (
-                              <>
-                                <TableCell key={index} align={column.align}>
-                                  {column.id === "img_url" ? <img className="w-24 h-14 m-auto" src={value} alt="Table image" /> : column.id === "delete" ? <Button onClick={() => {
-                                    deleteCategory(row.id)
-                                  }}><DeleteIcon /></Button> : value}
-                                </TableCell>
-                              </>
-                            );
-                          })}
+                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                        {columns.map((column, index) => {
+                          const value = row[column.id];
+                          return (
+                            <>
+                              <TableCell key={index} align={column.align}>
+                                {column.id === "img_url" ? (
+                                  <img
+                                    className="w-24 h-14 m-auto"
+                                    src={value}
+                                    alt="Table image"
+                                  />
+                                ) : column.id === "delete" ? (
+                                  <Button
+                                    onClick={() => {
+                                      deleteCategory(row.id);
+                                    }}
+                                  >
+                                    <DeleteIcon />
+                                  </Button>
+                                ) : (
+                                  value
+                                )}
+                              </TableCell>
+                            </>
+                          );
+                        })}
                       </TableRow>
                     );
                   })}
@@ -240,7 +247,11 @@ const index = ({ AllCategory }: any) => {
 
 export default index;
 export const getServerSideProps = async () => {
-  const response = await axios.get("http://localhost:3000/api/category");
-  return { props: { AllCategory: response.data } };
+  try {
+    const response = await axios.get("http://localhost:3000/api/category");
+    return { props: { AllCategory: response.data } };
+  } catch (error) {
+    console.error("Error fetching category:", error);
+    return { props: { AllCategory: {} } };
+  }
 };
-
