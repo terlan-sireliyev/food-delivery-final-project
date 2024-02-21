@@ -11,10 +11,11 @@ import { v4 } from "uuid";
 export default function index({ restuarantDatas }: any) {
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
-  const {
-    message,
-    result: { data },
-  } = restuarantDatas; //this with getServerSideProps all data fetch
+  // const {
+  //   message,
+  //   result: { data },
+  // } = restuarantDatas; //this with getServerSideProps all data fetch
+  // console.log(restuarantDatas);
   const [form, setForm] = useState({
     name: "",
     category_id: "",
@@ -28,33 +29,47 @@ export default function index({ restuarantDatas }: any) {
   const addProduct = (e: any) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/api/restuarants", {
-        name: form.name,
-        category_id: v4(),
-        img_url: form.img_url,
-        cuisine: form.cuisine,
-        address: form.address,
-        delivery_min: Number(form.delivery_min),
-        delivery_price: Number(form.delivery_price),
-      })
+      .post(
+        "https://foody-api.vercel.app/api/restuarants",
+        {
+          name: form.name,
+          category_id: v4(),
+          img_url: form.img_url,
+          cuisine: form.cuisine,
+          address: form.address,
+          delivery_min: Number(form.delivery_min),
+          delivery_price: Number(form.delivery_price),
+        }    )
       .then((result) => {
-        console.log(result);
+        console.log("yuklendi", result);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("error", err);
       });
   };
+  // const [datatwo, setData] = useState([]);
+  // useEffect(() => {
+  //   axios
+  //     .get("https://foody-api.vercel.app/api/restuarants")
+  //     .then((res) => {
+  //       console.log(res.data.result.data);
+  //       // setData(res.data.result.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching category:", error);
+  //     });
+  // }, []);
 
-  const [dataCate, setDataCate] = useState([]);
-  axios
-    .get("http://localhost:3000/api/category")
-    .then((res) => {
-      const { data } = res.data.result;
-      setDataCate(data);
-    })
-    .catch((error) => {
-      console.error("Error fetching category:", error);
-    });
+  // const [dataCate, setDataCate] = useState([]);
+  // axios
+  //   .get("http://localhost:3000/api/category")
+  //   .then((res) => {
+  //     const { data } = res.data.result;
+  //     setDataCate(data);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error fetching category:", error);
+  //   });
 
   const closeMenu = () => {
     setOpen(false);
@@ -110,7 +125,7 @@ export default function index({ restuarantDatas }: any) {
           } bg-admin-openMenu1 `}
         >
           <ul className={`${style.openMenuTarget},text-left`}>
-            {dataCate.map((itemCate: any) => {
+            {/* {dataCate.map((itemCate: any) => {
               return (
                 <>
                   <li
@@ -121,7 +136,7 @@ export default function index({ restuarantDatas }: any) {
                   </li>
                 </>
               );
-            })}
+            })} */}
           </ul>
         </div>
         <button
@@ -195,7 +210,7 @@ export default function index({ restuarantDatas }: any) {
         </div>
       </PageHeader>
       <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 mt-6 w-5/6  m-auto">
-        {data?.map((item: any) => (
+        {/* {datatwo?.map((item: any) => (
           <RestaurantCard
             id={item.id}
             key={item.id}
@@ -203,18 +218,20 @@ export default function index({ restuarantDatas }: any) {
             cuisine={item.cuisine}
             img_url={item.img_url}
           />
-        ))}
+        ))} */}
       </div>
     </>
   );
 }
 
-export const getServerSideProps = async () => {
-  try {
-    const response = await axios.get("http://localhost:3000/api/restuarants");
-    return { props: { restuarantDatas: response.data } };
-  } catch (error) {
-    console.error("Error fetching restuarant:", error);
-    return { props: { restuarantDatas: {} } };
-  }
-};
+// export const getServerSideProps = async () => {
+//   try {
+//     const response = await axios.get(
+//       "https://foody-api.vercel.app/api/restuarants"
+//     );
+//     return { props: { restuarantDatas: response.data } };
+//   } catch (error) {
+//     console.error("Error fetching restuarant:", error);
+//     return { props: { restuarantDatas: {} } };
+//   }
+// };
