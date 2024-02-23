@@ -26,7 +26,7 @@ const NavbarComp = () => {
                 <Link href="/">Home</Link>
               </li>
               <li>
-                <Link href="/user/restuarant">Restaurant</Link>
+                <Link href="/user/restuarants">Restaurant</Link>
               </li>
               <li>
                 <Link href="/user/about" className="max-lg:hidden">

@@ -41,7 +41,7 @@ module.exports = {
       "admin-bgCheck2": "gold",
       "admin-colorLogin": "#fff",
       "admin-colorEacampLogo1": "#C7C7C7",
-      "admin-colorEacampLogo2": "#8E8E93",
+      "admin-colorEacampLogo2": "#8E8E93", //input inside text-color
       "admin-inputBorder": "#c4c4c4",
       "admin-inProductproPrice": "#00B9C7",
       "admin-inProductTrashBack": "red",

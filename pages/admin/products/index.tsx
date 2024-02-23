@@ -3,22 +3,12 @@ import PageHeader from "../../../components/admin/pageHeader/index";
 import Product from "../../../components/admin/productCard";
 import Head from "next/head";
 import axios from "axios";
-export default function Index() {
-  // const {
-  //   message,
-  //   result: { data },
-  // } = AllProducts;
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://foody-api.vercel.app/api/products")
-      .then((res) => {
-        setData(res.data.result.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching category:", error);
-      });
-  }, []);
+export default function Index({ productDatas }: any) {
+  const {
+    message,
+    result: { data },
+  } = productDatas;
+
   return (
     <>
       <Head>
@@ -40,13 +30,13 @@ export default function Index() {
     </>
   );
 }
-// export const getServerSideProps = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:3000/api/products");
-//     const dataProducts = response.data;
-//     return { props: { AllProducts: dataProducts } };
-//   } catch (error) {
-//     console.error("Error fetching products:", error);
-//     return { props: { AllProducts: {} } };
-//   }
-// };
+export async function getServerSideProps() {
+  const [responseProducts] = await Promise.all([
+    await axios.get("http://localhost:3000/api/products"),
+  ]);
+  return {
+    props: {
+      productDatas: responseProducts.data,
+    },
+  };
+}

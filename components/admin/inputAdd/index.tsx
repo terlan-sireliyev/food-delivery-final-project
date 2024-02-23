@@ -3,7 +3,7 @@ const Index = ({ textName, type = "text", setForm, name }: any) => {
     const { name, value } = e.target;
     setForm((prevInpVal: any) => ({
       ...prevInpVal,
-      [name]: value,
+      [name]: type === "number" ? Number(value) : value,
     }));
   };
 

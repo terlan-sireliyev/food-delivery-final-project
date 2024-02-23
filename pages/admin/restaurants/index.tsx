@@ -7,15 +7,16 @@ import Head from "next/head";
 import InputAdd from "../../../components/admin/inputAdd/index";
 import axios from "axios";
 import { v4 } from "uuid";
+import DropDownMenu from "../../../components/admin/DropdownMenu";
 
-export default function index({ restuarantDatas }: any) {
+export default function index({ categoryDatas, restuarantDatas }: any) {
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
-  // const {
-  //   message,
-  //   result: { data },
-  // } = restuarantDatas; //this with getServerSideProps all data fetch
-  // console.log(restuarantDatas);
+  const {
+    message,
+    result: { data },
+  } = categoryDatas;
+
   const [form, setForm] = useState({
     name: "",
     category_id: "",
@@ -26,20 +27,12 @@ export default function index({ restuarantDatas }: any) {
     delivery_price: "",
   });
 
+  console.log(form);
+
   const addProduct = (e: any) => {
     e.preventDefault();
     axios
-      .post(
-        "https://foody-api.vercel.app/api/restuarants",
-        {
-          name: form.name,
-          category_id: v4(),
-          img_url: form.img_url,
-          cuisine: form.cuisine,
-          address: form.address,
-          delivery_min: Number(form.delivery_min),
-          delivery_price: Number(form.delivery_price),
-        }    )
+      .post("http://localhost:3000/api/restuarants", form)
       .then((result) => {
         console.log("yuklendi", result);
       })
@@ -47,30 +40,6 @@ export default function index({ restuarantDatas }: any) {
         console.log("error", err);
       });
   };
-  // const [datatwo, setData] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     .get("https://foody-api.vercel.app/api/restuarants")
-  //     .then((res) => {
-  //       console.log(res.data.result.data);
-  //       // setData(res.data.result.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching category:", error);
-  //     });
-  // }, []);
-
-  // const [dataCate, setDataCate] = useState([]);
-  // axios
-  //   .get("http://localhost:3000/api/category")
-  //   .then((res) => {
-  //     const { data } = res.data.result;
-  //     setDataCate(data);
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error fetching category:", error);
-  //   });
-
   const closeMenu = () => {
     setOpen(false);
   };
@@ -110,7 +79,6 @@ export default function index({ restuarantDatas }: any) {
         <title>Restaurant page</title>
       </Head>
       <PageHeader text="Restaurant">
-        {/* <button className="bg-admin-signBtnColor p-2 rounded">Fast Food</button> */}
         <button
           onClick={openMenuFastFood}
           className={`bg-admin-openMenu2 p-2 w-48 rounded m-2`}
@@ -125,7 +93,7 @@ export default function index({ restuarantDatas }: any) {
           } bg-admin-openMenu1 `}
         >
           <ul className={`${style.openMenuTarget},text-left`}>
-            {/* {dataCate.map((itemCate: any) => {
+            {data.map((itemCate: any) => {
               return (
                 <>
                   <li
@@ -136,7 +104,7 @@ export default function index({ restuarantDatas }: any) {
                   </li>
                 </>
               );
-            })} */}
+            })}
           </ul>
         </div>
         <button
@@ -151,7 +119,7 @@ export default function index({ restuarantDatas }: any) {
           ref={ref}
           className={`${style.modal} ${open && style.open} bg-admin-openMenu1 `}
         >
-          <form action="#">
+          <form onSubmit={addProduct}>
             <div className="flex justify-between p-5 ">
               <div>
                 <h5 className="text-labelOpenMenu text-admin-colorEacampLogo2">
@@ -185,24 +153,29 @@ export default function index({ restuarantDatas }: any) {
                   setForm={setForm}
                 />
                 <InputAdd textName="Address" name="address" setForm={setForm} />
-                <InputAdd
+                {/* <InputAdd
                   textName="Category"
                   name="category"
                   setForm={setForm}
+                /> */}
+                <DropDownMenu
+                  textName="Category"
+                  categoryData={data}
+                  name="category"
+                  setForm={setForm}
                 />
+                {/* <InputAdd textName="Slug" name="slug" setForm={setForm} /> */}
               </div>
             </div>
             <div className="bg-admin-TextCheck p-5 ">
               <button
+                type="button"
                 className="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
                 onClick={closeMenu}
               >
                 Cancel
               </button>
-              <button
-                onClick={addProduct}
-                className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-              >
+              <button className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded">
                 Add
               </button>
             </div>
@@ -210,28 +183,30 @@ export default function index({ restuarantDatas }: any) {
         </div>
       </PageHeader>
       <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 mt-6 w-5/6  m-auto">
-        {/* {datatwo?.map((item: any) => (
+        {restuarantDatas.result.data?.map((item: any) => (
           <RestaurantCard
             id={item.id}
             key={item.id}
             name={item.name}
             cuisine={item.cuisine}
             img_url={item.img_url}
+            category_id={item.category_id}
           />
-        ))} */}
+        ))}
       </div>
     </>
   );
 }
 
-// export const getServerSideProps = async () => {
-//   try {
-//     const response = await axios.get(
-//       "https://foody-api.vercel.app/api/restuarants"
-//     );
-//     return { props: { restuarantDatas: response.data } };
-//   } catch (error) {
-//     console.error("Error fetching restuarant:", error);
-//     return { props: { restuarantDatas: {} } };
-//   }
-// };
+export async function getServerSideProps() {
+  const [response, restuarant] = await Promise.all([
+    await axios.get("http://localhost:3000/api/category"),
+    await axios.get("http://localhost:3000/api/restuarants"),
+  ]);
+  return {
+    props: {
+      categoryDatas: response.data,
+      restuarantDatas: restuarant.data,
+    },
+  };
+}

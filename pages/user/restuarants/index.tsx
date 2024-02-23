@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import RestuarantCard from "../../../components/user/restuarant/restuarantCard";
 import RestuarantNavbar from "../../../components/user/restuarant/restuarantNavbar";
+import { useRouter } from "next/router";
 import axios from "axios";
+import Link from "next/link";
 
 const Index = ({ AllCategory }: any) => {
   const {
@@ -10,28 +12,42 @@ const Index = ({ AllCategory }: any) => {
   } = AllCategory;
 
   const [restuarantCard, setRestuarantCard] = useState([]);
-
+  const { query } = useRouter();
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/restuarants")
-      .then((res) => {
-        setRestuarantCard(res.data.result.data);
+      .then(({ data: { result } }) => {
+        if (query.category) {
+          const filteredData = result.data.filter(
+            ({ category_id }: any) => category_id === query.category
+          );
+          setRestuarantCard(filteredData);
+        } else {
+          setRestuarantCard(result.data);
+        }
       })
       .catch((error) => {
         console.error("Error fetching restaurants:", error);
       });
-  }, [restuarantCard]);
+  }, [query]);
 
   return (
     <>
       <div className="flex mt-4 max-am:flex-col">
         <div className="w-1/6 max-lg:w-1/3   bg-user-navbarBGColor ">
+          <nav className="list-none mt-4 w-1/2 m-auto text-left">
+            <li className="bg-user-LinkColor text-user-navbarSignBg font-bold px-4 py-2 rounded-regBtnRadius">
+              <Link href="/user/restuarants">All</Link>
+            </li>
+          </nav>
+
           {data.map((itemCategory: any) => (
             <RestuarantNavbar
-              key={itemCategory.slug}
+              key={itemCategory.id}
               name={itemCategory.name}
               img_url={itemCategory.img_url}
               slug={itemCategory.slug}
+              category_id={itemCategory.id}
             />
           ))}
         </div>
@@ -44,6 +60,7 @@ const Index = ({ AllCategory }: any) => {
               cuisine={itemRestuarant.cuisine}
               delivery_price={itemRestuarant.delivery_price}
               delivery_min={itemRestuarant.delivery_min}
+              id={itemRestuarant.id}
             />
           ))}
         </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-const index = ({ id, name, cuisine, img_url }: any) => {
+const index = ({ id, name, cuisine, img_url, category_id }: any) => {
   const deletRestauarant = () => {
     axios
       .delete(`http://localhost:3000/api/restuarants/${id}`)
@@ -31,6 +31,7 @@ const index = ({ id, name, cuisine, img_url }: any) => {
             {cuisine.split(",")[0]}
           </div>
         </div>
+        {/* <div>{category_id}</div> */}
         <div>
           <button className="mr-2 mt-3 px-3">
             <FontAwesomeIcon
