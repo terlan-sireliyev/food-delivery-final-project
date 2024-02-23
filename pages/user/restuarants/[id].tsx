@@ -63,6 +63,67 @@ const SingleRestaurant = () => {
           </div>
         </div>
       </div>
+      <div className="mt-4 flex justify-between items-center gap-4">
+        <div className="w-3/4 text-left bg-user-navbarBGColor py-4">
+          <div>
+            <h1 className="text-center  font-bold text-labelOpenMenu">
+              Product
+            </h1>
+          </div>
+          <div className="ml-8 flex ">
+            <div>
+              <img src={data?.img_url} className="w-32" alt="" />
+            </div>
+            <div className="ml-4">
+              <div className="font-bold text-labelOpenMenu">
+                Margarita Pizza
+              </div>
+              <div className="mt-3">
+                Prepared With A Patty, A Slice Of Cheese And Special Sauce
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="w-1/4  bg-user-navbarBGColor py-4 divide-y divide-admin-inputBorder ">
+          <div>
+            <h1 className="font-bold text-user-navbarSignBg text-left ml-4  ">
+              1 Items
+            </h1>
+          </div>
+          <div className="flex justify-between px-4 pt-4 mt-3">
+            <div className="flex ">
+              <div>
+                <img src={data?.img_url} className="w-16" alt="" />
+              </div>
+              <div className="-mt-2 ml-4 text-left ">
+                <h1>Margarita Pizza</h1>
+                <p>$7.90</p>
+              </div>
+            </div>
+            <div className="flex flex-col bg-admin-TextCheck p-2 rounded-regBtnRadius">
+              <button>+</button>
+              <button>1</button>
+              <button>-</button>
+            </div>
+          </div>
+          <div className="flex justify-between px-4 pt-4 mt-3">
+            <div className="flex">
+              <div>
+                <img src={data?.img_url} className="w-16" alt="" />
+              </div>
+              <div className="-mt-2 ml-4 text-left">
+                <h1>Margarita Pizza</h1>
+                <p>$7.90</p>
+              </div>
+            </div>
+            <div className="flex flex-col bg-admin-TextCheck p-2 rounded-regBtnRadius">
+              <button>+</button>
+              <button>1</button>
+              <button>-</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
