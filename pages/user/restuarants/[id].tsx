@@ -15,7 +15,6 @@ const SingleRestaurant = () => {
   useEffect(() => {
     if (id) {
       axios
-
         .get(`http://localhost:3000/api/restuarants/${id}`)
         .then((res) => setData(res.data.result.data))
         .catch((error) => console.error(error));
@@ -57,7 +56,7 @@ const SingleRestaurant = () => {
               <button className="mx-2 border border-user-navbarSignBg text-user-navbarSignBg p-2">
                 $5 Delivery
               </button>
-              <button className="mx-2 bg-user-navbarSignBg text-admin-colorLogin p-2">
+              <button className="mx-2 border border-user-navbarSignBg  bg-user-navbarSignBg text-admin-colorLogin p-2">
                 Go Back
               </button>
             </div>

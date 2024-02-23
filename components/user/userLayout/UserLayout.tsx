@@ -1,6 +1,7 @@
 import React from "react";
 import NavbarComp from "../navbarComp/navbarComp";
 import FooterComp from "../footerComp/footerCompt";
+// import Restaurant from "../../admin";
 const UserLayout = ({ children }: any) => {
   return (
     <>

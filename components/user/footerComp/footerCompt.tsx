@@ -6,7 +6,7 @@ import Link from "next/link";
 const FooterComp = () => {
   return (
     <>
-      <div className="bg-user-bgBack w-full">
+      <div className="bg-user-bgBack w-full mt-6">
         <div>
           <div className="flex justify-around items-center">
             <div className="w-1/2 max-md:w-full flex flex-col justify-center mt-12   ">
