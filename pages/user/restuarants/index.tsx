@@ -56,6 +56,7 @@ const Index = ({ AllCategory }: any) => {
             <RestuarantCard
               key={itemRestuarant.id}
               name={itemRestuarant.name}
+              adress={itemRestuarant.address}
               img_url={itemRestuarant.img_url}
               cuisine={itemRestuarant.cuisine}
               delivery_price={itemRestuarant.delivery_price}

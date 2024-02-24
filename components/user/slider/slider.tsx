@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./slider.module.css";
+import { Link } from "@mui/material";
 const SliderComp = () => {
   return (
     <>
@@ -17,12 +18,16 @@ const SliderComp = () => {
               mockups.
             </h2>
             <div className="flex gap-4 mt-8 w-2/3">
-              <button className=" hover:bg-user-navbarSignBgHover transition duration-400 rounded-btnRaduis  w-1/2 bg-user-navbarSignBg p-4 ">
-                Register
-              </button>
-              <button className="hover:bg-user-navbarSignBgHover2 rounded-btnRaduis w-1/2 p-4 rounded-full border border-admin-inputBorder  ">
-                Order now
-              </button>
+              <Link href='/user/register' className=" text-admin-colorLogin font-bold  hover:bg-user-navbarSignBgHover transition duration-400 rounded-btnRaduis  w-1/2 bg-user-navbarSignBg p-4 ">
+                <button >
+                  Register
+                </button>
+              </Link>
+              <Link href='/user/restuarants' className=" text-user-inSlider font-bold hover:bg-user-navbarSignBgHover2 rounded-btnRaduis w-1/2 p-4 rounded-full border border-admin-inputBorder  ">
+                <button >
+                  Order now
+                </button>
+              </Link>
             </div>
           </div>
           <div className="rightSlide mr-10 max-md:mr-0 ">

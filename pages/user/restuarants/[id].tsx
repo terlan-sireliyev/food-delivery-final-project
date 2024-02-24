@@ -1,3 +1,4 @@
+import { Link } from "@mui/material";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -5,6 +6,7 @@ import React, { useEffect, useState } from "react";
 interface Restaurant {
   name: string;
   img_url: string;
+  address: string
 }
 
 const SingleRestaurant = () => {
@@ -37,10 +39,10 @@ const SingleRestaurant = () => {
         <div className="flex justify-between items-center px-8">
           <div>
             <h1 className="font-bold text-left text-welcome">
-              Papa John’s Pizza Restaurant
+              {data?.name}
             </h1>
             <h2 className="text-admin-inputBorder text-left">
-              19 Nizami Street, Sabail, Baku
+              {data?.address}
             </h2>
           </div>
           <div className="flex justify-between items-center">
@@ -49,16 +51,17 @@ const SingleRestaurant = () => {
                 Cuisine
               </h1>
               <h2 className="text-left text-admin-inputBorder ">
-                Pizza, Drink, Hotdog, Sendvich, Roll
+                {data?.cuisine}
               </h2>
             </div>
             <div>
               <button className="mx-2 border border-user-navbarSignBg text-user-navbarSignBg p-2">
-                $5 Delivery
+                {data?.delivery_price} Delivery
               </button>
-              <button className="mx-2 border border-user-navbarSignBg  bg-user-navbarSignBg text-admin-colorLogin p-2">
-                Go Back
-              </button>
+              <Link href="/user/restuarants">
+                <button className="mx-2 border border-user-navbarSignBg  bg-user-navbarSignBg text-admin-colorLogin p-2">
+                  Go Back
+                </button></Link>
             </div>
           </div>
         </div>
