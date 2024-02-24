@@ -22,23 +22,21 @@ const DropDownMenu: React.FC<Props> = ({
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState("Choose One");
 
-  
+
   const categoryChangeHandler = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
-    const selectedItemName = e.currentTarget.textContent;
-    const selectedItem = categoryData?.find(
-      (item) => item.name === selectedItemName
+    const selectedItemName = e.currentTarget.textContent; //ul li value
+    const selectedItem = categoryData?.find(     //check from data for name
+      (item) => item.name === selectedItemName 
     );
-
     if (selectedItem) {
-      const { id } = selectedItem;
-      setForm((prev: any) => ({ ...prev, category_id: id }));
+      const { id } = selectedItem;  //to id take by name
+      setForm((prev: any) => ({ ...prev, category_id: id, rest_id: id })); //here put id
       setSelected(selectedItemName || "");
     } else {
       console.error("No item found with name:", selectedItemName);
     }
-
     setIsActive(false);
   };
   return (

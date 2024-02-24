@@ -36,7 +36,7 @@ const index = () => {
     await axios
       .post("http://localhost:3000/api/products", form)
       .then((result) => {
-        console.log("success");
+        console.log("success",result);
       })
       .catch((err) => {
         console.log(err);
