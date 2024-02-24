@@ -1,11 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { FileUploader } from "../FileUploader";
 import InputAdd from "../inputAdd/index";
 import TextArea from "../textArea/index";
-import style from "./nav.module.css";
+import style from '../navbarAdmin/style.module.css';
 import axios from "axios";
 import OpenMenuLang from "../openMenuLang/index";
+import DropDownMenu from "../DropdownMenu";
+
 const index = () => {
+  const [dataProduct,setDataProduct] = useState([])
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/restuarants').then(({data:{result}}) => {
+      setDataProduct(result.data)
+    })
+  },[])
+  
+
   const ref = useRef<any>(null);
   const [imageProd, setImageProd] = useState("");
   const [open, setOpen] = useState(false);
@@ -75,9 +85,8 @@ const index = () => {
             <div
               style={{ width: "50vw", height: "100vh" }}
               ref={ref}
-              className={`${style.modal} ${
-                open && style.open
-              } bg-admin-openMenu1 overflow-auto`}
+              className={`${style.modal} ${open && style.open
+                } bg-admin-openMenu1 overflow-auto`}
             >
               <form action="#">
                 <div className="flex justify-between p-5 ">
@@ -121,9 +130,19 @@ const index = () => {
                           type="number"
                           setForm={setForm}
                         />
-                        <InputAdd
+                        {/* <InputAdd
                           textName="Restuarants"
                           name="rest_id"
+                          setForm={setForm}
+                        /> */}
+                        {/* <DropDownMenu
+                          textName="Restuarants"
+                          name="rest_id"
+                          setForm={setForm} /> */}
+                        <DropDownMenu
+                          textName="Restuarants"
+                          categoryData={dataProduct}
+                          name="restuarant"
                           setForm={setForm}
                         />
                       </>
@@ -162,3 +181,5 @@ const index = () => {
 };
 
 export default index;
+
+

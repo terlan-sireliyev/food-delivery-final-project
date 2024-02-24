@@ -9,7 +9,7 @@ import axios from "axios";
 import { v4 } from "uuid";
 import DropDownMenu from "../../../components/admin/DropdownMenu";
 
-export default function index({ categoryDatas, restuarantDatas }: any) {
+export default function index({ categoryDatas, restuarantDatas }: any) {  
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
   const {
@@ -26,8 +26,6 @@ export default function index({ categoryDatas, restuarantDatas }: any) {
     delivery_min: "",
     delivery_price: "",
   });
-
-  console.log(form);
 
   const addProduct = (e: any) => {
     e.preventDefault();

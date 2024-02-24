@@ -22,11 +22,12 @@ const DropDownMenu: React.FC<Props> = ({
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState("Choose One");
 
+  
   const categoryChangeHandler = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     const selectedItemName = e.currentTarget.textContent;
-    const selectedItem = categoryData.find(
+    const selectedItem = categoryData?.find(
       (item) => item.name === selectedItemName
     );
 
@@ -50,7 +51,7 @@ const DropDownMenu: React.FC<Props> = ({
       </div>
       {isActive && (
         <div className={style.dropdownContent}>
-          {categoryData.map((item) => (
+          {categoryData?.map((item) => (
             <div
               key={item.id}
               className={style.dropdownItem}
