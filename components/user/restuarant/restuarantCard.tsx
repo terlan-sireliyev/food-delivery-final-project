@@ -10,13 +10,13 @@ const RestuarantCard = ({
 }: any) => {
   return (
     <>
-      <Link href={`/user/restuarants/${id}`}>
+      <Link href={`/user/restuarants/${id}`} className="hover:shadow-2xl ">
         <div className="border border-admin-inputBorder p-2 ">
-          <div className="w-2/3 m-auto h-48">
+          <div className="w-2/3 m-auto h-48 ">
             <img
               src={img_url}
               alt="Have your error"
-              className="h-full w-full object-contain"
+              className="h-full w-full object-contain "
             />
           </div>
           <div className="text-left">

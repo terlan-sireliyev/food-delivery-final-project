@@ -2,15 +2,16 @@ import React, { useState, useEffect } from "react";
 import RestuarantCard from "../../../components/user/restuarant/restuarantCard";
 import RestuarantNavbar from "../../../components/user/restuarant/restuarantNavbar";
 import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
-
+//bura restuarant user sehivesidir ve onun icinde sol terfedeki navbar hissesini
 const Index = ({ AllCategory }: any) => {
+  //filtirleyirik
   const {
     message,
     result: { data },
   } = AllCategory;
-
   const [restuarantCard, setRestuarantCard] = useState([]);
   const { query } = useRouter();
   useEffect(() => {
@@ -18,6 +19,7 @@ const Index = ({ AllCategory }: any) => {
       .get("http://localhost:3000/api/restuarants")
       .then(({ data: { result } }) => {
         if (query.category) {
+          //burda categorya-lari filtir edirik ki
           const filteredData = result.data.filter(
             ({ category_id }: any) => category_id === query.category
           );

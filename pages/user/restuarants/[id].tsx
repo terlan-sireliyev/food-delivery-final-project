@@ -1,33 +1,36 @@
 import { Link } from "@mui/material";
 import axios, { all } from "axios";
 import { useParams } from "next/navigation";
+import AddIcon from "@mui/icons-material/Add";
 import React, { useEffect, useState } from "react";
 interface Restaurant {
   name: string;
   img_url: string;
-  address: string;
+  address: string; //Single page
   delivery_price: string;
-  cuisine: string
+  cuisine: string;
 }
+//burda productu descruct edirik ve icini gotururuk
 const SingleRestaurant = ({ allPro: { result } }: any) => {
   const [data, setData] = useState<Restaurant | null>(null);
-  const params = useParams();
-  const id = params?.id;
-
+  const params = useParams(); //burda  yolunu secirik
+  const id = params?.id; //burda hemin yolun id - sini gotururuk
   useEffect(() => {
     if (id) {
-      axios
+      //burda click etdikde hemin click olunan id-nin melumatlarini
+      axios //gotururuk
         .get(`http://localhost:3000/api/restuarants/${id}`)
         .then((res) => setData(res.data.result.data))
         .catch((error) => console.error(error));
     }
   }, [id]);
-
   if (!data) {
     return <div>Loading...</div>;
   }
-
-  const filteredProducts = result.data.filter(({ rest_id }: { rest_id: string }) => rest_id === id)
+  //burda card-a daxil olanda o cardin diger melumatlarini getirir
+  const filteredProducts = result.data.filter(
+    ({ rest_id }: { rest_id: string }) => rest_id === id
+  );
 
   return (
     <>
@@ -41,9 +44,7 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
         </div>
         <div className="flex justify-between items-center px-8">
           <div>
-            <h1 className="font-bold text-left text-welcome">
-              {data?.name}
-            </h1>
+            <h1 className="font-bold text-left text-welcome">{data?.name}</h1>
             <h2 className="text-admin-inputBorder text-left">
               {data?.address}
             </h2>
@@ -64,7 +65,8 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
               <Link href="/user/restuarants">
                 <button className="mx-2 border border-user-navbarSignBg  bg-user-navbarSignBg text-admin-colorLogin p-2">
                   Go Back
-                </button></Link>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -77,23 +79,34 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
             </h1>
           </div>
           {/* map burdan baslayacaq */}
-          {
-            filteredProducts?.map((item: any) => (
-              <div className="ml-8 flex mt-4 ">
-                <div className="w-24 h-24">
-                  <img src={item?.img_url} className="w-full h-full rounded-iconsRadius" alt="" />
-                </div>
-                <div className="ml-4">
+          {filteredProducts?.map((item: any) => (
+            <div className="ml-8 flex mt-4  ">
+              <div className="w-24 h-24">
+                <img
+                  src={item?.img_url}
+                  className="w-full h-full rounded-iconsRadius"
+                  alt=""
+                />
+              </div>
+              <div className="ml-4 flex  w-full justify-between">
+                <div>
                   <div className="font-bold text-labelOpenMenu">
                     {item.name}
                   </div>
-                  <div className="mt-3">
-                    {item.description}
+                  <div className="mt-3">{item.description}</div>
+                </div>
+
+                <div className="flex gap-3">
+                  <div className="p-2 h-12 w-12 border border-admin-colorEacampLogo1 rounded-btnRaduis flex items-center justify-center ">
+                    ${item?.price}
+                  </div>
+                  <div className="p-2 h-12 w-12 mr-2 rounded-btnRaduis flex items-center justify-center bg-admin-welcomeText">
+                    <AddIcon />
                   </div>
                 </div>
               </div>
-            ))
-          }
+            </div>
+          ))}
         </div>
         <div className="w-1/4  bg-user-navbarBGColor py-4 divide-y divide-admin-inputBorder ">
           <div>
@@ -140,13 +153,10 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
 };
 
 export default SingleRestaurant;
-
 export const getServerSideProps = async () => {
-  let productGet = await axios.get('http://localhost:3000/api/products');
-  // const d = productGet.
+  let productGet = await axios.get("http://localhost:3000/api/products");
   return {
-    props: {
-      allPro: productGet.data
-    }
-  }
-}
+    //product-u getiririk
+    props: { allPro: productGet.data },
+  };
+};

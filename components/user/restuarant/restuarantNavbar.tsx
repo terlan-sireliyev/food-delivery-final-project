@@ -12,7 +12,7 @@ const RestuarantNavbar = ({ img_url, name, slug, category_id }: any) => {
           >
             <img
               src={img_url}
-              className=" w-4 h-4 rounded-iconsRadius  mr-2"
+              className=" w-4 h-4 rounded-iconsRadius  mr-2 object-cover"
               alt=""
             />
             {name}

@@ -9,7 +9,7 @@ import axios from "axios";
 import { v4 } from "uuid";
 import DropDownMenu from "../../../components/admin/DropdownMenu";
 
-export default function index({ categoryDatas, restuarantDatas }: any) {  
+export default function index({ categoryDatas, restuarantDatas }: any) {
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
   const {
@@ -144,25 +144,19 @@ export default function index({ categoryDatas, restuarantDatas }: any) {
                   name="delivery_price"
                   setForm={setForm}
                 />
-                <InputAdd
+                <InputAdd //input value component props send here
                   type="number"
                   textName="Delivery Minute"
                   name="delivery_min"
                   setForm={setForm}
                 />
                 <InputAdd textName="Address" name="address" setForm={setForm} />
-                {/* <InputAdd
-                  textName="Category"
-                  name="category"
-                  setForm={setForm}
-                /> */}
-                <DropDownMenu
+                <DropDownMenu //dropdown component props send here
                   textName="Category"
                   categoryData={data}
                   name="category"
                   setForm={setForm}
                 />
-                {/* <InputAdd textName="Slug" name="slug" setForm={setForm} /> */}
               </div>
             </div>
             <div className="bg-admin-TextCheck p-5 ">

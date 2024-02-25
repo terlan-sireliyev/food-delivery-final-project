@@ -8,6 +8,7 @@ const index = ({ id, name, cuisine, img_url, category_id }: any) => {
       .delete(`http://localhost:3000/api/restuarants/${id}`)
       .then((res) => {
         console.log("silindi");
+        console.log(res);
       })
       .catch((err) => {
         alert("Silinmedi");
@@ -15,12 +16,12 @@ const index = ({ id, name, cuisine, img_url, category_id }: any) => {
   };
   return (
     <>
-      <div className="group flex justify-between  w-full transition duration-400 hover:bg-admin-hover  my-4 border border-admin-inputBorder rounded  bg-admin-TextCheck">
-        <div className="w-32 h-20 flex justify-center items-center p-3   rounded-full">
+      <div className="group flex justify-between  w-full transition duration-400 hover:bg-admin-hover  mx-4 border border-admin-inputBorder rounded  bg-admin-TextCheck">
+        <div className="w-[80px] h-[55px] flex justify-center  mr-2 items-center p-3">
           <img
             src={img_url}
             alt="Have your error"
-            className="w-25 h-14 rounded-full"
+            className="w-full h-full rounded-iconsRadius object-scale-down "
           />
         </div>
         <div className="  w-full flex items-start justify-center flex-col text-left">
@@ -28,7 +29,7 @@ const index = ({ id, name, cuisine, img_url, category_id }: any) => {
             {name}
           </div>
           <div className="group-hover:text-admin-colorLogin  line-clamp-1 text-productSize  text-admin-welcomeBackColor text-left">
-            {cuisine.split(",")[0]}
+            {cuisine.split(" ")[0]}
           </div>
         </div>
         {/* <div>{category_id}</div> */}
