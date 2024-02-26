@@ -44,6 +44,7 @@ export const useBasket = create<any>((set: any) => ({
         item.id === productId ? { ...item, count: item.count + 1 } : item
       );
       return {
+        ...state,
         basket: updatedBasket,
       };
     });

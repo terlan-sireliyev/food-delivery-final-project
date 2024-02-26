@@ -17,15 +17,34 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { columnsSecond } from "../../../components/admin/materialUI";
 
-const index = ({ AllCategory }: any) => {
+interface Category {
+  id: string;
+  img_url: string;
+  name: string;
+  slug: string;
+}
+interface AllCategoryResponse {
+  message: string;
+  result: {
+    data: Category[];
+  };
+}
+
+const Index: React.FC<{ AllCategory: AllCategoryResponse }> = ({
+  AllCategory,
+}) => {
   const {
     message,
     result: { data },
   } = AllCategory;
 
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [page, setPage] = React.useState(0);
-  const [form, setForm] = useState({
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [page, setPage] = useState<number>(0);
+  const [form, setForm] = useState<{
+    img_url: string;
+    name: string;
+    slug: string;
+  }>({
     img_url: "",
     name: "",
     slug: "",
@@ -71,11 +90,11 @@ const index = ({ AllCategory }: any) => {
     setPage(0);
   };
   //  end table
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleOutSideClick = (event: any) => {
-      if (!ref.current?.contains(event.target)) {
+    const handleOutSideClick = (event: MouseEvent) => {
+      if (!ref.current?.contains(event.target as Node)) {
         setOpen(false);
       }
     };
@@ -84,8 +103,7 @@ const index = ({ AllCategory }: any) => {
       window.removeEventListener("mousedown", handleOutSideClick);
     };
   }, [ref]);
-
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const openMenu = () => {
     setOpen((prev) => true);
   };
@@ -220,7 +238,8 @@ const index = ({ AllCategory }: any) => {
   );
 };
 
-export default index;
+export default Index;
+
 export const getServerSideProps = async () => {
   try {
     const response = await axios.get("http://localhost:3000/api/category");
