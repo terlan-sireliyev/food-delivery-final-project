@@ -1,0 +1,8 @@
+istifade elediyim extention-lar:
+1.material ui
+2.tailwind
+3.zustand  /  evezibe redux  ve ya contextApi yazmaq olardi
+4.uuid
+5.eslint
+6.fontawesome
+7.axios

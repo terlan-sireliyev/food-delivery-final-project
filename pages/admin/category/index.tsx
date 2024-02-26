@@ -4,8 +4,6 @@ import style from "./category.module.css";
 import { FileUploader } from "../../../components/admin/FileUploader/index";
 import Head from "next/head";
 import InputAdd from "../../../components/admin/inputAdd/index";
-import BtnAdd from "../../../components/admin/btnAdd/index";
-
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -17,30 +15,7 @@ import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-interface Column {
-  id: "name" | "slug" | "img_url" | "delete";
-  label: string;
-  minWidth?: number;
-  align?: "center";
-}
-
-const columns: readonly Column[] = [
-  { id: "name", label: "Name", minWidth: 170 },
-  {
-    id: "slug",
-    label: "Slug",
-    minWidth: 170,
-    align: "center",
-  },
-  {
-    id: "img_url",
-    label: "Image",
-    minWidth: 170,
-    align: "center",
-  },
-  { id: "delete", label: "Action", align: "center", minWidth: 170 },
-];
+import { columnsSecond } from "../../../components/admin/materialUI";
 
 const index = ({ AllCategory }: any) => {
   const {
@@ -180,7 +155,7 @@ const index = ({ AllCategory }: any) => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {columns.map((column, index) => (
+                  {columnsSecond.map((column, index) => (
                     <TableCell
                       className="font-bold"
                       key={index}
@@ -198,7 +173,7 @@ const index = ({ AllCategory }: any) => {
                   ?.map((row: any, index: number) => {
                     return (
                       <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                        {columns.map((column, index) => {
+                        {columnsSecond.map((column, index) => {
                           const value = row[column.id];
                           return (
                             <>
