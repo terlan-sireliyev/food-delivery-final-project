@@ -1,7 +1,10 @@
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const RestuarantNavbar = ({ img_url, name, slug, category_id }: any) => {
+  // const { pathname } = useRouter();
+  // const currentPath = pathname.slice(pathname.lastIndexOf("/user/") + 1);
   return (
     <>
       <nav className="list-none mt-4 w-1/2 m-auto text-left">

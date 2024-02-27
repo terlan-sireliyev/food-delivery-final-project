@@ -8,7 +8,7 @@ const RestaurantSingleHeader = ({ dataSingle }: any) => {
           <img
             src={dataSingle?.img_url}
             alt={dataSingle?.name}
-            className="w-full h-48 object-contain border border-admin-inputBorder my-4"
+            className="cursor-pointer w-full h-48 object-contain border border-admin-inputBorder my-4"
           />
         </div>
         <div className="flex justify-between items-center px-8">

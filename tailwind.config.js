@@ -61,6 +61,7 @@ module.exports = {
       "user-iconsFooterBG": "#FB9300",
       "user-registerBtn": "#EB5757",
       "user-LinkColor": "#F0E1E1",
+      "user-bgCheckout": "#ED0800",
     },
     borderRadius: {
       borderSlider: "40px",

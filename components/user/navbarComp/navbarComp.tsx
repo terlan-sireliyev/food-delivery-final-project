@@ -1,7 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import OpenMenuLang from "../../admin/openMenuLang/index";
+import { userNavbarLinks } from "./linksNavbarMockData";
+import { useRouter } from "next/router";
 const NavbarComp = () => {
+  const { pathname } = useRouter();
+  const currentPath = pathname.slice(pathname.lastIndexOf("/admin") + 1);
   return (
     <>
       <div className="">
@@ -22,27 +26,19 @@ const NavbarComp = () => {
           </div>
           <div className="flex items-center  gap-8 ">
             <ul className={`${"flex gap-4 max-md:hidden "}`}>
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              <li>
-                <Link href="/user/restuarants">Restaurant</Link>
-              </li>
-              <li>
-                <Link href="/user/about" className="max-lg:hidden">
-                  About as
+              {userNavbarLinks.map(({ id, title, href, icon }: any) => (
+                <Link href={href} key={id}>
+                  <div
+                    className={`${
+                      href == currentPath
+                        ? "text-user-bgCheckout font-bold"
+                        : ""
+                    }  p-2 mt-3 rounded `}
+                  >
+                    {title}
+                  </div>
                 </Link>
-              </li>
-              <li>
-                <Link href="/user/work" className="max-lg:hidden">
-                  how it works
-                </Link>
-              </li>
-              <li>
-                <Link href="/user/faq" className="max-md:hidden">
-                  FAQs
-                </Link>
-              </li>
+              ))}
             </ul>
             <div className="flex items-center justify-center p-2  ">
               <div className="max-md:hidden">

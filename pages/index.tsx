@@ -7,6 +7,7 @@ import FeaturesComp from "../components/user/features/features";
 import NewFoods from "../components/user/newFoods/newFoods";
 import Menu1 from "../components/user/menu1/menu1";
 import Menu2 from "../components/user/menu2/menu2";
+import { render } from "react-dom";
 const Home: NextPage = () => {
   // const handleUpload = (e: any) => {
   //   const file = e.target.files[0];

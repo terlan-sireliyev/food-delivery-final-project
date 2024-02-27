@@ -6,7 +6,7 @@ import Link from "next/link";
 import { adminLinks } from "./linksMockData";
 const index = () => {
   const { pathname } = useRouter();
-  const currentPath = pathname.slice(pathname.lastIndexOf("/") + 1);
+  const currentPath = pathname.slice(pathname.lastIndexOf("/user/") + 1);
   return (
     <>
       <div className=" bg-admin-bgLeftBar text-admin-bgCheck  p-8 rounded">
@@ -14,7 +14,9 @@ const index = () => {
           <Link href={href} key={id}>
             <div
               className={`${
-                href === currentPath ? "bg-admin-bgLeftBarCheck" : ""
+                href === currentPath
+                  ? "bg-admin-bgLeftBarCheck rounded-regBtnRadius"
+                  : ""
               }  p-2 mt-3 rounded `}
             >
               {icon}

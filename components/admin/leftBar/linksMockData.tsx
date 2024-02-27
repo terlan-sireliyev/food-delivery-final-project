@@ -5,8 +5,18 @@ import CategoryIcon from "@mui/icons-material/Category";
 import FilterFramesIcon from "@mui/icons-material/FilterFrames";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 export const adminLinks = [
-  { id: 1, title: "Dashboard", href: "/admin/dashboard", icon: <DashboardIcon /> },
-  { id: 2, title: "Products", href: "/admin/products", icon: <AddShoppingCartIcon /> },
+  {
+    id: 1,
+    title: "Dashboard",
+    href: "/admin/dashboard",
+    icon: <DashboardIcon />,
+  },
+  {
+    id: 2,
+    title: "Products",
+    href: "/admin/products",
+    icon: <AddShoppingCartIcon />,
+  },
   {
     id: 3,
     title: "Restaurants",

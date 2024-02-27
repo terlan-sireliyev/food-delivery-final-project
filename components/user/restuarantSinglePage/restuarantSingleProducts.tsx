@@ -7,7 +7,7 @@ const RestuarantSingleProducts = ({ filteredProducts, addBasket }: any) => {
         <h1 className="text-center  font-bold text-labelOpenMenu">Product</h1>
       </div>
       {filteredProducts.map((item: any) => (
-        <div className="ml-8 flex mt-4" key={item.id}>
+        <div className=" cursor-pointer ml-8 flex mt-4" key={item.id}>
           <div className="w-24 h-24">
             <img
               src={item?.img_url}
@@ -27,7 +27,7 @@ const RestuarantSingleProducts = ({ filteredProducts, addBasket }: any) => {
               </div>
               <div
                 onClick={() => addBasket(item?.id)}
-                className="p-2 h-12 w-12 mr-2 rounded-btnRaduis flex items-center justify-center bg-admin-welcomeText"
+                className=" cursor-pointer  p-2 h-12 w-12 mr-2 rounded-btnRaduis flex items-center justify-center bg-admin-welcomeText"
               >
                 <AddIcon />
               </div>

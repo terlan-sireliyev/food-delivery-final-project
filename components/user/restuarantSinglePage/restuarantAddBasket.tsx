@@ -34,8 +34,8 @@ const RestuarantSingleBasket = ({ basket, countAdd, totalPrice }: any) => {
           })}
         </div>
         <div className="absolute bottom-0  w-5/6  ml-8 ">
-          <button className="bg-user-navbarSignBg  mt-4 rounded-borderSlider p-3  w-full">
-            <div className="flex justify-around items-center">
+          <button className="bg-user-navbarSignBg  mt-4 rounded-borderSlider p-3  w-full hover:bg-user-bgCheckout">
+            <div className="flex justify-around items-center ">
               <div className="text-admin-colorLogin font-bold">Checkout</div>
               <div className="bg-admin-colorLogin w-1/2 p-3 rounded-borderSlider">
                 {totalPrice}.00 $

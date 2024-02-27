@@ -5,7 +5,7 @@ import AdminLayout from "../components/admin/adminLayout";
 import RegNavbarComp from "../components/user/registerLayout/registerLayout";
 import UserLayout from "../components/user/userLayout/UserLayout";
 import Head from "next/head";
-
+import { render } from "react-dom";
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   if (router.pathname == "/admin/login")
