@@ -11,7 +11,7 @@ const RestuarantNavbar = ({ img_url, name, slug, category_id }: any) => {
         <li className="font-bold px-4 py-2 rounded-regBtnRadius">
           <Link
             href={`/user/restuarants?category=${category_id}`}
-            className={`flex items-center  rounded-regBtnRadius ${
+            className={`flex items-center px-3 py-2  rounded-regBtnRadius ${
               router?.query && router.query.category === category_id
                 ? "bg-user-LinkColor"
                 : ""

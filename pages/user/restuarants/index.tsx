@@ -39,7 +39,7 @@ const Index = ({ AllCategory }: any) => {
         <div className="w-1/6 max-lg:w-1/3   bg-user-navbarBGColor ">
           <nav className="list-none mt-4 w-1/2 m-auto text-left">
             <li
-              className={`text-user-navbarSignBg font-bold rounded-regBtnRadius ${
+              className={`text-user-navbarSignBg font-bold rounded-regBtnRadius px-3 py-2 ${
                 !query.category && "bg-user-LinkColor"
               }`}
             >
