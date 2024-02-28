@@ -25,7 +25,7 @@ export const options = {
   chart: {
     title: "Average Temperatures and Daylight in Iceland Throughout the Year",
   },
-  backgroundColor: "#27283C",
+  backgroundColor: "#c4c4c4",
   width: 600,
   height: 400,
   series: {

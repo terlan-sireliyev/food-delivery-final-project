@@ -6,24 +6,26 @@ import Link from "next/link";
 import { adminLinks } from "./linksMockData";
 const index = () => {
   const { pathname } = useRouter();
-  const currentPath = pathname.slice(pathname.lastIndexOf("/user/") + 1);
+
   return (
     <>
       <div className=" bg-admin-bgLeftBar text-admin-bgCheck  p-8 rounded">
-        {adminLinks.map(({ id, title, href, icon }: any) => (
-          <Link href={href} key={id}>
-            <div
-              className={`${
-                href === currentPath
-                  ? "bg-admin-bgLeftBarCheck rounded-regBtnRadius"
-                  : ""
-              }  p-2 mt-3 rounded `}
-            >
-              {icon}
-              {title}
-            </div>
-          </Link>
-        ))}
+        {adminLinks.map(({ id, title, href, icon }: any) => {
+          return (
+            <Link href={href} key={id}>
+              <div
+                className={`${
+                  href === pathname
+                    ? "bg-admin-bgLeftBarCheck rounded-regBtnRadius"
+                    : ""
+                }  p-2 mt-3 rounded `}
+              >
+                {icon}
+                {title}
+              </div>
+            </Link>
+          );
+        })}
         <Link href="login">
           <div className="p-2 mt-3 rounded">
             <FontAwesomeIcon icon={faList} className="mr-2" />
