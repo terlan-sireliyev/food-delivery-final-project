@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-
+import Login from "./login";
 const AdminDashboard: NextPage = () => {
   return (
     <div>
@@ -11,7 +11,7 @@ const AdminDashboard: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Welcome to Admin page</h1>
+      <Login />
     </div>
   );
 };

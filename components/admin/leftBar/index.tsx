@@ -26,7 +26,7 @@ const index = () => {
             </Link>
           );
         })}
-        <Link href="login">
+        <Link href="/admin">
           <div className="p-2 mt-3 rounded">
             <FontAwesomeIcon icon={faList} className="mr-2" />
             Logout

@@ -1,3 +1,8 @@
-.bdd{
-    color: hsl(0, 0%, 100%) !important;
+.bdd {
+  color: hsl(0, 0%, 100%) !important;
 }
+
+/* .g > .g > .g > text {
+  fill: #fff !important;
+  color: #fff !important;
+} */
