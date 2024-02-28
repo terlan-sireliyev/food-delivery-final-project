@@ -5,7 +5,6 @@ import { userNavbarLinks } from "./linksNavbarMockData";
 import { useRouter } from "next/router";
 const NavbarComp = () => {
   const { pathname } = useRouter();
-  const currentPath = pathname.slice(pathname.lastIndexOf("/admin") + 1);
   return (
     <>
       <div className="">
@@ -30,9 +29,7 @@ const NavbarComp = () => {
                 <Link href={href} key={id}>
                   <div
                     className={`${
-                      href == currentPath
-                        ? "text-user-bgCheckout font-bold"
-                        : ""
+                      href == pathname ? "text-user-bgCheckout font-bold" : ""
                     }  p-2 mt-3 rounded `}
                   >
                     {title}
