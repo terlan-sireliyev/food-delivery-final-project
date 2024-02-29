@@ -1,37 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+const restPerPage = 4;
 
-const theme = createTheme({
-  components: {
-    MuiPagination: {
-      styleOverrides: {
-        root: {
-          "& .MuiPaginationItem-outlined": {
-            color: "#CD61ED",
-            borderColor: "#CD61ED",
-            width: "50px",
-            height: "50px",
-          },
-          "& .Mui-selected": {
-            backgroundColor: "#CD61ED",
-            borderColor: "#CD61ED",
-            color: "white",
-            width: "50px",
-            height: "50px",
-            fontWeight: "bold",
-          },
-        },
-      },
-    },
-  },
-});
+function App({ setRestaurant, restuarantDatas }: any) {
+  const [pageItem, setPageItems] = useState({
+    from: 0,
+    to: restPerPage,
+  });
+  // const dt;
+  useEffect(() => {
+    const currentProducts = restuarantDatas.result.data.slice(
+      pageItem.from,
+      pageItem.to
+    );
 
-function App() {
+    setRestaurant(currentProducts);
+  }, [pageItem.from, pageItem.to]);
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    const from = (page - 1) * restPerPage;
+    const to = (page - 1) * restPerPage + restPerPage;
+
+    setPageItems({ from, to });
+  };
+
   return (
-    <ThemeProvider theme={theme}>
-      <Pagination count={5} variant="outlined" />
-    </ThemeProvider>
+    <Pagination
+      count={Math.ceil(restuarantDatas.result.data.length / restPerPage)}
+      onChange={handlePageChange}
+      variant="outlined"
+    />
   );
 }
 

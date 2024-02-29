@@ -71,6 +71,8 @@ export default function index({ categoryDatas, restuarantDatas }: any) {
     setOpenFastFood((prev) => true);
   };
 
+  const [restaurant, setRestaurant] = useState(restuarantDatas.result.data);
+
   return (
     <>
       <Head>
@@ -175,7 +177,7 @@ export default function index({ categoryDatas, restuarantDatas }: any) {
         </div>
       </PageHeader>
       <div className="grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 mt-6 w-5/6  m-auto">
-        {restuarantDatas.result.data?.map((item: any) => (
+        {restaurant.map((item: any) => (
           <RestaurantCard
             id={item.id}
             key={item.id}
@@ -186,8 +188,12 @@ export default function index({ categoryDatas, restuarantDatas }: any) {
           />
         ))}
       </div>
+
       <div className="p-2 flex justify-center my-6 ">
-        <PaginationOutlined />
+        <PaginationOutlined
+          restuarantDatas={restuarantDatas}
+          setRestaurant={setRestaurant}
+        />
       </div>
     </>
   );
