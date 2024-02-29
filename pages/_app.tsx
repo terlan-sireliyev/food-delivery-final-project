@@ -9,13 +9,6 @@ import "../styles/globals.css";
 import isAuth from "./isAuth";
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
-  useEffect(() => {
-    if (isAuth()) {
-      router.push('/admin')
-      return
-    }
-  }, [])
   if (router.pathname == "/admin")
     return (
       <>
@@ -25,6 +18,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   else if (router.pathname.includes("/admin")) {
     return (
       <>
+        {useEffect(() => {
+          if (isAuth()) {
+            setTimeout(() => router.push("../admin"), 0);
+            return;
+          }
+        }, [])}
         <AdminLayout>
           <>
             <Component {...pageProps} />

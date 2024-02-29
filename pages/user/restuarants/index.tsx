@@ -2,24 +2,46 @@ import React, { useState, useEffect } from "react";
 import RestuarantCard from "../../../components/user/restuarant/restuarantCard";
 import RestuarantNavbar from "../../../components/user/restuarant/restuarantNavbar";
 import { useRouter } from "next/router";
-import { useParams } from "next/navigation";
 import axios from "axios";
 import Link from "next/link";
-//bura restuarant user sehivesidir ve onun icinde sol terfedeki navbar hissesini
-const Index = ({ AllCategory }: any) => {
-  //filtirleyirik
-  const {
-    message,
-    result: { data },
-  } = AllCategory;
-  const [restuarantCard, setRestuarantCard] = useState([]);
+
+interface Category {
+  id: string;
+  name: string;
+  img_url: string;
+  slug: string;
+}
+
+interface Restaurant {
+  id: string;
+  name: string;
+  address: string;
+  img_url: string;
+  cuisine: string;
+  delivery_price: number;
+  delivery_min: number;
+}
+
+interface AllCategoryResponse {
+  message: string;
+  result: {
+    data: Category[];
+  };
+}
+
+interface IndexProps {
+  AllCategory: AllCategoryResponse;
+}
+
+const Index: React.FC<IndexProps> = ({ AllCategory }) => {
   const { query } = useRouter();
+  const [restuarantCard, setRestuarantCard] = useState<Restaurant[]>([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/restuarants")
       .then(({ data: { result } }) => {
         if (query.category) {
-          //burda categorya-lari filtir edirik ki
           const filteredData = result.data.filter(
             ({ category_id }: any) => category_id === query.category
           );
@@ -47,7 +69,7 @@ const Index = ({ AllCategory }: any) => {
             </li>
           </nav>
 
-          {data.map((itemCategory: any) => (
+          {AllCategory.result.data.map((itemCategory) => (
             <RestuarantNavbar
               key={itemCategory.id}
               name={itemCategory.name}
@@ -58,11 +80,11 @@ const Index = ({ AllCategory }: any) => {
           ))}
         </div>
         <div className="w-5/6 ps-4 grid grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2 gap-4">
-          {restuarantCard.map((itemRestuarant: any) => (
+          {restuarantCard.map((itemRestuarant) => (
             <RestuarantCard
               key={itemRestuarant.id}
               name={itemRestuarant.name}
-              adress={itemRestuarant.address}
+              address={itemRestuarant.address}
               img_url={itemRestuarant.img_url}
               cuisine={itemRestuarant.cuisine}
               delivery_price={itemRestuarant.delivery_price}
@@ -81,10 +103,10 @@ export default Index;
 export const getServerSideProps = async () => {
   try {
     const response = await axios.get("http://localhost:3000/api/category");
-    const dataCategory = response.data;
+    const dataCategory: AllCategoryResponse = response.data;
     return { props: { AllCategory: dataCategory } };
   } catch (error) {
     console.error("Error fetching categories:", error);
-    return { props: { AllCategory: {} } };
+    return { props: { AllCategory: {} as AllCategoryResponse } };
   }
 };
