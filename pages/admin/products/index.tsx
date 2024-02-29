@@ -3,6 +3,7 @@ import PageHeader from "../../../components/admin/pageHeader/index";
 import Product from "../../../components/admin/productCard";
 import Head from "next/head";
 import axios from "axios";
+import PaginationOutlined from "../../../components/admin/materialUiPagination/index";
 export default function Index({ productDatas }: any) {
   const {
     message,
@@ -26,6 +27,10 @@ export default function Index({ productDatas }: any) {
             restuarant={prod.rest_id}
           />
         ))}
+      </div>
+      {/* bg-admin-colorLogin */}
+      <div className="p-2 flex justify-center my-6 ">
+        <PaginationOutlined />
       </div>
     </>
   );

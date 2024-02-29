@@ -8,7 +8,7 @@ import InputAdd from "../../../components/admin/inputAdd/index";
 import axios from "axios";
 import { v4 } from "uuid";
 import DropDownMenu from "../../../components/admin/DropdownMenu";
-
+import PaginationOutlined from "../../../components/admin/materialUiPagination/index";
 export default function index({ categoryDatas, restuarantDatas }: any) {
   const ref = useRef<any>(null);
   const refFastFood = useRef<any>(null);
@@ -185,6 +185,9 @@ export default function index({ categoryDatas, restuarantDatas }: any) {
             category_id={item.category_id}
           />
         ))}
+      </div>
+      <div className="p-2 flex justify-center my-6 ">
+        <PaginationOutlined />
       </div>
     </>
   );
