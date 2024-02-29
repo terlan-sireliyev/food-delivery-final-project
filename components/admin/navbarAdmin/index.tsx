@@ -2,19 +2,20 @@ import React, { use, useEffect, useRef, useState } from "react";
 import { FileUploader } from "../FileUploader";
 import InputAdd from "../inputAdd/index";
 import TextArea from "../textArea/index";
-import style from '../navbarAdmin/style.module.css';
+import style from "../navbarAdmin/style.module.css";
 import axios from "axios";
 import OpenMenuLang from "../openMenuLang/index";
 import DropDownMenu from "../DropdownMenu";
-
+import Link from "next/link";
 const index = () => {
-  const [dataProduct,setDataProduct] = useState([])
+  const [dataProduct, setDataProduct] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:3000/api/restuarants').then(({data:{result}}) => {
-      setDataProduct(result.data)
-    })
-  },[])
-  
+    axios
+      .get("http://localhost:3000/api/restuarants")
+      .then(({ data: { result } }) => {
+        setDataProduct(result.data);
+      });
+  }, []);
 
   const ref = useRef<any>(null);
   const [imageProd, setImageProd] = useState("");
@@ -36,7 +37,7 @@ const index = () => {
     await axios
       .post("http://localhost:3000/api/products", form)
       .then((result) => {
-        console.log("success",result);
+        console.log("success", result);
       })
       .catch((err) => {
         console.log(err);
@@ -70,7 +71,9 @@ const index = () => {
     <div className=" ">
       <div className="flex p-2 justify-between items-center bg-admin-navbarBG rounded-b-lg">
         <div className="mt-2 ml-4">
-          <img src="../images/logo.svg" alt="Have yor error" className="" />
+          <Link href="/admin/dashboard">
+            <img src="../images/logo.svg" alt="Have yor error" />
+          </Link>
         </div>
         <div className="flex">
           <div className="mx-2 flex items-center">
@@ -85,8 +88,9 @@ const index = () => {
             <div
               style={{ width: "50vw", height: "100vh" }}
               ref={ref}
-              className={`${style.modal} ${open && style.open
-                } bg-admin-openMenu1 overflow-auto`}
+              className={`${style.modal} ${
+                open && style.open
+              } bg-admin-openMenu1 overflow-auto`}
             >
               <form action="#">
                 <div className="flex justify-between p-5 ">
@@ -181,5 +185,3 @@ const index = () => {
 };
 
 export default index;
-
-
