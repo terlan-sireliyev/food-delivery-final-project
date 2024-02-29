@@ -33,9 +33,6 @@ export default function Index({ productDatas }: any) {
       </div>
       <div className="p-2 flex justify-center my-6 ">
         <PaginationOutlined
-          // restuarantDatas={productDatas}
-          // setRestaurant={setProductPagination}
-
           commonDatas={productDatas}
           paginationData={setProductPagination}
         />
