@@ -9,7 +9,9 @@ export default function Index({ productDatas }: any) {
     message,
     result: { data },
   } = productDatas;
-  const [pro, setPro] = useState(productDatas.result.data);
+  const [productPagination, setProductPagination] = useState(
+    productDatas.result.data
+  );
 
   return (
     <>
@@ -18,7 +20,7 @@ export default function Index({ productDatas }: any) {
       </Head>
       <PageHeader text="Products"></PageHeader>
       <div className="  grid grid-cols-4 gap-4 max-2xl:grid-cols-4 max-xl:grid-cols-3 max-lg:grid-cols-2 max-md:grid-cols-2 max-sm:grid-cols-1 mt-6 w-5/6  m-auto">
-        {pro?.map((prod: any) => (
+        {productPagination?.map((prod: any) => (
           <Product
             id={prod.id}
             key={prod.id}
@@ -29,11 +31,13 @@ export default function Index({ productDatas }: any) {
           />
         ))}
       </div>
-      {/* bg-admin-colorLogin */}
       <div className="p-2 flex justify-center my-6 ">
         <PaginationOutlined
-          restuarantDatas={productDatas}
-          setRestaurant={setPro}
+          // restuarantDatas={productDatas}
+          // setRestaurant={setProductPagination}
+
+          commonDatas={productDatas}
+          paginationData={setProductPagination}
         />
       </div>
     </>

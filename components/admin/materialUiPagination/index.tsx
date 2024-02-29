@@ -2,19 +2,18 @@ import React, { useEffect, useState } from "react";
 import Pagination from "@mui/material/Pagination";
 const restPerPage = 4;
 
-function App({ setRestaurant, restuarantDatas }: any) {
+function App({ paginationData, commonDatas }: any) {
   const [pageItem, setPageItems] = useState({
     from: 0,
     to: restPerPage,
   });
-  // const dt;
   useEffect(() => {
-    const currentProducts = restuarantDatas.result.data.slice(
+    const currentProducts = commonDatas.result.data.slice(
       pageItem.from,
       pageItem.to
     );
 
-    setRestaurant(currentProducts);
+    paginationData(currentProducts);
   }, [pageItem.from, pageItem.to]);
 
   const handlePageChange = (
@@ -29,7 +28,7 @@ function App({ setRestaurant, restuarantDatas }: any) {
 
   return (
     <Pagination
-      count={Math.ceil(restuarantDatas.result.data.length / restPerPage)}
+      count={Math.ceil(commonDatas.result.data.length / restPerPage)}
       onChange={handlePageChange}
       variant="outlined"
     />

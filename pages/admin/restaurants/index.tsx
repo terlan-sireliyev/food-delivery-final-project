@@ -191,8 +191,8 @@ export default function index({ categoryDatas, restuarantDatas }: any) {
 
       <div className="p-2 flex justify-center my-6 ">
         <PaginationOutlined
-          restuarantDatas={restuarantDatas}
-          setRestaurant={setRestaurant}
+          commonDatas={restuarantDatas}
+          paginationData={setRestaurant}
         />
       </div>
     </>
