@@ -4,6 +4,7 @@ import { faList } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { adminLinks } from "./linksMockData";
+import { removeAuth } from "../../../pages/isAuth";
 const index = () => {
   const { pathname } = useRouter();
 
@@ -26,7 +27,9 @@ const index = () => {
             </Link>
           );
         })}
-        <Link href="/admin">
+        <Link href="/admin" onClick={()=>{
+          removeAuth()
+        }}>
           <div className="p-2 mt-3 rounded">
             <FontAwesomeIcon icon={faList} className="mr-2" />
             Logout

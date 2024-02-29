@@ -1,14 +1,21 @@
-import { useRouter } from "next/router";
-import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import AdminLayout from "../components/admin/adminLayout";
 import RegNavbarComp from "../components/user/registerLayout/registerLayout";
 import UserLayout from "../components/user/userLayout/UserLayout";
-import Login from "./admin/login";
-import Head from "next/head";
-import { render } from "react-dom";
+import "../styles/globals.css";
+import isAuth from "./isAuth";
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+
+  useEffect(() => {
+    if (isAuth()) {
+      router.push('/admin')
+      return
+    }
+  }, [])
   if (router.pathname == "/admin")
     return (
       <>

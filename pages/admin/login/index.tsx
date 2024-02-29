@@ -20,23 +20,27 @@ const Login: React.FC = () => {
   const inpPasswordRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (
-      !localStorage.getItem("username") ||
-      !localStorage.getItem("password")
-    ) {
-      localStorage.setItem("username", "terlan");
-      localStorage.setItem("password", "terlan123");
-    }
+    // if (
+    //   !localStorage.getItem("username") ||
+    //   !localStorage.getItem("password")
+    // ) {
+    //   localStorage.setItem("username", "terlan");
+    //   localStorage.setItem("password", "terlan123");
+    // }
+    inpUsernameRef.current?.value === ""
+    inpPasswordRef.current?.value === ""
   }, []);
 
   const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (
-      inpUsernameRef.current?.value === localStorage.getItem("username") &&
-      inpPasswordRef.current?.value === localStorage.getItem("password")
+      inpUsernameRef.current?.value === "terlan" &&
+      inpPasswordRef.current?.value === "terlan123"
     ) {
       notify(true);
+      localStorage.setItem("username", "terlan");
+      localStorage.setItem("password", "terlan123");
     } else {
       notify(false);
     }
@@ -59,6 +63,7 @@ const Login: React.FC = () => {
                   placeholder="Username"
                   type="text"
                   loginRef={inpUsernameRef}
+                  valueInput={inpUsernameRef}
                 />
               </div>
               <div>
@@ -66,6 +71,7 @@ const Login: React.FC = () => {
                   placeholder="Password"
                   type="password"
                   loginRef={inpPasswordRef}
+                  valueInput={inpPasswordRef}
                 />
               </div>
               <div className=" max-md:mt-4">

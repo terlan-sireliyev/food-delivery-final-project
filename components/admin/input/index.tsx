@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = ({ label, type, placeholder, loginRef }: any) => {
+const Input = ({ label, type, placeholder, loginRef,valueInput }: any) => {
   return (
     <>
       {label && <label htmlFor="">{label}</label>}
