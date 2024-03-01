@@ -1,19 +1,19 @@
 import React from "react";
 import Head from "next/head";
-// import sytle from "../../../components/admin/charts/style.module.css";
 import BarChart from "../../../components/admin/charts/BarChart";
 import MDDualYChatrs from "../../../components/admin/charts/MDDualYChatrs";
-const index = () => {
+
+const Index = () => {
   return (
     <>
       <Head>
         <title>Home page</title>
       </Head>
-      <div className="flex">
-        <div className="w-1/2 m-auto h-[150px]   ">
+      <div className="flex justify-center">
+        <div className="w-1/2 mx-4 h-[400px]">
           <BarChart />
         </div>
-        <div className=" m-auto h-[150px] ">
+        <div className="w-1/2 mx-4 h-[400px]">
           <MDDualYChatrs />
         </div>
       </div>
@@ -21,4 +21,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

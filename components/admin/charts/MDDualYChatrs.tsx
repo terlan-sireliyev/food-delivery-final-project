@@ -1,6 +1,6 @@
 import React from "react";
 import { Chart } from "react-google-charts";
-
+import styles from "./style.module.css";
 export const data = [
   [
     { type: "date", label: "Day" },
@@ -25,16 +25,13 @@ export const options = {
   chart: {
     title: "Average Temperatures and Daylight in Iceland Throughout the Year",
   },
-  backgroundColor: "#c4c4c4",
   width: 600,
   height: 400,
   series: {
-    // Gives each series an axis name that matches the Y-axis below.
     0: { axis: "Temps" },
     1: { axis: "Daylight" },
   },
   axes: {
-    // Adds labels to each axis; they don't have to match the axis names.
     y: {
       Temps: { label: "Temps (Celsius)" },
       Daylight: { label: "Daylight" },
@@ -44,12 +41,14 @@ export const options = {
 
 export default function MDDualYChatrs() {
   return (
-    <Chart
-      chartType="Line"
-      width="100%"
-      height=".200px"
-      data={data}
-      options={options}
-    />
+    <div className={styles.pdd}>
+      <Chart
+        chartType="Line"
+        width="100%"
+        height="100%"
+        data={data}
+        options={options}
+      />
+    </div>
   );
 }

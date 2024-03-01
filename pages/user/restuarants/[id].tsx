@@ -29,7 +29,7 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
   const updateBasket = useBasket((state: any) => state.updateBasket);
   const decrementBasket = useBasket((state: any) => state.decrementBasket);
   const incirmentBasket = useBasket((state: any) => state.incirmentBasket);
-
+  const deleteOrder = useBasket((state: any) => state.deleteOrder);
   useEffect(() => {
     if (id) {
       axios
@@ -62,6 +62,12 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
     }
   };
 
+  const deletOrder = (id: any, action: string) => {
+    if (action === "delete") {
+      deleteOrder(id);
+    }
+  };
+
   const totalPrice = basket.reduce(
     (prev: number, current: Product) => prev + current.price * current.count,
     0
@@ -83,6 +89,7 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
           basket={basket}
           countAdd={countAdd}
           totalPrice={totalPrice}
+          deletOrder={deletOrder}
         />
       </div>
     </>

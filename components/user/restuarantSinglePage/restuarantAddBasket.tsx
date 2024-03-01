@@ -1,19 +1,30 @@
-const RestuarantSingleBasket = ({ basket, countAdd, totalPrice }: any) => {
+const RestuarantSingleBasket = ({
+  basket,
+  countAdd,
+  totalPrice,
+  deletOrder,
+}: any) => {
   return (
     <>
-      <div className="w-1/4 h-96 relative  bg-user-navbarBGColor py-4 divide-y divide-admin-inputBorder ">
+      <div className="w-1/4 bg-user-navbarBGColor py-2 divide-y divide-admin-inputBorder ">
         <div>
-          <h1 className="font-bold text-user-navbarSignBg text-left ml-4  ">
+          <h1 className="font-bold text-user-navbarSignBg text-left ml-4 mb-2  ">
             {basket.length} Items
           </h1>
         </div>
-        <div>
+        <div className="overflow-y-auto  h-60 mb-4">
           {basket?.map((itemBasket: any, index: any) => {
             return (
-              <div key={index} className="flex justify-between px-4 pt-4 mt-3">
-                <div className="flex ">
+              <div key={index} className="flex justify-between px-4 pt-4 mt-3 ">
+                <div className="flex  ">
                   <div>
                     <img src={itemBasket?.img_url} className="w-16" alt="" />
+                    <p
+                      onClick={() => deletOrder(itemBasket.id, "delete")}
+                      className="text-eacampLog italic underline underline-offset-1 mt-4 cursor-pointer "
+                    >
+                      Remove order
+                    </p>
                   </div>
                   <div className="-mt-2 ml-4 text-left ">
                     <h1>{itemBasket.name}</h1>
@@ -33,7 +44,7 @@ const RestuarantSingleBasket = ({ basket, countAdd, totalPrice }: any) => {
             );
           })}
         </div>
-        <div className="absolute bottom-0  w-5/6  ml-8 ">
+        <div className=" bottom-0  w-5/6  ml-8 ">
           <button className="bg-user-navbarSignBg  mt-4 rounded-borderSlider p-3  w-full hover:bg-user-bgCheckout">
             <div className="flex justify-around items-center ">
               <div className="text-admin-colorLogin font-bold">Checkout</div>

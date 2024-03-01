@@ -13,16 +13,6 @@ export const useBasket = create<any>((set: any) => ({
           item.id === newProduct.id ? { ...item } : item
         );
 
-        updatedBasket.map((productİnformation: any) => {
-          const productName = productİnformation.name;
-          alert(productName);
-          // if (updatedBasket !== -1) {
-          //   alert(
-          //     `Hörmətli müştəri ${productName} adlı məhsul artıq Bir dəfə əlavə olunub,əyər siz məhsul sayını artırmaq istəyirsinizsə səbətə daxil olub sayını artırasız`
-          //   );
-          //   return false;
-          // }
-        });
         return {
           ...state,
           basket: updatedBasket,
@@ -58,6 +48,17 @@ export const useBasket = create<any>((set: any) => ({
       return {
         ...state,
         basket: updatedBasket,
+      };
+    });
+  },
+  deleteOrder: (productId: any) => {
+    set((state: any) => {
+      const filterCard = state.basket.filter(
+        (fil: any) => fil.id !== productId
+      );
+      return {
+        ...state,
+        basket: filterCard,
       };
     });
   },

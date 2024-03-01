@@ -7,18 +7,18 @@ const RestuarantSingleProducts = ({ filteredProducts, addBasket }: any) => {
         <h1 className="text-center  font-bold text-labelOpenMenu">Product</h1>
       </div>
       {filteredProducts.map((item: any) => (
-        <div className=" cursor-pointer ml-8 flex mt-4" key={item.id}>
-          <div className="w-24 h-24">
+        <div className=" cursor-pointer ml-8 flex mt-8" key={item.id}>
+          <div className="w-[60px] h-[60px]  rounded-iconsRadius">
             <img
               src={item?.img_url}
               className="w-full h-full rounded-iconsRadius"
               alt=""
             />
           </div>
-          <div className="ml-4 flex  w-full justify-between">
+          <div className="ml-4 flex w-full justify-between">
             <div>
               <div className="font-bold text-labelOpenMenu">{item.name}</div>
-              <div className="mt-3">{item.description}</div>
+              <div className="mt-2">{item.description}</div>
             </div>
 
             <div className="flex gap-3">

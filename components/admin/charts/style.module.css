@@ -1,8 +1,24 @@
-.bdd {
+/* .bdd {
   color: hsl(0, 0%, 100%) !important;
+} */
+/* .chartContainer {
+  background-color: #27283c;
+} */
+ 
+.pdd g > rect{
+  fill: #27283C !important;
+  color: #fff !important;
+  border-radius: 50px;
 }
-
-/* .g > .g > .g > text {
+.bdd{position: relative;}
+.bdd g > text {
   fill: #fff !important;
   color: #fff !important;
-} */
+  
+}
+ 
+.bdd g > svg> rect {
+   position: absolute;
+  left: 50px;  
+  top: 50px;
+}
