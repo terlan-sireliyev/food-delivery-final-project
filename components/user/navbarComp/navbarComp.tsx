@@ -28,8 +28,10 @@ const NavbarComp = () => {
         return check;
       }
     });
-    setSearchFilter(filteredRestaurants);
+    setSearchFilter(filteredRestaurants|| []) ;
+    
   };
+ 
 
   return (
     <>
@@ -48,6 +50,8 @@ const NavbarComp = () => {
                 className=""
               />
             </Link>
+            
+       
           </div>
           <div className="flex items-center  gap-8 ">
             <ul className={`${"flex gap-4 max-md:hidden "}`}>
@@ -75,6 +79,7 @@ const NavbarComp = () => {
                   searchFilter.length > 0 ? (
                     <ul className="p-2 absolute bg-admin-TextCheck w-full ">
                       {searchFilter.map((restaurant) => (
+                        <Link href={`/user/restuarants/${restaurant.id}`}>
                         <li key={restaurant.id} className="hover:bg-admin-inputBorder cursor-pointer h-16  mt-2 pl-2 border-b border-admin-inputBorder">
                           <div className="flex items-center p-[4px]">
                           <div className="border border-admin-inputBorder w-14 h-14">
@@ -86,6 +91,7 @@ const NavbarComp = () => {
                           </div>
                           </div>
                         </li>
+                        </Link>
                       ))}
                     </ul>
                   ) : null
