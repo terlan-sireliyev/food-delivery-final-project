@@ -3,6 +3,7 @@ import Link from "next/link";
 import OpenMenuLang from "../../admin/openMenuLang/index";
 import { userNavbarLinks } from "./linksNavbarMockData";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import axios from "axios";
 interface Restaurant {
   id: string;
@@ -49,10 +50,11 @@ const NavbarComp = () => {
               className="h-10 object-contain hidden max-2xl:hidden max-xl:hidden max-lg:hidden max-md:block mr-4"
             />
             <Link href="/">
-              <img
-                src="../images/userImg/Foody.svg"
-                alt="Have your error"
-                className=""
+              <Image
+                src="/images/userImg/Foody.svg"
+                width={100}
+                height={100}
+                alt="Picture of the author"
               />
             </Link>
           </div>
