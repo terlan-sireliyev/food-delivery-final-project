@@ -1,3 +1,36 @@
-.list-item{
-    display: block;
+.list-item {
+  display: block;
+}
+
+.modalLangClass {
+  position: fixed;
+  visibility: hidden;
+  /* right: 120px; */
+  top: 15px;
+  overflow-x: auto;
+  height: 100vh;
+  /* z-index: ; */
+}
+.openLangClass {
+  visibility: visible;
+  animation: slideIn 0.5s ease-in-out;
+  z-index: 99;
+  position: absolute;
+  top: 0px;
+  height: 100vh;
+  background-color: white !important;
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(0%);
+    height: 100vh;
+    z-index: 9999;
+  }
+  to {
+    opacity: 4;
+    transform: translateY(0);
+    height: 100vh;
+    z-index: 9999;
+  }
 }

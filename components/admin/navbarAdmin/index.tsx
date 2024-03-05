@@ -29,9 +29,7 @@ const index = () => {
     rest_id: "",
   });
   const ref2 = useRef<any>(null);
-  const closeMenu = () => {
-    setOpen(false);
-  };
+
   const addProduct = async (e: any) => {
     e.preventDefault();
     await axios
@@ -63,6 +61,9 @@ const index = () => {
       window.removeEventListener("mousedown", handleOutSideClick2);
     };
   }, [ref2]);
+  const closeMenu = () => {
+    setOpen(false);
+  };
   const openMenu = () => {
     setOpen((prev) => true);
   };
