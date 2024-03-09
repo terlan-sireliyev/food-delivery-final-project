@@ -1,7 +1,11 @@
-const Index = ({ textName, type = "text", setForm, name }: any) => { //addInput components
+const Index = ({ textName, type = "text", setForm, name }: any) => {
+  //addInput components
   const changeFucn = (e: any) => {
     const { name, value } = e.target;
-    setForm((prevInpVal: any) => ({...prevInpVal, [name]: type === "number" ? Number(value) : value,}));
+    setForm((prevInpVal: any) => ({
+      ...prevInpVal,
+      [name]: type === "number" ? Number(value) : value,
+    }));
   };
   return (
     <>
