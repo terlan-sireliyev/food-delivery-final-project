@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+
 const index = () => {
   return (
     <>
@@ -27,7 +28,7 @@ const index = () => {
               <Link href="register">Register</Link>
             </button>
           </div>
-          <div className="flex flex-col gap-4    ">
+          <div className="flex flex-col gap-4">
             <input
               type="text"
               className="focus:outline-none w-96 border border-admin-inputBorder p-2"

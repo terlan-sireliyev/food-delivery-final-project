@@ -5,8 +5,10 @@ import { userNavbarLinks } from "./linksNavbarMockData";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import HamburgerMenu from "./hamburgerMenu";
+
 const NavbarCompDesktop = ({
   searchFilter,
+  setInputValue,
   inputValue,
   searchRestuarantInput,
   clearInputAndLinks,
@@ -48,15 +50,15 @@ const NavbarCompDesktop = ({
               {userNavbarLinks.map(({ id, title, href, icon }: any) => (
                 <Link href={href} key={id}>
                   <div
-                    className={`${
-                      href == pathname ? "text-user-bgCheckout font-bold" : ""
-                    }  p-2 mt-3 rounded `}
+                    className={`${href == pathname ? "text-user-bgCheckout font-bold" : ""
+                      }  p-2 mt-3 rounded `}
                   >
                     {title}
                   </div>
                 </Link>
               ))}
             </ul>
+
             <div className="flex items-center justify-center p-2  ">
               <div className="max-md:hidden relative">
                 <input

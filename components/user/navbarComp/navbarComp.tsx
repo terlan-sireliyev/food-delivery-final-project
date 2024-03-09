@@ -67,7 +67,8 @@ const NavbarComp = () => {
             searchRestuarant={searchRestuarant}
             setSearchFilter={setSearchFilter}
             searchFilter={searchFilter}
-            inputValue={setInputValue}
+            inputValue={inputValue}
+            setInputValue={setInputValue}
             searchRestuarantInput={searchRestuarantInput}
             clearInputAndLinks={clearInputAndLinks}
             HamburgerMenuBtn={HamburgerMenuBtn}
