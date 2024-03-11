@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import axios from "axios";
 import NavbarCompDesktop from "./navbarCompDesktop";
-import NavbarCompMobil from "./navbarCompMobil";
 interface Restaurant {
   id: string;
   name: string;

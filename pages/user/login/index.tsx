@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { log } from "console";
 const index = () => {
+  const [checkSignin,setCheckSignIn] = useState([])
   const router = useRouter();
   const [form, setForm] = useState<{
-    username: string;
+    email: string;
     password: string;
   }>({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -17,20 +19,28 @@ const index = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  //  access_token,  refresh_token
+
+
   const loginHandler = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     axios
       .post("http://localhost:3000/api/auth/signin", {
-        username: form.username,
+        email: form.email,
         password: form.password,
       })
-      .then((res) => {
-        console.log("success");
-        // Redirect to another page after successful login
-        // router.push("/dashboard");
+      .then((result) => {
+        if (result.status === 200) {
+          const { user: { access_token, refresh_token } } = result.data;
+          localStorage.setItem("access_token", access_token);
+          localStorage.setItem("refresh_token", refresh_token);
+          // console.log(result);
+          
+          router.push("/");
+        }
       })
       .catch((err) => {
-        console.log("error"); // Log the actual error message
+        alert('Daxil ola bilmediniz!')
       });
   };
   return (
@@ -62,10 +72,10 @@ const index = () => {
           <div className="flex flex-col gap-4">
             <input
               type="text"
-              name="username"
+              name="email"
               onChange={onchangeLogin}
               className="focus:outline-none w-96   border  border-admin-inputBorder p-2"
-              placeholder="username"
+              placeholder="email"
             />
             <input
               name="password"

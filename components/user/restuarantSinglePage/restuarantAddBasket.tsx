@@ -21,9 +21,9 @@ const RestuarantSingleBasket = ({
                     <img src={itemBasket?.img_url} className="w-16" alt="" />
                     <p
                       onClick={() => deletOrder(itemBasket.id, "delete")}
-                      className="text-eacampLog italic underline underline-offset-1 mt-4 cursor-pointer "
+                      className="text-productSize14  italic underline underline-offset-1 mt-4 cursor-pointer "
                     >
-                      Remove order
+                      Remove
                     </p>
                   </div>
                   <div className="-mt-2 ml-4 text-left ">

@@ -3,8 +3,13 @@ import Link from "next/link";
 import OpenMenuLang from "../../admin/openMenuLang/index";
 import { userNavbarLinks } from "./linksNavbarMockData";
 import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 import Image from "next/image";
+import style from "./styles.module.css";
 import HamburgerMenu from "./hamburgerMenu";
+// import UserProfile from '../../../pages/user/userPages/profile/index'
+import axios from "axios";
+// import img from '../../../public/images/avatar.svg'
 
 const NavbarCompDesktop = ({
   searchFilter,
@@ -17,7 +22,41 @@ const NavbarCompDesktop = ({
   setStateHamburger,
   CloseMenu,
 }: any) => {
-  const { pathname } = useRouter();
+  const [openLang, setOpenLang] = useState(false);
+  const openMenuLang = () => {
+    setOpenLang(!openLang);
+  };
+  const commonClose = () => {
+    setOpenLang(false);
+  };
+  const router = useRouter();
+  const [token, setToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    const access_token = localStorage.getItem("access_token");
+
+    // axios.get('http://localhost:3000/api/user',{
+    //   headers:{
+    //     "Authorization" : `Bearer ${access_token}`
+    //   }
+    // }).then((res) =>{
+    //   console.log(res.data  );
+    // })
+
+    if (access_token) {
+      setToken(access_token)
+    } else {
+      setToken(null)
+    }
+  }, []);
+
+  const logOut = () => {
+    localStorage.removeItem("access_token");
+    // localStorage.removeItem("refresh_token");
+    
+    router.push("/user/login");
+
+  }
 
   return (
     <>
@@ -50,7 +89,7 @@ const NavbarCompDesktop = ({
               {userNavbarLinks.map(({ id, title, href, icon }: any) => (
                 <Link href={href} key={id}>
                   <div
-                    className={`${href == pathname ? "text-user-bgCheckout font-bold" : ""
+                    className={`${href == router.pathname ? "text-user-bgCheckout font-bold" : ""
                       }  p-2 mt-3 rounded `}
                   >
                     {title}
@@ -105,9 +144,53 @@ const NavbarCompDesktop = ({
               <div className="mt-2 ml-4 flex">
                 <OpenMenuLang />
               </div>
-              <button className=" max-lg:hidden mr-8 ml-4 px-[30px] py-[5px] mt-2 bg-user-navbarSignBg rounded-btnRaduis">
+              {
+                token && <div>
+                  <div className="w-10 border border-inputBorder rounded-iconsRadius">
+                    <img
+                      src="/images/basket.jpg"
+                      alt="you have error"
+                      className="w-full rounded-iconsRadius"
+                    />
+                  </div>
+                </div>
+              }
+              {/* {
+                token && <div>
+                  <p></p>
+                </div>
+              } */}
+
+              {
+                token && <div>
+                  <div className="relative">
+                    <img
+                      onClick={openMenuLang}
+                      src="/images/avatar.svg"
+                      alt="in "
+                    // className="w-full rounded-iconsRadius"
+                    />
+                  </div>
+                  <div
+
+                    className={`${openLang ? style.openProfilClass : style.modalProfilClass
+                      } `}
+                  >
+                    <ul className="z-40 flex flex-col">
+                      <Link href="/user/userPages/profile" className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">Profile</Link>
+                      <Link href="profile" className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">Your Basket</Link>
+                      <Link href="profile" className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">Your Orders</Link>
+                      <Link href="profile" className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">Checkout</Link>
+                      <button onClick={logOut} className="bg-admin-colorLogin p-3 text-left hover:bg-admin-inputBorder">Logout</button>
+                    </ul>
+                  </div>
+                </div>
+              }
+
+
+              {!token && <button className=" max-lg:hidden mr-8 ml-4 px-[30px] py-[5px] mt-2 bg-user-navbarSignBg rounded-btnRaduis">
                 <Link href="/user/login">Sign up</Link>
-              </button>
+              </button>}
             </div>
           </div>
         </div>
