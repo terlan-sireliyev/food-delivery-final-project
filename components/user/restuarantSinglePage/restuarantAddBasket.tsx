@@ -3,7 +3,10 @@ const RestuarantSingleBasket = ({
   countAdd,
   totalPrice,
   deletOrder,
+  AllBasket
 }: any) => {
+  console.log(AllBasket);
+  
   return (
     <>
       <div className="w-1/4 bg-user-navbarBGColor py-2 divide-y divide-admin-inputBorder ">

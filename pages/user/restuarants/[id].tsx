@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/router"; // Import useRouter instead of useParams
 import React, { useEffect, useState } from "react";
 import { useBasket } from "../../store";
 import RestaurantSingleHeader from "../../../components/user/restuarantSinglePage/restuarantSingleHeader";
 import RestuarantSingleProducts from "../../../components/user/restuarantSinglePage/restuarantSingleProducts";
 import RestuarantSingleBasket from "../../../components/user/restuarantSinglePage/restuarantAddBasket";
+import { useParams } from "next/navigation";
 
 interface Restaurant {
   name: string;
@@ -12,46 +13,59 @@ interface Restaurant {
   address: string;
   delivery_price: string;
   cuisine: string;
+  products: Product[];
 }
-
 interface Product {
   id: string;
   price: number;
   count: number;
 }
 
-const SingleRestaurant = ({ allPro: { result } }: any) => {
+const SingleRestaurant = ({ AllBasket }: { AllBasket: any }) => {
   const [data, setData] = useState<Restaurant | null>(null);
+  // const router = useRouter();
   const params = useParams();
-  const id = params?.id;
+  const idSingl = params?.id
 
   const basket = useBasket((state: any) => state.basket);
   const updateBasket = useBasket((state: any) => state.updateBasket);
   const decrementBasket = useBasket((state: any) => state.decrementBasket);
   const incirmentBasket = useBasket((state: any) => state.incirmentBasket);
   const deleteOrder = useBasket((state: any) => state.deleteOrder);
+
   useEffect(() => {
-    if (id) {
+    if (idSingl) {
       axios
-        .get(`http://localhost:3000/api/restuarants/${id}`)
+        .get(`http://localhost:3000/api/restuarants/${idSingl}`)
         .then((res) => setData(res.data.result.data))
         .catch((error) => console.error(error));
     }
-  }, [id]);
+  }, [idSingl]);
 
   if (!data) {
     return <div>Loading...</div>;
   }
 
-  const filteredProducts = result.data.filter(
-    ({ rest_id }: { rest_id: string }) => rest_id === id
-  );
-
   const addBasket = (id: any) => {
-    const selectedItem = filteredProducts.find(
-      (item: Product) => item.id === id
-    );
+    const selectedItem = data.products.find((item: Product) => item.id === id);
     updateBasket(selectedItem);
+    const access_token = localStorage.getItem("access_token");
+    
+    axios
+      .post("http://localhost:3000/api/basket/add", {
+        product_id: idSingl
+      }, {
+        headers: {
+          'Authorization': `Bearer ${access_token}`
+        }
+      })
+      .then((result) => {
+        console.log("Loaded", result);
+      })
+      .catch((err) => {
+        console.log("Error", err);
+      })
+
   };
 
   const countAdd = (id: any, action: string) => {
@@ -81,7 +95,7 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
       <div className="mt-4 flex justify-between items-center gap-4">
         <div className="w-3/4 text-left bg-user-navbarBGColor py-4">
           <RestuarantSingleProducts
-            filteredProducts={filteredProducts}
+            filteredProducts={data.products}
             addBasket={addBasket}
           />
         </div>
@@ -90,6 +104,7 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
           countAdd={countAdd}
           totalPrice={totalPrice}
           deletOrder={deletOrder}
+          AllBasket={AllBasket}
         />
       </div>
     </>
@@ -98,9 +113,13 @@ const SingleRestaurant = ({ allPro: { result } }: any) => {
 
 export default SingleRestaurant;
 
+
 export const getServerSideProps = async () => {
-  let productGet = await axios.get("http://localhost:3000/api/products");
-  return {
-    props: { allPro: productGet.data },
-  };
+  try {
+    const responseBasket = await axios.get("http://localhost:3000/api/basket");
+    return { props: { AllBasket: responseBasket?.data } };
+  } catch (error) {
+    console.error("Error fetching category:", error);
+    return { props: { AllBasket: {} } };
+  }
 };

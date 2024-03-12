@@ -2,7 +2,7 @@ import Person2Icon from '@mui/icons-material/Person2';
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import FilterFramesIcon from "@mui/icons-material/FilterFrames";
-import LogoutIcon from '@mui/icons-material/Logout';
+// import LogoutIcon from '@mui/icons-material/Logout';
 export const userProfileLink = [
   {
     id: 1,
@@ -23,5 +23,5 @@ export const userProfileLink = [
     icon: <FilterFramesIcon />,
   },
   { id: 4, title: "Checkout", href: "checkout", icon: <PointOfSaleIcon /> },
-  { id: 5, title: "Logout", href: "user/login", icon: <LogoutIcon /> },
+  // { id: 5, title: "Logout", href: "user/login", icon: <LogoutIcon /> },
 ];
