@@ -16,7 +16,13 @@ const RestuarantSingleBasket = ({
   totalPrice,
   deletOrder,
 }: any) => {
-  const [itemData, setItemData] = useState<Item[]>([]);
+  const [itemData, setItemData] = useState<Item[]>([]); 
+  const myBasket = useBasket((state) => state.basket )
+  const updateBasket = useBasket((state) => state.updateBasket )
+  const decrementBasket = useBasket((state) => state.decrementBasket )
+  const incirmentBasket = useBasket((state) => state.incirmentBasket )
+  const setBasket = useBasket((state) => state.setBasket )
+
 
   const [countPlus, setCountPlus] = useState([]);
   // const { basket } = useBasket();
@@ -29,21 +35,22 @@ const RestuarantSingleBasket = ({
         },
       })
       .then((response) => {
-        const items = response.data.result.data.items.map((item: any) => ({
-          ...item,
-          count: item.count || 0,  
-        }));
-        setItemData(items);
+        // const items = response.data.result.data.items.map((item: any) => ({
+        //   ...item,
+        //   count: item.count || 0,  
+        // }));
+        setBasket(...response.data.result.data.items);
       })
       .catch((error) => {
         console.error("Error fetching basket data:", error);
       });
-  }, [itemData]);
+  }, []);
 
-  const addCount = () => {
-    if(itemData){
-      // console.log(first)
-    }
+  const incrementCount = (item) => {
+    incirmentBasket(item.id)
+  };
+  const decrementCount = (item) => {
+    decrementBasket(item.id)
   };
 
   return (
@@ -55,8 +62,9 @@ const RestuarantSingleBasket = ({
           </h1>
         </div>
         <div className="overflow-y-auto  h-60 mb-4">
-          {itemData?.map((itemBasket: any, index: any) => {
-            return (
+          {myBasket?.map((itemBasket: any, index: any) => {
+            
+            return (  
               <div key={index} className="flex justify-between px-4 pt-4 mt-3 ">
                 <div className="flex  ">
                   <div>
@@ -77,14 +85,14 @@ const RestuarantSingleBasket = ({
                   {/* <button onClick={() => countAdd(itemBasket.id, "increment")}>
                     +
                   </button> */}
-                  <button onClick={addCount}>+</button>
+                  <button onClick={() => incrementCount(itemBasket)}>+</button>
                   <button>
                     {itemBasket.count > 0 && (
                   
-                      <div>{itemBasket.count+1}</div>
+                      <div>{itemBasket.count}</div>
                     )}{" "}
                   </button>
-                  <button onClick={() => countAdd(itemBasket.id, "decrement")}>
+                  <button onClick={() => decrementCount(itemBasket)}>
                     -
                   </button>
                 </div>

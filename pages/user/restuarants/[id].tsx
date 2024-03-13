@@ -48,22 +48,9 @@ const SingleRestaurant = () => {
   // const [basketItems, setBasketItems] = useState([]);
   const addBasket = (id: any) => {
     const selectedItem = data.products.find((item: Product) => item.id === id);
-    updateBasket(id);
-
-
+    updateBasket(selectedItem);
 
     const access_token = localStorage.getItem("access_token");
-    // axios
-    // .get("http://localhost:3000/api/basket", {
-    //   headers: {
-    //     Authorization: `Bearer ${access_token}`,
-    //   },
-    // })
-    // .then((res) => {
-    //   setBasketItems(res.data.result.data);
-    //   // console.log(res.data.result.data)
-    // });
-
 
 
     
