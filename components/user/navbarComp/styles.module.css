@@ -21,25 +21,6 @@
   background-color: white !important;
 }
 
-.modalProfilClass {
-  position: fixed;
-  visibility: hidden;
-  /* left: 150px; */
-  top: 0px;
-  /* border-radius: 5px; */
-}
-.openProfilClass {
-
-  z-index: 3;
-  width: 200px;
-  /* border: 1px solid #c4c4cc; */
-  border-radius: 5px;
-  position: absolute;
-  height: 240px;
-  right: 0px;
-  visibility: visible;
-  animation: slideIn 0.5s ease-in-out;
-}
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -54,9 +35,26 @@
     z-index: 9999;
   }
 }
+.modalProfilClass {
+  position: fixed;
+  visibility: hidden;
+  /* left: 150px; */
+  top: 0px;
+  /* border-radius: 5px; */
+}
+.openProfilClass {
+  z-index: 3;
+  width: 200px;
+  /* border: 1px solid #c4c4cc; */
+  border-radius: 5px;
+  position: absolute;
+  height: 240px;
+  right: 0px;
+  visibility: visible;
+  animation: slideNavOne 0.5s ease-in-out;
+}
 
-
-@keyframes slideIn {
+@keyframes slideNavOne {
   from {
     opacity: 0;
     transform: translateY(-10%);

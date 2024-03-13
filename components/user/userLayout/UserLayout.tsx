@@ -5,7 +5,7 @@ import FooterComp from "../footerComp/footerCompt";
 const UserLayout = ({ children }: any) => {
   return (
     <>
-      <div className="px-4 py-4">
+      <div className="">
         <NavbarComp />
         <div className="text-center ">{children}</div>
         <FooterComp />

@@ -12,7 +12,7 @@ const RestuarantCard = ({
     <>
       <Link href={`/user/restuarants/${id}`} className="hover:shadow-2xl ">
         <div className="border border-admin-inputBorder p-2 ">
-          <div className="w-2/3 m-auto h-48 ">
+          <div className="w-2/3 m-auto h-48 max-sm:h-24 ">
             <img
               src={img_url}
               alt="Have your error"

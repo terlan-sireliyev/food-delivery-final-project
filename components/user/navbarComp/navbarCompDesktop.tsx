@@ -30,7 +30,7 @@ const NavbarCompDesktop = ({
     setOpenLang(false);
   };
   const router = useRouter();
-  const [token, setToken] = useState<string | null>(null)
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
@@ -44,19 +44,18 @@ const NavbarCompDesktop = ({
     // })
 
     if (access_token) {
-      setToken(access_token)
+      setToken(access_token);
     } else {
-      setToken(null)
+      setToken(null);
     }
   }, []);
 
   const logOut = () => {
     localStorage.removeItem("access_token");
     // localStorage.removeItem("refresh_token");
-    
-    router.push("/user/login");
 
-  }
+    router.push("/user/login");
+  };
 
   return (
     <>
@@ -89,8 +88,11 @@ const NavbarCompDesktop = ({
               {userNavbarLinks.map(({ id, title, href, icon }: any) => (
                 <Link href={href} key={id}>
                   <div
-                    className={`${href == router.pathname ? "text-user-bgCheckout font-bold" : ""
-                      }  p-2 mt-3 rounded `}
+                    className={`${
+                      href == router.pathname
+                        ? "text-user-bgCheckout font-bold"
+                        : ""
+                    }  p-2 mt-3 rounded `}
                   >
                     {title}
                   </div>
@@ -144,8 +146,8 @@ const NavbarCompDesktop = ({
               <div className="mt-2 ml-4 flex">
                 <OpenMenuLang />
               </div>
-              {
-                token && <div>
+              {token && (
+                <div>
                   <div className="w-10 border border-inputBorder rounded-iconsRadius">
                     <img
                       src="/images/basket.jpg"
@@ -154,43 +156,69 @@ const NavbarCompDesktop = ({
                     />
                   </div>
                 </div>
-              }
+              )}
               {/* {
                 token && <div>
                   <p></p>
                 </div>
               } */}
 
-              {
-                token && <div>
+              {token && (
+                <div>
                   <div className="relative">
                     <img
                       onClick={openMenuLang}
                       src="/images/avatar.svg"
                       alt="in "
-                    // className="w-full rounded-iconsRadius"
+                      // className="w-full rounded-iconsRadius"
                     />
                   </div>
                   <div
-
-                    className={`${openLang ? style.openProfilClass : style.modalProfilClass
-                      } `}
+                    className={`${
+                      openLang ? style.openProfilClass : style.modalProfilClass
+                    } `}
                   >
                     <ul className="z-40 flex flex-col">
-                      <Link href="/user/userPages/profile" className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">Profile</Link>
-                      <Link href="profile" className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">Your Basket</Link>
-                      <Link href="profile" className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">Your Orders</Link>
-                      <Link href="profile" className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">Checkout</Link>
-                      <button onClick={logOut} className="bg-admin-colorLogin p-3 text-left hover:bg-admin-inputBorder">Logout</button>
+                      <Link
+                        href="/user/userPages/profile"
+                        className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
+                      >
+                        Profile
+                      </Link>
+                      <Link
+                        href="profile"
+                        className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
+                      >
+                        Your Basket
+                      </Link>
+                      <Link
+                        href="profile"
+                        className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
+                      >
+                        Your Orders
+                      </Link>
+                      <Link
+                        href="profile"
+                        className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
+                      >
+                        Checkout
+                      </Link>
+                      <button
+                        onClick={logOut}
+                        className="bg-admin-colorLogin p-3 text-left hover:bg-admin-inputBorder"
+                      >
+                        Logout
+                      </button>
                     </ul>
                   </div>
                 </div>
-              }
+              )}
 
-
-              {!token && <button className=" max-lg:hidden mr-8 ml-4 px-[30px] py-[5px] mt-2 bg-user-navbarSignBg rounded-btnRaduis">
-                <Link href="/user/login">Sign up</Link>
-              </button>}
+              {!token && (
+                <button className=" max-lg:hidden mr-8 ml-4 px-[30px] py-[5px] mt-2 bg-user-navbarSignBg rounded-btnRaduis">
+                  <Link href="/user/login">Sign up</Link>
+                </button>
+              )}
             </div>
           </div>
         </div>

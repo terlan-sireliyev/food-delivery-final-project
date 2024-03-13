@@ -9,6 +9,9 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontWeight: {
+      bold: "800",
+    },
     extend: {
       spacing: {
         1: "9rem",
@@ -22,9 +25,9 @@ module.exports = {
       size1: "22px",
       size50: "50px",
       productSize: "12px",
-      productSize10:"10px",
-      productSize14:"14px",
-      productSize16:"16px",
+      productSize10: "10px",
+      productSize14: "14px",
+      productSize16: "16px",
       products: "1.5rem",
       labelOpenMenu: "1.25rem",
       restuarantCardNameSize: "15px",
