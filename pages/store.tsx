@@ -1,3 +1,4 @@
+import axios from "axios";
 import { create } from "zustand";
 
 export const useBasket = create<any>((set: any) => ({
@@ -56,6 +57,12 @@ export const useBasket = create<any>((set: any) => ({
       const filterCard = state.basket.filter(
         (fil: any) => fil.id !== productId
       );
+    //  const filterCard= axios.delete(`http://localhost:3000/api/basket/delete}`).then((res) => {
+    //     console.log("silindi");
+    //   })
+    //   .catch((err) => {
+    //     alert("Silinmedi");
+    //   });
       return {
         ...state,
         basket: filterCard,

@@ -21,7 +21,7 @@ interface Product {
   count: number;
 }
 
-const SingleRestaurant = ({ AllBasket }: { AllBasket: any }) => {
+const SingleRestaurant = () => {
   const [data, setData] = useState<Restaurant | null>(null);
   // const router = useRouter();
   const params = useParams();
@@ -45,15 +45,31 @@ const SingleRestaurant = ({ AllBasket }: { AllBasket: any }) => {
   if (!data) {
     return <div>Loading...</div>;
   }
-
+  // const [basketItems, setBasketItems] = useState([]);
   const addBasket = (id: any) => {
     const selectedItem = data.products.find((item: Product) => item.id === id);
-    updateBasket(selectedItem);
+    updateBasket(id);
+
+
+
     const access_token = localStorage.getItem("access_token");
+    // axios
+    // .get("http://localhost:3000/api/basket", {
+    //   headers: {
+    //     Authorization: `Bearer ${access_token}`,
+    //   },
+    // })
+    // .then((res) => {
+    //   setBasketItems(res.data.result.data);
+    //   // console.log(res.data.result.data)
+    // });
+
+
+
     
     axios
       .post("http://localhost:3000/api/basket/add", {
-        product_id: idSingl
+        product_id: id
       }, {
         headers: {
           'Authorization': `Bearer ${access_token}`
@@ -104,7 +120,7 @@ const SingleRestaurant = ({ AllBasket }: { AllBasket: any }) => {
           countAdd={countAdd}
           totalPrice={totalPrice}
           deletOrder={deletOrder}
-          AllBasket={AllBasket}
+          // basketItems={basketItems}
         />
       </div>
     </>
@@ -113,13 +129,3 @@ const SingleRestaurant = ({ AllBasket }: { AllBasket: any }) => {
 
 export default SingleRestaurant;
 
-
-export const getServerSideProps = async () => {
-  try {
-    const responseBasket = await axios.get("http://localhost:3000/api/basket");
-    return { props: { AllBasket: responseBasket?.data } };
-  } catch (error) {
-    console.error("Error fetching category:", error);
-    return { props: { AllBasket: {} } };
-  }
-};
