@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useRouter } from "next/router"; // Import useRouter instead of useParams
 import React, { useEffect, useState } from "react";
-import { useBasket } from "../../store";
+import { useBasket } from "../../zustand/store";
 import RestaurantSingleHeader from "../../../components/user/restuarantSinglePage/restuarantSingleHeader";
 import RestuarantSingleProducts from "../../../components/user/restuarantSinglePage/restuarantSingleProducts";
 import RestuarantSingleBasket from "../../../components/user/restuarantSinglePage/restuarantAddBasket";

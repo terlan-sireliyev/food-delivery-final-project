@@ -3,8 +3,8 @@ import { create } from "zustand";
 
 export const useBasket = create<any>((set: any) => ({
   basket: [] as { id: number; count: number }[],
-  setBasket: (elements) => {
-    set((state) => {
+  setBasket: (elements:any) => {
+    set((state:any) => {
       return {
         basket: [elements],
       };
@@ -13,7 +13,7 @@ export const useBasket = create<any>((set: any) => ({
   updateBasket: (newProduct: any) => {
     set((state: any) => {
       const currentProduct = state.basket.find(
-        (item) => item.id === newProduct.id
+        (item:any) => item.id === newProduct.id
       );
       if (!currentProduct) {
         return {
@@ -55,9 +55,9 @@ export const useBasket = create<any>((set: any) => ({
   },
   deleteOrder: (productId: any) => {
     set((state: any) => {
-      // const filterCard = state.basket.filter(
-      //   (fil: any) => fil.id !== productId
-      // );
+      const filterCard = state.basket.filter(
+        (fil: any) => fil.id !== productId
+      );
       //  const filterCard= axios.delete(`http://localhost:3000/api/basket/delete}`).then((res) => {
       //     console.log("silindi");
       //   })

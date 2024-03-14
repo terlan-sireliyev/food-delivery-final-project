@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useBasket } from "../../../pages/store";
+import { useBasket } from "../../../pages/zustand/store";
+import { useBasketFetch } from "../../../pages/zustand/storeFetchData";
 interface Item {
   id: string;
   name: string;
@@ -16,36 +17,45 @@ const RestuarantSingleBasket = ({
   totalPrice,
   deletOrder,
 }: any) => {
-  const [itemData, setItemData] = useState<Item[]>([]); 
-  const myBasket = useBasket((state:any) => state.basket )
-  const updateBasket = useBasket((state:any) => state.updateBasket )
-  const decrementBasket = useBasket((state:any) => state.decrementBasket )
-  const incirmentBasket = useBasket((state:any) => state.incirmentBasket )
-  const setBasket = useBasket((state:any) => state.setBasket )
-
+  const [basketZustandData, setBasketZustandData] = useState<Item[]>([]);
+  // const updateBasket = useBasket((state:any) => state.updateBasket )
+  const myBasket = useBasket((state: any) => state.basket);
+  const decrementBasket = useBasket((state: any) => state.decrementBasket);
+  const incirmentBasket = useBasket((state: any) => state.incirmentBasket);
+  // const setBasket = useBasket((state: any) => state.setBasket);
+  const { basketData, setBasketFetchData } = useBasketFetch();
 
   // const [countPlus, setCountPlus] = useState([]);
+  // useEffect(() => {
+  //   const access_token = localStorage.getItem("access_token");
+  //   axios
+  //     .get("http://localhost:3000/api/basket", {
+  //       headers: {
+  //         Authorization: `Bearer ${access_token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setBasket(...response.data.result.data.items);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching basket data:", error);
+  //     });
+  // }, []);
+
   useEffect(() => {
-    const access_token = localStorage.getItem("access_token");
-    axios
-      .get("http://localhost:3000/api/basket", {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
-      .then((response) => {
-        setBasket(...response.data.result.data.items);
-      })
-      .catch((error) => {
-        console.error("Error fetching basket data:", error);
-      });
+    setBasketFetchData();
   }, []);
 
-  const incrementCount = (item:any) => {
-    incirmentBasket(item.id)
+  useEffect(() => {
+    // console.log( basketData);
+    setBasketZustandData(basketData)
+  }, [basketData]);
+
+  const incrementCount = (item: any) => {
+    incirmentBasket(item.id);
   };
-  const decrementCount = (item:any) => {
-    decrementBasket(item.id)
+  const decrementCount = (item: any) => {
+    decrementBasket(item.id);
   };
 
   return (
@@ -57,9 +67,8 @@ const RestuarantSingleBasket = ({
           </h1>
         </div>
         <div className="overflow-y-auto  h-60 mb-4">
-          {myBasket?.map((itemBasket: any, index: any) => {
-            
-            return (  
+          {basketZustandData?.map((itemBasket: any, index: any) => {
+            return (
               <div key={index} className="flex justify-between px-4 pt-4 mt-3 ">
                 <div className="flex  ">
                   <div>
@@ -77,19 +86,11 @@ const RestuarantSingleBasket = ({
                   </div>
                 </div>
                 <div className="flex flex-col bg-admin-TextCheck p-2 rounded-regBtnRadius">
-                  {/* <button onClick={() => countAdd(itemBasket.id, "increment")}>
-                    +
-                  </button> */}
                   <button onClick={() => incrementCount(itemBasket)}>+</button>
                   <button>
-                    {itemBasket.count > 0 && (
-                  
-                      <div>{itemBasket.count}</div>
-                    )}{" "}
+                    {itemBasket.count > 0 && <div>{itemBasket.count}</div>}{" "}
                   </button>
-                  <button onClick={() => decrementCount(itemBasket)}>
-                    -
-                  </button>
+                  <button onClick={() => decrementCount(itemBasket)}>-</button>
                 </div>
               </div>
             );
