@@ -1,11 +1,11 @@
 import axios from "axios";
-import { useRouter } from "next/router"; // Import useRouter instead of useParams
 import React, { useEffect, useState } from "react";
 import { useBasket } from "../../zustand/store";
 import RestaurantSingleHeader from "../../../components/user/restuarantSinglePage/restuarantSingleHeader";
 import RestuarantSingleProducts from "../../../components/user/restuarantSinglePage/restuarantSingleProducts";
 import RestuarantSingleBasket from "../../../components/user/restuarantSinglePage/restuarantAddBasket";
-import { useParams } from "next/navigation";
+// import { useBasketFetch } from "../../zustand/storeFetchData";
+import { useRouter } from "next/router";
 
 interface Restaurant {
   name: string;
@@ -15,6 +15,7 @@ interface Restaurant {
   cuisine: string;
   products: Product[];
 }
+
 interface Product {
   id: string;
   price: number;
@@ -23,68 +24,60 @@ interface Product {
 
 const SingleRestaurant = () => {
   const [data, setData] = useState<Restaurant | null>(null);
-  // const router = useRouter();
-  const params = useParams();
-  const idSingl = params?.id
+  const router = useRouter(); // Use useRouter instead of useParams
+  const idSingl = router.query.id;
 
   const basket = useBasket((state: any) => state.basket);
   const updateBasket = useBasket((state: any) => state.updateBasket);
-  const decrementBasket = useBasket((state: any) => state.decrementBasket);
-  const incirmentBasket = useBasket((state: any) => state.incirmentBasket);
-  const deleteOrder = useBasket((state: any) => state.deleteOrder);
+
+  // const { basketData, setBasketFetchData } = useBasketFetch();
+
+  // useEffect(() => {
+  //   setBasketFetchData();
+  // }, []);
 
   useEffect(() => {
     if (idSingl) {
       axios
         .get(`http://localhost:3000/api/restuarants/${idSingl}`)
         .then((res) => setData(res.data.result.data))
-        .catch((error) => console.error(error));
+        .catch((error) => {
+          console.error("Error fetching restaurant data:", error);
+          setData(null);
+        });
     }
   }, [idSingl]);
 
   if (!data) {
     return <div>Loading...</div>;
   }
-  // const [basketItems, setBasketItems] = useState([]);
+
   const addBasket = (id: any) => {
     const selectedItem = data.products.find((item: Product) => item.id === id);
     updateBasket(selectedItem);
+    console.log(id);
 
     const access_token = localStorage.getItem("access_token");
-
-
     
     axios
       .post("http://localhost:3000/api/basket/add", {
-        product_id: id
+        product_id: selectedItem
       }, {
         headers: {
           'Authorization': `Bearer ${access_token}`
         }
       })
       .then((result) => {
+        alert('success');
         console.log("Loaded", result);
       })
       .catch((err) => {
-        console.log("Error", err);
-      })
-
+        alert('error');
+        console.error("Error adding item to basket:", err);
+      });
   };
 
-  const countAdd = (id: any, action: string) => {
-    if (action === "increment") {
-      incirmentBasket(id);
-    } else if (action === "decrement") {
-      decrementBasket(id);
-    }
-  };
-
-  const deletOrder = (id: any, action: string) => {
-    if (action === "delete") {
-      deleteOrder(id);
-    }
-  };
-
+  // Calculate total price of items in basket
   const totalPrice = basket.reduce(
     (prev: number, current: Product) => prev + current.price * current.count,
     0
@@ -104,10 +97,7 @@ const SingleRestaurant = () => {
         </div>
         <RestuarantSingleBasket
           basket={basket}
-          countAdd={countAdd}
           totalPrice={totalPrice}
-          deletOrder={deletOrder}
-          // basketItems={basketItems}
         />
       </div>
     </>
@@ -115,4 +105,3 @@ const SingleRestaurant = () => {
 };
 
 export default SingleRestaurant;
-

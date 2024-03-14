@@ -6,6 +6,7 @@ export const useBasket = create<any>((set: any) => ({
   setBasket: (elements:any) => {
     set((state:any) => {
       return {
+      
         basket: [elements],
       };
     });
