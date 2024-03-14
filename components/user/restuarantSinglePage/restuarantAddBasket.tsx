@@ -24,8 +24,7 @@ const RestuarantSingleBasket = ({
   const setBasket = useBasket((state:any) => state.setBasket )
 
 
-  const [countPlus, setCountPlus] = useState([]);
-  // const { basket } = useBasket();
+  // const [countPlus, setCountPlus] = useState([]);
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
     axios
@@ -35,10 +34,6 @@ const RestuarantSingleBasket = ({
         },
       })
       .then((response) => {
-        // const items = response.data.result.data.items.map((item: any) => ({
-        //   ...item,
-        //   count: item.count || 0,  
-        // }));
         setBasket(...response.data.result.data.items);
       })
       .catch((error) => {
