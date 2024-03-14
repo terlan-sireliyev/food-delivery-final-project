@@ -17,11 +17,11 @@ const RestuarantSingleBasket = ({
   deletOrder,
 }: any) => {
   const [itemData, setItemData] = useState<Item[]>([]); 
-  const myBasket = useBasket((state) => state.basket )
-  const updateBasket = useBasket((state) => state.updateBasket )
-  const decrementBasket = useBasket((state) => state.decrementBasket )
-  const incirmentBasket = useBasket((state) => state.incirmentBasket )
-  const setBasket = useBasket((state) => state.setBasket )
+  const myBasket = useBasket((state:any) => state.basket )
+  const updateBasket = useBasket((state:any) => state.updateBasket )
+  const decrementBasket = useBasket((state:any) => state.decrementBasket )
+  const incirmentBasket = useBasket((state:any) => state.incirmentBasket )
+  const setBasket = useBasket((state:any) => state.setBasket )
 
 
   const [countPlus, setCountPlus] = useState([]);
@@ -46,10 +46,10 @@ const RestuarantSingleBasket = ({
       });
   }, []);
 
-  const incrementCount = (item) => {
+  const incrementCount = (item:any) => {
     incirmentBasket(item.id)
   };
-  const decrementCount = (item) => {
+  const decrementCount = (item:any) => {
     decrementBasket(item.id)
   };
 
