@@ -17,4 +17,34 @@ export const useBasketFetch = create<any>((set: any) => ({
       console.log("yalnis var ");
     }
   },
+
+  incrementApiCount: (id: string) =>
+    set((state: any) => {
+      const findId = state.basketData.find((item: any) => item.id === id);
+      if (findId) {
+        const updatedBasketData = state.basketData.map((item: any) => {
+          if (item.id === id) {
+            return { ...item, count: (item.count += 1) };
+          }
+          return item;
+        });
+        return { basketData: updatedBasketData };
+      }
+      return state;
+    }),
+
+  decrementCountApi: (id: string) =>
+    set((state: any) => {
+      const find = state.basketData.find((item: any) => item.id === id);
+      if (find) {
+        const updateDecrement = state.basketData.map((itemMap: any) => {
+          if (itemMap.id === id) {
+            return { ...itemMap, count: (itemMap.count -= 1) };
+          }
+          return itemMap;
+        });
+        return { basketData: updateDecrement };
+      }
+      return state;
+    }),
 }));

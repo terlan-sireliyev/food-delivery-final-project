@@ -3,27 +3,49 @@ import { create } from "zustand";
 
 export const useBasket = create<any>((set: any) => ({
   basket: [] as { id: number; count: number }[],
-  setBasket: (elements:any) => {
-    set((state:any) => {
+  setBasket: (elements: any) => {
+    set((state: any) => {
       return {
-      
         basket: [elements],
       };
     });
   },
+  // updateBasket: (newProduct: any) => {
+  //   set((state: any) => {
+  //     const currentProduct = state.basket.find(
+  //       (item:any) => item.id === newProduct.id
+  //     );
+  //     if (!currentProduct) {
+  //       return {
+  //         basket: [...state.basket, { ...newProduct, count: 1 }],
+  //       };
+  //     } else {
+  //       currentProduct.count += 1;
+  //       return {
+  //         basket: [...state.basket],
+  //       };
+  //     }
+  //   });
+  // },
   updateBasket: (newProduct: any) => {
     set((state: any) => {
-      const currentProduct = state.basket.find(
-        (item:any) => item.id === newProduct.id
+      const findPro = state.basket.find(
+        (item: any) => item.id === newProduct.id
       );
-      if (!currentProduct) {
+
+      if (findPro) {
+        const updatedBasket = state.basket.map((item: any) =>
+          item.id === newProduct.id ? { ...item } : item
+        );
+
         return {
-          basket: [...state.basket, { ...newProduct, count: 1 }],
+          ...state,
+          basket: updatedBasket,
         };
       } else {
-        currentProduct.count += 1;
         return {
-          basket: [...state.basket],
+          ...state,
+          basket: [...state.basket, { ...newProduct, count: 1 }],
         };
       }
     });
