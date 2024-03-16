@@ -46,4 +46,7 @@ export const useBasketFetch = create<any>((set: any) => ({
       }
       return state;
     }),
+
+
+    clearBasket: () => set({ basketData: [] }),
 }));

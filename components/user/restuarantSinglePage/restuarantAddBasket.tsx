@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useBasket } from "../../../pages/zustand/store";
 import { useBasketFetch } from "../../../pages/zustand/storeFetchData";
-// import img  from '../../../public/images/emptyBasket.svg'
+
 interface Item {
   id: string;
   name: string;
@@ -17,7 +16,6 @@ const RestuarantSingleBasket = ({
   basket,
   countAdd,
   totalPrice,
-  deletOrder,
 }: any) => {
   const [basketZustandData, setBasketZustandData] = useState<Item[]>([]);
 
@@ -26,6 +24,7 @@ const RestuarantSingleBasket = ({
     setBasketFetchData,
     incrementApiCount,
     decrementCountApi,
+    clearBasket,
   } = useBasketFetch();
 
   useEffect(() => {
@@ -67,8 +66,8 @@ const RestuarantSingleBasket = ({
       .catch((err) => {
         console.error("Error adding item to basket:", err);
       });
-    //post
   };
+  
   const decrementCount = (item: any) => {
     const access_token = localStorage.getItem("access_token");
     axios.delete(
@@ -82,24 +81,72 @@ const RestuarantSingleBasket = ({
         },
       }
     )
-    .then((result) => {
-      setBasketFetchData(result.data.items);
+      .then((result) => {
+        setBasketFetchData(result.data.items);
+      })
+      .catch((err) => {
+        console.error("Error decrementing item count in basket:", err);
+      });
+  };
+
+  const deleteOrder = (item: any) => {
+    const access_token = localStorage.getItem("access_token");
+    axios.delete(
+      "http://localhost:3000/api/basket/delete",
+      {
+        data: {
+          product_id: item.id,
+        },
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    )
+      .then((result) => {
+        setBasketFetchData(result.data.items);
+      })
+      .catch((err) => {
+        console.error("Error decrementing item count in basket:", err);
+      });
+  };
+
+  const clearAllData = () => {
+    const access_token = localStorage.getItem("access_token");
+    axios.delete(
+      "http://localhost:3000/api/basket/clear",
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    )
+    .then(() => {
+      clearBasket(); // Clear the basket directly
+      alert('Success: Basket cleared');
     })
     .catch((err) => {
-      console.error("Error decrementing item count in basket:", err);
+      console.error("Error clearing basket:", err);
+      alert('Error: Unable to clear basket');
     });
   };
+  
   return (
     <>
       <div className="w-1/4 bg-user-navbarBGColor py-2 divide-y divide-admin-inputBorder">
-        <div>
-          {token ? (
-            <h1 className="font-bold text-user-navbarSignBg text-left ml-4 mb-2">
-              {token ? basketZustandData?.length ?? 0 : ""} items
-            </h1>
-          ) : (
-            ""
-          )}
+        <div className="flex justify-between">
+          <div>
+            {token ? (
+              <h1 className="font-bold text-user-navbarSignBg text-left ml-4 mb-2">
+                {token ? basketZustandData?.length ?? 0 : ""} items
+              </h1>
+            ) : (
+              ""
+            )}
+          </div>
+          <div id="clearAllButtonContainer">
+            <button></button>
+            <p onClick={clearAllData} className="mr-4 cursor-pointer">clear all</p>
+          </div>
         </div>
         {token ? (
           <div className="overflow-y-auto h-[290px] mb-4">
@@ -112,7 +159,7 @@ const RestuarantSingleBasket = ({
                         <img src={itemBasket.img_url} className="w-16" alt="" />
                       )}
                       <p
-                        onClick={() => deletOrder(itemBasket.id, "delete")}
+                        onClick={() => deleteOrder(itemBasket)}
                         className="text-productSize14 italic underline underline-offset-1 mt-4 cursor-pointer"
                       >
                         Remove
