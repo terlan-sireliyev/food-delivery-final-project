@@ -48,12 +48,47 @@ const RestuarantSingleBasket = ({
 
   const incrementCount = (item: any) => {
     incrementApiCount(item.id);
-    console.log(basketZustandData);
+    const access_token = localStorage.getItem("access_token");
+    axios
+      .post(
+        "http://localhost:3000/api/basket/add",
+        {
+          product_id: item.id,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        }
+      )
+      .then((result) => {
+        setBasketFetchData(result.data.items);
+      })
+      .catch((err) => {
+        console.error("Error adding item to basket:", err);
+      });
+    //post
   };
   const decrementCount = (item: any) => {
-    decrementCountApi(item.id);
+    const access_token = localStorage.getItem("access_token");
+    axios.delete(
+      "http://localhost:3000/api/basket/delete",
+      {
+        data: {
+          product_id: item.id,
+        },
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      }
+    )
+    .then((result) => {
+      setBasketFetchData(result.data.items);
+    })
+    .catch((err) => {
+      console.error("Error decrementing item count in basket:", err);
+    });
   };
-
   return (
     <>
       <div className="w-1/4 bg-user-navbarBGColor py-2 divide-y divide-admin-inputBorder">
