@@ -2,6 +2,9 @@ import Person2Icon from "@mui/icons-material/Person2";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import FilterFramesIcon from "@mui/icons-material/FilterFrames";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 //После входа на сайт к нам приходит именно навбар
 export const userProfileLink = [
   {
@@ -30,7 +33,7 @@ export const userProfileLinkSome = [
     id: 1,
     title: "Home",
     href: "/",
-    icon: <Person2Icon />,
+    icon: <HomeIcon />,
   },
   {
     id: 2,
@@ -54,13 +57,13 @@ export const userProfileLinkSome = [
     id: 5,
     title: "Restaurants",
     href: "/user/restuarants",
-    icon: <Person2Icon />,
+    icon: <RestaurantMenuIcon />,
   },
   {
     id: 6,
     title: "About",
     href: "/user/about",
-    icon: <Person2Icon />,
+    icon: <InfoIcon />,
   },
   {
     id: 7,

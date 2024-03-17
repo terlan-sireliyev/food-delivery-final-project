@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import style from "./style.module.css";
 import Image from "next/image";
 
@@ -18,13 +18,13 @@ const index = () => {
         onClick={commonClose}
       ></div>
       <div className="mx-2">
-        <img
+        <Image
           onClick={openMenuLang}
-          src="../images/langEn.svg"
-          alt="Have yor error"
-          className=""
+          src="/images/langEn.svg"
+          width={40}
+          height={40}
+          alt="Picture of the author"
         />
-
         <div
           style={{ width: "85px", height: "150px" }}
           className={`${
@@ -33,13 +33,28 @@ const index = () => {
         >
           <ul className="z-40">
             <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
-              <img src="../images/abs.svg" alt="" className="m-auto" />
+              <Image
+                src="/images/abs.svg"
+                width={40}
+                height={40}
+                alt="Picture of the author"
+              />
             </li>
             <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
-              <img src="../images/ru.svg" alt="" className="m-auto" />
+              <Image
+                src="/images/ru.svg"
+                width={40}
+                height={40}
+                alt="Picture of the author"
+              />
             </li>
             <li className="bg-admin-colorLogin p-3 rounded-b-lg hover:bg-admin-inputBorder">
-              <img src="../images/az.svg" alt="" className="m-auto" />
+              <Image
+                src="/images/az.svg"
+                width={40}
+                height={40}
+                alt="Picture of the author"
+              />
             </li>
           </ul>
         </div>

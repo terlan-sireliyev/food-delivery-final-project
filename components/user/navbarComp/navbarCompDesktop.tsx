@@ -48,10 +48,12 @@ const NavbarCompDesktop = ({
       <div className="">
         <div className="bg-user-navbarBGColor p-4 flex  justify-between ">
           <div className="flex justify-center items-center">
-            <img
+            <Image
               onClick={HamburgerMenuBtnOpen}
-              src="../images/userImg/segment.png"
-              alt="Have your error"
+              src="/images/userImg/segment.png"
+              width={40}
+              height={40}
+              alt="Picture of the author"
               className="h-10 object-contain hidden max-2xl:hidden max-xl:hidden max-lg:hidden max-md:block mr-4"
             />
             <HamburgerMenu
@@ -167,25 +169,25 @@ const NavbarCompDesktop = ({
                     {/* bura navbarda saq terefde user iconuna clikc edildike aclian menudur */}
                     <ul className="z-40 flex flex-col">
                       <Link
-                        href="/user/userPages/profile"
+                        href="user/userPages/profile"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Profile
                       </Link>
                       <Link
-                        href="yourBasket"
+                        href="user/userPages/yourBasket"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Your Basket
                       </Link>
                       <Link
-                        href="yourOrder"
+                        href="user/userPages/yourOrder"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Your Orders
                       </Link>
                       <Link
-                        href="checkout"
+                        href="user/userPages/checkout"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Checkout

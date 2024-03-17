@@ -89,8 +89,10 @@ const HamburgerMenu = ({ openHamburger, HamburgerMenuBtnClose }: any) => {
                         href == pathname ? "text-user-bgCheckout font-bold" : ""
                       } p-2 mt-3 rounded `}
                     >
-                      {icon}
-                      {title}
+                      <div className="flex items-center  justify-center gap-2">
+                        <p>{icon}</p>
+                        <p>{title}</p>
+                      </div>
                     </div>
                   </Link>
                 ))}
