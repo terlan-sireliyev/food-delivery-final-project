@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { log } from "console";
 const index = () => {
-  const [checkSignin,setCheckSignIn] = useState([])
   const router = useRouter();
   const [form, setForm] = useState<{
     email: string;
@@ -13,15 +11,10 @@ const index = () => {
     email: "",
     password: "",
   });
-
   const onchangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
-
-  //  access_token,  refresh_token
-
-
   const loginHandler = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     axios
@@ -31,17 +24,16 @@ const index = () => {
       })
       .then((result) => {
         if (result.status === 200) {
-          const { user: { access_token, refresh_token } } = result.data;
-          
+          const {
+            user: { access_token, refresh_token },
+          } = result.data;
           localStorage.setItem("access_token", access_token);
           localStorage.setItem("refresh_token", refresh_token);
-          // console.log(result);
-          
           router.push("/");
         }
       })
-      .catch((err) => {
-        alert('Daxil ola bilmediniz!')
+      .catch((err: any) => {
+        console.log("Daxil ola bilmediniz!", err);
       });
   };
   return (

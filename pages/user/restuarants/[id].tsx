@@ -67,13 +67,6 @@ const SingleRestaurant = () => {
         console.error("Error adding item to basket:", err);
       });
   };
-
-  // Calculate total price of items in basket
-  const totalPrice = basket.reduce(
-    (prev: number, current: Product) => prev + current.price * current.count,
-    0
-  );
-
   return (
     <>
       <div>

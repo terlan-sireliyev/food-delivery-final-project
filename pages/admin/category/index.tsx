@@ -23,16 +23,14 @@ interface Category {
   name: string;
   slug: string;
 }
-interface AllCategoryResponse {
-  message: string;
-  result: {
-    data: Category[];
-  };
-}
+// interface AllCategoryResponse {
+//   message: string;
+//   result: {
+//     data: Category[];
+//   };
+// }
 
-const Index: React.FC<{ AllCategory: AllCategoryResponse }> = ({
-  AllCategory,
-}) => {
+const Index = ({ AllCategory }: any) => {
   const {
     message,
     result: { data },

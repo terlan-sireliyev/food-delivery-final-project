@@ -2,29 +2,20 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
-
 const Index = () => {
+  //register
   const router = useRouter();
   const [form, setForm] = useState<{
     name: string;
     username: string;
     email: string;
     password: string;
-  }>({
-    name: "",
-    username: "",
-    email: "",
-    password: "",
-  });
+  }>({ name: "", username: "", email: "", password: "" });
 
   const changeFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
+    setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
-
   const registerHandler = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     axios
@@ -38,13 +29,11 @@ const Index = () => {
         if (res.status === 201) {
           router.push("login");
         }
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
   return (
     <>
       <div className="flex max-lg:flex-col-reverse mt-4 mb-4 ">
