@@ -27,8 +27,9 @@ const index = () => {
 
         <div
           style={{ width: "85px", height: "150px" }}
-          className={`${openLang ? style.openLangClass : style.modalLangClass
-            } bg-admin-openMenu1 `}
+          className={`${
+            openLang ? style.openLangClass : style.modalLangClass
+          } bg-admin-openMenu1 `}
         >
           <ul className="z-40">
             <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">

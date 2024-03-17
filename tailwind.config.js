@@ -68,6 +68,8 @@ module.exports = {
       "user-registerBtn": "#EB5757",
       "user-LinkColor": "#F0E1E1",
       "user-bgCheckout": "#ED0800",
+      "user-btnSave": "#6FCF97",
+      "user-navBasketBG": "#EB5757",
     },
     borderRadius: {
       borderSlider: "40px",

@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useBasketFetch } from "../../../pages/zustand/storeFetchData";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
 interface Item {
   id: string;
@@ -12,13 +14,8 @@ interface Item {
   amount: number;
 }
 
-const RestuarantSingleBasket = ({
-  basket,
-  countAdd,
-  totalPrice,
-}: any) => {
+const RestuarantSingleBasket = () => {
   const [basketZustandData, setBasketZustandData] = useState<Item[]>([]);
-
   const {
     basketData,
     setBasketFetchData,
@@ -44,64 +41,47 @@ const RestuarantSingleBasket = ({
       setToken(null);
     }
   }, []);
-
+  //здесь мы увеличиваем число
   const incrementCount = (item: any) => {
-    incrementApiCount(item.id);
     const access_token = localStorage.getItem("access_token");
     axios
       .post(
         "http://localhost:3000/api/basket/add",
-        {
-          product_id: item.id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        }
+        { product_id: item.id },
+        { headers: { Authorization: `Bearer ${access_token}` } }
       )
       .then((result) => {
+        incrementApiCount(result.data.items.id);
         setBasketFetchData(result.data.items);
       })
       .catch((err) => {
         console.error("Error adding item to basket:", err);
       });
   };
-  
+  //здесь мы уменьшаем  число
   const decrementCount = (item: any) => {
     const access_token = localStorage.getItem("access_token");
-    axios.delete(
-      "http://localhost:3000/api/basket/delete",
-      {
-        data: {
-          product_id: item.id,
-        },
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    )
+    axios
+      .delete("http://localhost:3000/api/basket/delete", {
+        data: { product_id: item.id },
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
       .then((result) => {
+        decrementCountApi(result.data.items.id);
         setBasketFetchData(result.data.items);
       })
       .catch((err) => {
         console.error("Error decrementing item count in basket:", err);
       });
   };
-
+  //Удаляем товары из корзины
   const deleteOrder = (item: any) => {
     const access_token = localStorage.getItem("access_token");
-    axios.delete(
-      "http://localhost:3000/api/basket/delete",
-      {
-        data: {
-          product_id: item.id,
-        },
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    )
+    axios
+      .delete("http://localhost:3000/api/basket/delete", {
+        data: { product_id: item.id },
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
       .then((result) => {
         setBasketFetchData(result.data.items);
       })
@@ -112,31 +92,26 @@ const RestuarantSingleBasket = ({
 
   const clearAllData = () => {
     const access_token = localStorage.getItem("access_token");
-    axios.delete(
-      "http://localhost:3000/api/basket/clear",
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
-    )
-    .then(() => {
-      clearBasket(); // Clear the basket directly
-      alert('Success: Basket cleared');
-    })
-    .catch((err) => {
-      console.error("Error clearing basket:", err);
-      alert('Error: Unable to clear basket');
-    });
+    axios
+      .delete("http://localhost:3000/api/basket/clear", {
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
+      .then(() => {
+        clearBasket();
+      })
+      .catch((err) => {
+        console.error("Error clearing basket:", err);
+      });
   };
-  
+
   return (
     <>
       <div className="w-1/4 bg-user-navbarBGColor py-2 divide-y divide-admin-inputBorder">
         <div className="flex justify-between">
-          <div>
+          <div className="flex">
             {token ? (
-              <h1 className="font-bold text-user-navbarSignBg text-left ml-4 mb-2">
+              <h1 className="font-bold text-user-navbarSignBg text-left ml-4 mb-2 flex items-center gap-2">
+                <ShoppingBasketIcon />
                 {token ? basketZustandData?.length ?? 0 : ""} items
               </h1>
             ) : (
@@ -144,8 +119,12 @@ const RestuarantSingleBasket = ({
             )}
           </div>
           <div id="clearAllButtonContainer">
-            <button></button>
-            <p onClick={clearAllData} className="mr-4 cursor-pointer">clear all</p>
+            <p
+              onClick={clearAllData}
+              className="mr-4 cursor-pointer bg-user-navbarSignBg hover:bg-user-bgCheckout px-4 py-2 rounded-regBtnRadius text-admin-colorLogin flex items-center  mb-2"
+            >
+              <DeleteOutlineIcon /> clear all
+            </p>
           </div>
         </div>
         {token ? (

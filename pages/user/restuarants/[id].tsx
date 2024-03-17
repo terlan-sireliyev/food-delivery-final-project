@@ -24,17 +24,12 @@ interface Product {
 
 const SingleRestaurant = () => {
   const [data, setData] = useState<Restaurant | null>(null);
+
   const router = useRouter(); // Use useRouter instead of useParams
   const idSingl = router.query.id as string;
 
-  const basket = useBasket((state: any) => state.basket);
-  const updateBasket = useBasket((state: any) => state.updateBasket);
+  const { basket, updateBasket } = useBasket();
   const { basketData, setBasketFetchData } = useBasketFetch();
-  // const { basketData, setBasketFetchData } = useBasketFetch();
-
-  // useEffect(() => {
-  //   setBasketFetchData();
-  // }, []);
 
   useEffect(() => {
     if (idSingl) {
@@ -62,14 +57,8 @@ const SingleRestaurant = () => {
     axios
       .post(
         "http://localhost:3000/api/basket/add",
-        {
-          product_id: id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        }
+        { product_id: id },
+        { headers: { Authorization: `Bearer ${access_token}` } }
       )
       .then((result) => {
         setBasketFetchData(result.data.items);
@@ -97,7 +86,7 @@ const SingleRestaurant = () => {
             addBasket={addBasket}
           />
         </div>
-        <RestuarantSingleBasket basket={basket} totalPrice={totalPrice} />
+        <RestuarantSingleBasket />
       </div>
     </>
   );

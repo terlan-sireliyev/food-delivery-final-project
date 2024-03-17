@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 const RestuarantNavbar = ({
   img_url,
   name,
-  slug,
   category_id,
   navMobilClose,
 }: any) => {

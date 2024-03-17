@@ -3,76 +3,62 @@ import Link from "next/link";
 import OpenMenuLang from "../../admin/openMenuLang/index";
 import { userNavbarLinks } from "./linksNavbarMockData";
 import { useRouter } from "next/router";
-import { redirect } from "next/navigation";
 import Image from "next/image";
 import style from "./styles.module.css";
 import HamburgerMenu from "./hamburgerMenu";
-// import UserProfile from '../../../pages/user/userPages/profile/index'
-import axios from "axios";
-// import img from '../../../public/images/avatar.svg'
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 
 const NavbarCompDesktop = ({
   searchFilter,
-  setInputValue,
   inputValue,
   searchRestuarantInput,
   clearInputAndLinks,
-  HamburgerMenuBtn,
-  stateHamburger,
-  setStateHamburger,
-  CloseMenu,
+  HamburgerMenuBtnOpen,
+  openHamburger,
+  setOpenHamburger,
+  HamburgerMenuBtnClose,
 }: any) => {
+  //Это меню, которое открывается при нажатии на значок пользователя на панели навигации.
   const [openLang, setOpenLang] = useState(false);
   const openMenuLang = () => {
     setOpenLang(!openLang);
   };
-  const commonClose = () => {
-    setOpenLang(false);
-  };
-  const router = useRouter();
-  const [token, setToken] = useState<string | null>(null);
 
+  const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
-
-    // axios.get('http://localhost:3000/api/user',{
-    //   headers:{
-    //     "Authorization" : `Bearer ${access_token}`
-    //   }
-    // }).then((res) =>{
-    //   console.log(res.data  );
-    // })
-
     if (access_token) {
+      //здесь мы пишем Токен для получения данных
       setToken(access_token);
     } else {
       setToken(null);
     }
   }, []);
-
+  const router = useRouter(); //здесь мы вводим переменную маршрутизатора(router)
   const logOut = () => {
-    localStorage.removeItem("access_token");
-    // localStorage.removeItem("refresh_token");
-
+    localStorage.removeItem("access_token"); //здесь мы удаляем Токен
     router.push("/user/login");
   };
-
+  const openBasket = () => {
+    //Перенаправляем на любую страницу с router.push
+    router.push("/user/userPages/yourBasket");
+  };
   return (
     <>
       <div className="">
         <div className="bg-user-navbarBGColor p-4 flex  justify-between ">
           <div className="flex justify-center items-center">
             <img
-              onClick={HamburgerMenuBtn}
+              onClick={HamburgerMenuBtnOpen}
               src="../images/userImg/segment.png"
               alt="Have your error"
               className="h-10 object-contain hidden max-2xl:hidden max-xl:hidden max-lg:hidden max-md:block mr-4"
             />
             <HamburgerMenu
-              HamburgerMenuBtn={HamburgerMenuBtn}
-              setStateHamburger={setStateHamburger}
-              stateHamburger={stateHamburger}
-              CloseMenu={CloseMenu}
+              className="max-sm:hidden"
+              setOpenHamburger={setOpenHamburger}
+              openHamburger={openHamburger}
+              HamburgerMenuBtnClose={HamburgerMenuBtnClose}
             />
             <Link href="/">
               <Image
@@ -83,12 +69,15 @@ const NavbarCompDesktop = ({
               />
             </Link>
           </div>
+          {/* //Здесь в панели навигации мы говорим, что какая бы страница ни была
+          активна, ее цвет должен измениться */}
           <div className="flex items-center  gap-8 ">
             <ul className={`${"flex gap-4 max-md:hidden "}`}>
               {userNavbarLinks.map(({ id, title, href, icon }: any) => (
                 <Link href={href} key={id}>
                   <div
                     className={`${
+                      // const router = useRouter();
                       href == router.pathname
                         ? "text-user-bgCheckout font-bold"
                         : ""
@@ -99,8 +88,8 @@ const NavbarCompDesktop = ({
                 </Link>
               ))}
             </ul>
-
             <div className="flex items-center justify-center p-2  ">
+              {/* это сторона поиска входных данных То есть (input search) */}
               <div className="max-md:hidden relative">
                 <input
                   onChange={searchRestuarantInput}
@@ -109,6 +98,7 @@ const NavbarCompDesktop = ({
                   placeholder="Search"
                   value={inputValue}
                 />
+                {/* //информация, которая поступает к нам при поиске на входе start */}
                 {searchFilter.length > 0 ? (
                   <ul className="p-2 absolute bg-admin-TextCheck w-full z-10">
                     {searchFilter.map((restaurant: any) => (
@@ -142,27 +132,24 @@ const NavbarCompDesktop = ({
                     ))}
                   </ul>
                 ) : null}
+                {/* //информация, которая поступает к нам при поиске на входе end */}
               </div>
-              <div className="mt-2 ml-4 flex">
+              {/* //языковое меню в навигаторе start */}
+              <div className="flex">
                 <OpenMenuLang />
               </div>
+              {/* языковое меню в навигаторе end */}
               {token && (
                 <div>
-                  <div className="w-10 border border-inputBorder rounded-iconsRadius">
-                    <img
-                      src="/images/basket.jpg"
-                      alt="you have error"
-                      className="w-full rounded-iconsRadius"
-                    />
+                  <div
+                    onClick={openBasket}
+                    className="p-[8px] bg-user-navBasketBG rounded-iconsRadius cursor-pointer text-admin-colorLogin"
+                  >
+                    <ShoppingBasketIcon />
                   </div>
                 </div>
               )}
-              {/* {
-                token && <div>
-                  <p></p>
-                </div>
-              } */}
-
+              {/* Если мы уже на сайте, покажите языковое меню */}
               {token && (
                 <div>
                   <div className="relative">
@@ -170,7 +157,6 @@ const NavbarCompDesktop = ({
                       onClick={openMenuLang}
                       src="/images/avatar.svg"
                       alt="in "
-                      // className="w-full rounded-iconsRadius"
                     />
                   </div>
                   <div
@@ -178,6 +164,7 @@ const NavbarCompDesktop = ({
                       openLang ? style.openProfilClass : style.modalProfilClass
                     } `}
                   >
+                    {/* bura navbarda saq terefde user iconuna clikc edildike aclian menudur */}
                     <ul className="z-40 flex flex-col">
                       <Link
                         href="/user/userPages/profile"
@@ -186,19 +173,19 @@ const NavbarCompDesktop = ({
                         Profile
                       </Link>
                       <Link
-                        href="profile"
+                        href="yourBasket"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Your Basket
                       </Link>
                       <Link
-                        href="profile"
+                        href="yourOrder"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Your Orders
                       </Link>
                       <Link
-                        href="profile"
+                        href="checkout"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Checkout
@@ -213,7 +200,7 @@ const NavbarCompDesktop = ({
                   </div>
                 </div>
               )}
-
+              {/* Если вы зашли на сайт, то удалите кнопку «Зарегистрироваться» */}
               {!token && (
                 <button className=" max-lg:hidden mr-8 ml-4 px-[30px] py-[5px] mt-2 bg-user-navbarSignBg rounded-btnRaduis">
                   <Link href="/user/login">Sign up</Link>
