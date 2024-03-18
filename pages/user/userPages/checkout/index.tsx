@@ -6,7 +6,8 @@ import axios from "axios";
 
 const index = () => {
     const [forcheckoutId, setForcheckoutId] = useState<string | undefined>(undefined);
-    const [checkOut, setCheckOut] = useState<any[] | undefined>(undefined); useEffect(() => {
+    const [checkOut, setCheckOut] = useState<any[] | undefined>(undefined);
+    useEffect(() => {
         const access_token = localStorage.getItem("access_token");
         axios.get("http://localhost:3000/api/basket", {
             headers: { Authorization: `Bearer ${access_token}` },
@@ -45,7 +46,6 @@ const index = () => {
                 if (res.status === 201) {
                     router.push("/user/userPages/yourOrder");
                 }
-                console.log(res);
             })
             .catch((err) => {
                 console.log(err);
@@ -59,15 +59,15 @@ const index = () => {
                     <div className="flex gap-2">
                         <div className="w-3/5 bg-user-navbarBGColor">
                             <input
-                                type="email"
-                                name="email"
+                                type="text"
+                                name="delivery_address"
                                 onChange={changeFunc}
                                 className="focus:outline-none mt-4  w-96 border border-admin-inputBorder p-2"
                                 placeholder="Delivery Address"
                             />
                             <input
-                                type="text"
-                                name="Contact_Number"
+                                type="number"
+                                name="contact"
                                 onChange={changeFunc}
                                 className="focus:outline-none mt-4 w-96 border border-admin-inputBorder p-2"
                                 placeholder="Contact Number"
@@ -76,11 +76,11 @@ const index = () => {
                                 <p>Payment Method:</p>
                                 <div className="flex justify-around w-3/5 m-auto">
                                     <div>
-                                        <input type="radio" onChange={changeFunc} id="door" name="delivery" value="door" />
+                                        <input type="radio" onChange={changeFunc} id="door" name="payment_method" value="door" />
                                         <label htmlFor="door">pay at the door</label>
                                     </div>
                                     <div>
-                                        <input type="radio" onChange={changeFunc} id="cart" name="delivery" value="cart" />
+                                        <input type="radio" onChange={changeFunc} id="cart" name="payment_method" value="cart" />
                                         <label htmlFor="cart">By Credit card</label>
                                     </div>
                                 </div>

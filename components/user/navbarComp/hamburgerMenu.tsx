@@ -21,16 +21,20 @@ const HamburgerMenu = ({ openHamburger, HamburgerMenuBtnClose }: any) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000/api/user")
-  //     .then((res) => {
-  //       setUserData(res.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching user data:", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const access_token = localStorage.getItem("access_token");
+    axios
+      .get("http://localhost:3000/api/user",{
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
+      .then((res) => {
+        // setUserData(res.data);
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
 
   return (
     <>
@@ -55,7 +59,7 @@ const HamburgerMenu = ({ openHamburger, HamburgerMenuBtnClose }: any) => {
             </button>
           ) : (
             <div className="flex gap-4">
-              {userData && (
+              {/* {userData && (
                 <>
                   <div>
                     <img src={userData.image} alt="User profile" />
@@ -64,7 +68,7 @@ const HamburgerMenu = ({ openHamburger, HamburgerMenuBtnClose }: any) => {
                     <h2>{userData.email}</h2>
                   </div>
                 </>
-              )}
+              )} */}
             </div>
           )}
         </div>
