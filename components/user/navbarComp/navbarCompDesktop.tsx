@@ -169,25 +169,25 @@ const NavbarCompDesktop = ({
                     {/* bura navbarda saq terefde user iconuna clikc edildike aclian menudur */}
                     <ul className="z-40 flex flex-col">
                       <Link
-                        href="user/userPages/profile"
+                        href="/user/userPages/profile"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Profile
                       </Link>
                       <Link
-                        href="user/userPages/yourBasket"
+                        href="/user/userPages/yourBasket"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Your Basket
                       </Link>
                       <Link
-                        href="user/userPages/yourOrder"
+                        href="/user/userPages/yourOrder"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Your Orders
                       </Link>
                       <Link
-                        href="user/userPages/checkout"
+                        href="/user/userPages/checkout"
                         className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
                       >
                         Checkout

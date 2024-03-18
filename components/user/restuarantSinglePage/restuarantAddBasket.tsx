@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useBasketFetch } from "../../../pages/zustand/storeFetchData";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-
+import Link from "next/link";
+import { useRouter } from "next/router";
 interface Item {
   id: string;
   name: string;
@@ -15,6 +16,7 @@ interface Item {
 }
 
 const RestuarantSingleBasket = () => {
+  const router = useRouter();
   const [basketZustandData, setBasketZustandData] = useState<Item[]>([]);
   const {
     basketData,
@@ -23,7 +25,6 @@ const RestuarantSingleBasket = () => {
     decrementCountApi,
     clearBasket,
   } = useBasketFetch();
-
   useEffect(() => {
     setBasketFetchData();
   }, []);
@@ -104,6 +105,9 @@ const RestuarantSingleBasket = () => {
       });
   };
 
+  const addOrder = () => {
+     router.push("/user/userPages/checkout");
+  }
   return (
     <>
       <div className="w-1/4 bg-user-navbarBGColor py-2 divide-y divide-admin-inputBorder">
@@ -158,7 +162,7 @@ const RestuarantSingleBasket = () => {
               </div>
             ))}
             <div className="bottom-0 w-5/6 ml-8">
-              <button className="bg-user-navbarSignBg mt-4 rounded-borderSlider p-3 w-full hover:bg-user-bgCheckout">
+              <button onClick={addOrder}  className="bg-user-navbarSignBg mt-4 rounded-borderSlider p-3 w-full hover:bg-user-bgCheckout">
                 <div className="flex justify-around items-center">
                   <div className="text-admin-colorLogin font-bold">
                     Checkout

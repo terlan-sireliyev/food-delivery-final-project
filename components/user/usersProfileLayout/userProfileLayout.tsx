@@ -8,7 +8,7 @@ const UserProfileLayout = ({ children }: any) => {
           <UserProfileLeft />
         </div>
 
-        <div className="mx-2 p-2 w-5/6 bg-user-navbarBGColor ">
+        <div className="mx-2 p-2 w-5/6  ">
           <div className="text-center ">{children}</div>
         </div>
       </div>
