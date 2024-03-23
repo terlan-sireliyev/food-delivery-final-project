@@ -1,42 +1,122 @@
 import React, { useEffect, useState } from "react";
+import Tables from "../../../../components/user/tables/index";
 import UserProfileLayout from "../../../../components/user/usersProfileLayout/userProfileLayout";
-import Link from "next/link";
 import axios from "axios";
+interface Order {
+  id: string;
+  customer_id: string;
+  delivery_address: string;
+  amount: number;
+  payment_method: string;
+  contact: string;
+  products: ShowOrder[];
+}
+interface ShowOrder {
+  id: string;
+  img_url: string;
+  name: string;
+  price: number;
+  count: number;
+  amount: number;
+}
 
-const index = () => {
-    const [contactState, setContactState] = useState([])
-    useEffect(() => {
+const Index = () => {
+  const [orderActionOpenMenu, setOrderActionOpenMenu] = useState<
+    number | false
+  >(false);
+
+  const [contactState, setContactState] = useState([]);
+  const [showOrder, setShowOrder] = useState<number | false>(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
         const access_token = localStorage.getItem("access_token");
-        axios.get("http://localhost:3000/api/order", {
-            headers: { Authorization: `Bearer ${access_token}` },
-        }).then((res) => {
-            // console.log('data order',res.data.result.data);
-            setContactState(res.data.result.data)
-        }).catch((err: any) => {
-            console.log('error var', err);
-        })
-    }, [])
+        const response = await axios.get("http://localhost:3000/api/order", {
+          headers: { Authorization: `Bearer ${access_token}` },
+        });
 
-    return (
-        <>
-            <UserProfileLayout>
-                <div>
-                    {
-                        contactState && contactState.map((item: any) => (
-                            <>
-                                <div className="flex gap-6">
-                                    <p key={item.id}>{item.contact}</p>
-                                    <p key={item.id}>{item.delivery_address}</p>
-                                    <p key={item.id}>{item.payment_method}</p>
-                                </div>
-                            </>
-                        ))
-                    }
+        if (response.data && Array.isArray(response.data.result.data)) {
+          setContactState(response.data.result.data);
+          setLoading(false);
+        } else {
+          console.error("Data format error: Response data is not an array.");
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
 
-                </div>
-            </UserProfileLayout>
-        </>
-    );
+    fetchData();
+  }, []);
+
+  const actionOrder = (index: any) => {
+    if (orderActionOpenMenu === index) {
+      setOrderActionOpenMenu(false);
+    } else {
+      setOrderActionOpenMenu(index);
+    }
+  };
+
+  const closeOrderAction = (index: any) => {
+    if (orderActionOpenMenu !== index) {
+      setOrderActionOpenMenu(false);
+    }
+  };
+  const showOrderClick = (index: any) => {
+    if (showOrder === index) {
+      setShowOrder(false);
+    } else {
+      setShowOrder(index);
+    }
+  };
+  const closeOrder = (index: any) => {
+    if (showOrder !== index) {
+      setShowOrder(false);
+      setOrderActionOpenMenu(false);
+    }
+  };
+
+  const deleteOrder = (item: any) => {
+    const access_token = localStorage.getItem("access_token");
+    axios
+      .delete("http://localhost:3000/api/order", {
+        data: {
+          order_id: item.id,
+        },
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((result) => {
+        console.log("success");
+      })
+      .catch((err) => {
+        console.error("Error decrementing item count in basket:", err);
+      });
+  };
+
+  return (
+    <UserProfileLayout>
+      <div className="relative z-10 ">
+        <div>
+          <Tables
+            orderActionOpenMenu={orderActionOpenMenu}
+            showOrderClick={showOrderClick}
+            closeOrder={closeOrder}
+            deleteOrder={deleteOrder}
+            closeOrderAction={closeOrderAction}
+            actionOrder={actionOrder}
+            contactState={contactState}
+            showOrder={showOrder}
+          />
+        </div>
+      </div>
+    </UserProfileLayout>
+  );
 };
 
-export default index;
+export default Index;

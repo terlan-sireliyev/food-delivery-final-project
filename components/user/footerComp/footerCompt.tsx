@@ -3,6 +3,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Link from "next/link";
+import Image from "next/image";
+
 const FooterComp = () => {
   return (
     <>
@@ -11,10 +13,12 @@ const FooterComp = () => {
           <div className="flex justify-around items-center">
             <div className="w-1/2 max-md:w-full flex flex-col justify-center mt-12   ">
               <div className="ml-[150px] flex max-md:items-center max-md:ml-[0px] max-md:justify-center flex-col">
-                <img
-                  src="../images/logo.svg"
-                  alt="Have your error"
-                  className="w-24 max-md:w-32 mb-4 "
+                <Image
+                  src="/images/logo.svg"
+                  width={100}
+                  height={100}
+                  className="mb-4"
+                  alt="Picture of the author"
                 />
                 <p className=" text-products  ml-2 text-user-inSlider w-2/3  max-md:w-1/2 max-md:text-center max-md:mb-4">
                   Lorem ipsum is placeholder text commonly used in the graphic

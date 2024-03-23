@@ -5,6 +5,8 @@ import { useBasketFetch } from "../../../zustand/storeFetchData";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import axios from "axios";
+import { useRouter } from "next/router";
+
 interface Item {
   id: string;
   name: string;
@@ -14,9 +16,9 @@ interface Item {
   count: number;
   amount: number;
 }
-const index = ({ basket, countAdd, totalPrice }: any) => {
+const index = () => {
   const [basketZustandData, setBasketZustandData] = useState<Item[]>([]);
-
+  const router = useRouter();
   const {
     basketData,
     setBasketFetchData,
@@ -42,6 +44,9 @@ const index = ({ basket, countAdd, totalPrice }: any) => {
       setToken(null);
     }
   }, []);
+  const addCheckOutInYourbasket = () => {
+    router.push("/user/userPages/checkout");
+  };
 
   const incrementCount = (item: any) => {
     incrementApiCount(item.id);
@@ -189,7 +194,10 @@ const index = ({ basket, countAdd, totalPrice }: any) => {
               <div className="bottom-0 ">
                 <button className="bg-user-navbarSignBg mt-4 rounded-borderSlider  w-full hover:bg-user-bgCheckout">
                   <div className="flex justify-between items-center ml-6">
-                    <div className="text-admin-colorLogin font-bold">
+                    <div
+                      onClick={addCheckOutInYourbasket}
+                      className="text-admin-colorLogin font-bold"
+                    >
                       Checkout
                     </div>
                     <div className="bg-admin-colorLogin w-1/2 p-3 rounded-borderSlider">

@@ -1,142 +1,114 @@
-// import React from "react";
-// import Head from "next/head";
-// import PageHeader from "../../../components/admin/pageHeader/index";
-// import Paper from "@mui/material/Paper";
-// import Table from "@mui/material/Table";
-// import TableBody from "@mui/material/TableBody";
-// import TableCell from "@mui/material/TableCell";
-// import TableContainer from "@mui/material/TableContainer";
-// import TableHead from "@mui/material/TableHead";
-// import TablePagination from "@mui/material/TablePagination";
-// import TableRow from "@mui/material/TableRow";
-// import axios from "axios";
-// import { useState } from "react";
-// interface Column {
-//   id:
-//     | "id"
-//     | "customer ID"
-//     | "date"
-//     | "address"
-//     | "amount"
-//     | "paymen"
-//     | "contact";
-//   label: string;
-//   minWidth?: number;
-//   align?: "center";
-// }
+import Head from "next/head";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import PageHeader from "../../../components/admin/pageHeader/index";
+import Tables from "../../../components/user/tables/index";
 
-// const columns: readonly Column[] = [
-//   { id: "id", label: "ID", minWidth: 170 },
-//   { id: "customer ID", label: "Customer ID", minWidth: 170, align: "center" },
-//   { id: "date", label: "Date", minWidth: 170, align: "center" },
-//   { id: "address", label: "Address", minWidth: 170 },
-//   { id: "amount", label: "Amount", minWidth: 170 },
-//   { id: "paymen", label: "Paymen", minWidth: 170 },
-//   { id: "contact", label: "Contact", minWidth: 170 },
-// ];
+const index = ({ AllOrders }: any) => {
+  const [orderActionOpenMenu, setOrderActionOpenMenu] = useState<
+    number | false
+  >(false);
+  const [contactState, setContactState] = useState([]);
+  const [showOrder, setShowOrder] = useState<number | false>(false);
+  const {
+    message,
+    result: { data },
+  } = AllOrders;
 
-// const index = ({ AllOrders }: any) => {
-//   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-//   const [page, setPage] = React.useState(0);
+  useEffect(() => {
+    setContactState(data);
+  }, [AllOrders]);
 
-//   const {
-//     message,
-//     result: { data },
-//   } = AllOrders;
+  const actionOrder = (index: any) => {
+    if (orderActionOpenMenu === index) {
+      setOrderActionOpenMenu(false);
+    } else {
+      setOrderActionOpenMenu(index);
+    }
+  };
 
-//   const handleChangePage = (event: unknown, newPage: number) => {
-//     setPage(newPage);
-//   };
+  const closeOrderAction = (index: any) => {
+    if (orderActionOpenMenu !== index) {
+      setOrderActionOpenMenu(false);
+    }
+  };
 
-//   const handleChangeRowsPerPage = (
-//     event: React.ChangeEvent<HTMLInputElement>
-//   ) => {
-//     setRowsPerPage(+event.target.value);
-//     setPage(0);
-//   };
-//   //  end table
+  const deleteOrder = (item: any) => {
+    const access_token = localStorage.getItem("access_token");
+    axios
+      .delete("http://localhost:3000/api/order", {
+        data: {
+          order_id: item.id,
+        },
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+      .then((result) => {
+        console.log("success");
+      })
+      .catch((err) => {
+        console.error("Error decrementing item count in basket:", err);
+      });
+  };
 
-//   const [open, setOpen] = useState(false);
-//   const openMenu = () => {
-//     setOpen((prev) => true);
-//   };
+  const showOrderClick = (index: any) => {
+    if (showOrder === index) {
+      setShowOrder(false);
+    } else {
+      setShowOrder(index);
+    }
+  };
 
-//   return (
-//     <>
-//       <Head>
-//         <title>Category page</title>
-//       </Head>
+  const closeOrder = (index: any) => {
+    if (showOrder !== index) {
+      setShowOrder(false);
+      setOrderActionOpenMenu(false);
+    }
+  };
+  return (
+    <>
+      <Head>
+        <title>Category page</title>
+      </Head>
+      <PageHeader text="Orders"></PageHeader>
+      <div className="w-5/6 m-auto mt-4">
+        <div>
+          <Tables
+            orderActionOpenMenu={orderActionOpenMenu}
+            showOrderClick={showOrderClick}
+            closeOrder={closeOrder}
+            deleteOrder={deleteOrder}
+            closeOrderAction={closeOrderAction}
+            actionOrder={actionOrder}
+            contactState={contactState}
+            showOrder={showOrder}
+          />
+        </div>
+      </div>
+    </>
+  );
+};
 
-//       <div className="flex flex-wrap justify-between w-5/6 m-auto mt-4">
-//         <Paper sx={{ width: "100%", overflow: "hidden" }}>
-//           <TableContainer sx={{ maxHeight: 440 }}>
-//             <Table stickyHeader aria-label="sticky table">
-//               <TableHead>
-//                 <TableRow>
-//                   {columns.map((column, index) => (
-//                     <TableCell
-//                       className="font-bold"
-//                       key={index}
-//                       align={column.align}
-//                       style={{ minWidth: column.minWidth }}
-//                     >
-//                       {column.label}
-//                     </TableCell>
-//                   ))}
-//                 </TableRow>
-//               </TableHead>
-//               <TableBody>
-//                 {data
-//                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-//                   ?.map((row: any, index: number) => {
-//                     return (
-//                       <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-//                         {columns.map((column, index) => {
-//                           const value = row[column.id];
-//                           return (
-//                             <>
-//                               <TableCell key={index} align={column.align}>
-//                                 {column.id === "img_url" ? (
-//                                   <img
-//                                     className="w-24 h-14 m-auto"
-//                                     src={value}
-//                                     alt="Table image"
-//                                   />
-//                                 ) : (
-//                                   value
-//                                 )}
-//                               </TableCell>
-//                             </>
-//                           );
-//                         })}
-//                       </TableRow>
-//                     );
-//                   })}
-//               </TableBody>
-//             </Table>
-//           </TableContainer>
-//           <TablePagination
-//             rowsPerPageOptions={[10, 25, 100]}
-//             component="div"
-//             count={data.length}
-//             rowsPerPage={rowsPerPage}
-//             page={page}
-//             onPageChange={handleChangePage}
-//             onRowsPerPageChange={handleChangeRowsPerPage}
-//           />
-//         </Paper>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default index;
-// export const getServerSideProps = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:3000/api/order/add");
-//     return { props: { AllOrders: response.data } };
-//   } catch (error) {
-//     console.error("Error fetching order:", error);
-//     return { props: { AllOrders: {} } };
-//   }
-// };
+export default index;
+export async function getServerSideProps({ req }: any) {
+  try {
+    const access_token = req.cookies.access_token;
+    const response = await axios.get("http://localhost:3000/api/order", {
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
+    // console.log("API response:", response.data);
+    return {
+      props: {
+        AllOrders: response.data,
+      },
+    };
+  } catch (error: any) {
+    // console.error("Error fetching order:", error);
+    return {
+      props: {
+        error: error.message,
+      },
+    };
+  }
+}
