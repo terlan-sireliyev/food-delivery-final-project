@@ -73,7 +73,7 @@ const SingleRestaurant = () => {
         <RestaurantSingleHeader dataSingle={data} />
       </div>
       <div className="mt-4 flex justify-between items-center gap-4">
-        <div className="w-3/4 text-left bg-user-navbarBGColor py-4">
+        <div className="w-3/4 text-left max-lg:w-full bg-user-navbarBGColor py-4">
           <RestuarantSingleProducts
             filteredProducts={data.products}
             addBasket={addBasket}

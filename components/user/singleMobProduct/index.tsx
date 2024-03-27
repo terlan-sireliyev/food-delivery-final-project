@@ -1,10 +1,11 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import style from "./styles.module.css";
 import { useBasketFetch } from "../../../pages/zustand/storeFetchData";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import CloseIcon from "@mui/icons-material/Close";
+
+import axios from "axios";
 interface Item {
   id: string;
   name: string;
@@ -14,8 +15,8 @@ interface Item {
   count: number;
   amount: number;
 }
-
-const RestuarantSingleBasket = () => {
+const index = () => {
+  const [openNavMobil, setOpenNavMobil] = useState(false);
   const router = useRouter();
   const [basketZustandData, setBasketZustandData] = useState<Item[]>([]);
   const {
@@ -32,7 +33,6 @@ const RestuarantSingleBasket = () => {
   useEffect(() => {
     setBasketZustandData(basketData);
   }, [basketData]);
-
   const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
@@ -90,53 +90,71 @@ const RestuarantSingleBasket = () => {
         console.error("Error decrementing item count in basket:", err);
       });
   };
-
-  const clearAllData = () => {
-    const access_token = localStorage.getItem("access_token");
-    axios
-      .delete("http://localhost:3000/api/basket/clear", {
-        headers: { Authorization: `Bearer ${access_token}` },
-      })
-      .then(() => {
-        clearBasket();
-      })
-      .catch((err) => {
-        console.error("Error clearing basket:", err);
-      });
+  const openSingleMobilProduct = () => {
+    setOpenNavMobil(true);
   };
-
-  const addOrder = () => {
-    router.push("/user/userPages/checkout");
+  const closeSingleMobilProduct = () => {
+    setOpenNavMobil(false);
   };
+  // bg-gradient-to-r from-blue-500 to-transparent
   return (
-    <>
-      <div className="max-lg:hidden w-1/4 bg-user-navbarBGColor py-2 divide-y divide-admin-inputBorder">
-        <div className="flex justify-between">
-          <div className="flex">
-            {token ? (
-              <h1 className="font-bold text-user-navbarSignBg text-left ml-4 mb-2 flex items-center gap-2">
-                <ShoppingBasketIcon />
-                {token ? basketZustandData?.length ?? 0 : ""} items
-              </h1>
-            ) : (
-              ""
-            )}
+    <div>
+      <div className="bottom-0 w-5/6 ml-8">
+        <button
+          onClick={openSingleMobilProduct}
+          className="bg-user-navbarSignBg mt-4 rounded-borderSlider p-3 w-full hover:bg-user-bgCheckout"
+        >
+          <div className="flex justify-between items-center">
+            <div className="flex">
+              {token ? (
+                <h1 className="font-bold ignBg text-left ml-4 mb-2 flex items-center gap-2">
+                  <ShoppingBasketIcon />
+                  {token ? basketZustandData?.length ?? 0 : ""} items
+                </h1>
+              ) : (
+                ""
+              )}
+            </div>
+            <div id="clearAllButtonContainer ">
+              <p className="mr-4 mt-[3px] cursor-pointer bg-admin-bgCheck text-user-bgCheckout  px-4 py-2 rounded-regBtnRadius flex items-center  mb-2">
+                $
+                {basketZustandData &&
+                  basketZustandData.reduce(
+                    (totalAmount, item) => totalAmount + item.amount,
+                    0
+                  )}
+                .00
+              </p>
+            </div>
           </div>
-          <div id="clearAllButtonContainer">
-            <p
-              onClick={clearAllData}
-              className="mr-4 cursor-pointer bg-user-navbarSignBg hover:bg-user-bgCheckout px-4 py-2 rounded-regBtnRadius text-admin-colorLogin flex items-center  mb-2"
-            >
-              <DeleteOutlineIcon /> clear all
-            </p>
-          </div>
+        </button>
+      </div>
+      <div
+        onClick={closeSingleMobilProduct}
+        className={`${style.modalNavMobilCommoHiddenClass} ${
+          openNavMobil && style.modalNavMobilCommonShowClass
+        } bg-gradient-to-r from-blue-500 to-transparent fixed bottom-[0px] w-full h-dvh`}
+      ></div>
+      <div
+        className={`${style.modalNavMobilClass} ${
+          openNavMobil && style.openNavMobilClass
+        }  `}
+      >
+        <div
+          onClick={closeSingleMobilProduct}
+          className="mt-2 p-2 font-bold text-admin-bgCheck1 flex items-center justify-center cursor-pointer "
+        >
+          <CloseIcon className="font-bold border rounded-btnRaduis" />
         </div>
-        {token ? (
-          <div className="overflow-y-auto h-[290px] mb-4">
+        {token && basketData.length > 0 ? (
+          <div className=" mb-4  max-lg:w-full max-lg:px-4 mt-6 ">
             {basketZustandData?.map((itemBasket: any, index: any) => (
-              <div key={index} className="flex justify-between px-4 pt-4 mt-3">
+              <div
+                key={index}
+                className="flex justify-between max-lg:justify-between max-lg:border-t-2 max-lg:border-admin-colorEacampLogo1   pt-4 mt-3"
+              >
                 {itemBasket && (
-                  <div className="flex">
+                  <div className="flex ">
                     <div>
                       {itemBasket.img_url && (
                         <img src={itemBasket.img_url} className="w-16" alt="" />
@@ -163,7 +181,7 @@ const RestuarantSingleBasket = () => {
             ))}
             <div className="bottom-0 w-5/6 ml-8">
               <button
-                onClick={addOrder}
+                onClick={openSingleMobilProduct}
                 className="bg-user-navbarSignBg mt-4 rounded-borderSlider p-3 w-full hover:bg-user-bgCheckout"
               >
                 <div className="flex justify-around items-center">
@@ -183,9 +201,9 @@ const RestuarantSingleBasket = () => {
             </div>
           </div>
         ) : (
-          <div className="flex justify-center items-center flex-col">
+          <div className="flex justify-center items-center flex-col  ">
             <div>
-              <img src="/images/emptyBasket.svg" alt="adas" />
+              <img src="/images/emptyBasket.svg" alt="#" />
             </div>
             <div>
               <p>
@@ -196,8 +214,8 @@ const RestuarantSingleBasket = () => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
-export default RestuarantSingleBasket;
+export default index;

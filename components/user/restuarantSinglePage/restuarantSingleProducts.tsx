@@ -1,4 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
+import SingleMobProduct from "../../../components/user/singleMobProduct/index";
 const RestuarantSingleProducts = ({ filteredProducts, addBasket }: any) => {
   return (
     <>
@@ -34,6 +35,9 @@ const RestuarantSingleProducts = ({ filteredProducts, addBasket }: any) => {
           </div>
         </div>
       ))}
+      <div className="hidden max-lg:block">
+        <SingleMobProduct />
+      </div>
     </>
   );
 };

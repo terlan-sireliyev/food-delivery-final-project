@@ -3,7 +3,7 @@ import Link from "next/link";
 const RestaurantSingleHeader = ({ dataSingle }: any) => {
   return (
     <>
-      <div>
+      <div className="">
         <div className="p-2">
           <img
             src={dataSingle?.img_url}
@@ -11,17 +11,21 @@ const RestaurantSingleHeader = ({ dataSingle }: any) => {
             className="cursor-pointer w-full h-48 object-contain border border-admin-inputBorder my-4"
           />
         </div>
-        <div className="flex justify-between items-center px-8">
-          <div>
-            <h1 className="font-bold text-left text-welcome">
+        <div
+          className="flex
+         justify-between items-center px-8 max-lg:px-[6px]
+         max-lg:flex-col "
+        >
+          <div className=" max-lg:w-[100%]  max-lg:mt-[6px] ">
+            <h1 className="font-bold text-left  text-welcome">
               {dataSingle?.name}
             </h1>
-            <h2 className="text-admin-inputBorder text-left">
+            <h2 className="text-admin-inputBorder text-left max-lg:ml-[3px]">
               {dataSingle?.address}
             </h2>
           </div>
-          <div className="flex justify-between items-center">
-            <div className="ml-4 mr-4">
+          <div className="flex justify-between items-center  max-lg:mt-[12px]  max-lg:w-[100%]">
+            <div className="ml-4 mr-4 max-lg:ml-[3px]">
               <h1 className="text-left text-admin-inputBorder font-bold ">
                 Cuisine
               </h1>
