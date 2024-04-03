@@ -6,7 +6,7 @@ import axios from "axios";
 import PaginationOutlined from "../../../components/admin/materialUiPagination/index";
 import EditProduct from "../../../components/admin/editProduct/index";
 
-export default function Index({ productDatas, setForm, form }: any) {
+export default function Index({ productDatas }: any) {
   const {
     message,
     result: { data },
@@ -14,10 +14,21 @@ export default function Index({ productDatas, setForm, form }: any) {
   const [productPagination, setProductPagination] = useState(
     productDatas.result.data
   );
+  // console.log(form);
+
 
   const [isActive, setIsActive] = useState(false);
 
   const [editForm, setEditForm] = useState({
+    id: "",
+    name: "",
+    description: "",
+    img_url: "",
+    rest_id: "",
+    price: 0,
+  });
+
+  const [form, setForm] = useState({
     id: "",
     name: "",
     description: "",
@@ -50,7 +61,7 @@ export default function Index({ productDatas, setForm, form }: any) {
   };
   console.log("editform", editForm);
 
-  const updateBtn = async (e: any) => {
+  const updateProducts = async (e: any) => {
     e.preventDefault();
     try {
       setIsActive(false);
@@ -96,14 +107,14 @@ export default function Index({ productDatas, setForm, form }: any) {
       </div>
       <div className="flex flex-wrap  absolute top-[10px] left-0 justify-between w-5/6 m-auto mt-4">
         <EditProduct
-          updateBtn={updateBtn}
+          updateProducts={updateProducts}
           setForm={setForm}
           form={form}
           setEditForm={setEditForm}
           editForm={editForm}
           setIsActive={setIsActive}
           isActive={isActive}
-          // updateBtn={updateBtn}
+        // updateBtn={updateBtn}
         />
       </div>
     </>

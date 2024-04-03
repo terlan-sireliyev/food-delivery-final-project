@@ -7,6 +7,7 @@ import axios from "axios";
 import OpenMenuLang from "../openMenuLang/index";
 import DropDownMenu from "../DropdownMenu";
 import EditProduct from "../editProduct/index";
+import Product from '../../../pages/admin/products/index'
 import Link from "next/link";
 const index = () => {
   const [dataProduct, setDataProduct] = useState([]);
@@ -71,8 +72,8 @@ const index = () => {
 
   return (
     <div className=" ">
-      {/* <EditProduct setForm={setForm} form={form} /> */}
-
+      <EditProduct setForm={setForm} form={form} />
+      {/* <Product setForm={setForm} form={form} /> */}
       <div className="flex p-2 justify-between items-center bg-admin-navbarBG rounded-b-lg">
         <div className="mt-2 ml-4">
           <Link href="/admin/dashboard">
@@ -92,9 +93,8 @@ const index = () => {
             <div
               style={{ width: "50vw", height: "100vh" }}
               ref={ref}
-              className={`${style.modal} ${
-                open && style.open
-              } bg-admin-openMenu1 overflow-auto`}
+              className={`${style.modal} ${open && style.open
+                } bg-admin-openMenu1 overflow-auto`}
             >
               <form action="#">
                 <div className="flex justify-between p-5 ">

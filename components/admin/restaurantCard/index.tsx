@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-const index = ({ id, name, cuisine, img_url, category_id }: any) => {
+import EditRestuarant from '../editRestuarant/index'
+import EditIcon from "@mui/icons-material/Edit";
+
+const index = ({ id, name, cuisine, img_url, setForm }: any) => {
+  
   const deletRestauarant = () => {
     axios
       .delete(`http://localhost:3000/api/restuarants/${id}`)
@@ -13,6 +17,57 @@ const index = ({ id, name, cuisine, img_url, category_id }: any) => {
       .catch((err) => {
         alert("Silinmedi");
       });
+  };
+
+  const [isActive, setIsActive] = useState(false);
+
+  const [editForm, setEditForm] = useState({
+    id: "",
+    name: "",
+    category_id: "",
+    img_url: "",
+    cuisine: "",
+    address: "",
+    delivery_min: 0,
+    delivery_price: 0
+  });
+
+  const handleEdit = async (itemId: any) => {
+    setIsActive(!isActive);
+
+    try {
+      const response = await axios.get(`http://localhost:3000/api/restuarants/${itemId}`);
+      const { data } = response.data.result;
+      const { name, category_id, img_url, cuisine, address, delivery_min, delivery_price } = data;
+
+      setEditForm({
+        id: itemId,
+        name,
+        category_id,
+        img_url,
+        cuisine,
+        address,
+        delivery_min,
+        delivery_price
+      });
+    } catch (error) {
+      console.error("Error fetching restaurant:", error);
+    }
+  };
+
+  const updateBtn = async (e: any) => {
+    e.preventDefault();
+    setIsActive(false);
+
+    try {
+      const { id, ...rest } = editForm;
+      const response = await axios.put(`http://localhost:3000/api/restuarants/${id}`, rest);
+      console.log(response.data.data);
+      // Optionally, update the form state if necessary
+      setForm(response.data.data);
+    } catch (error) {
+      console.error("Error updating restaurant:", error);
+    }
   };
   return (
     <>
@@ -32,8 +87,10 @@ const index = ({ id, name, cuisine, img_url, category_id }: any) => {
             {cuisine.split(" ")[0]}
           </div>
         </div>
-        {/* <div>{category_id}</div> */}
         <div>
+          <button onClick={() => handleEdit(id)}>
+            <EditIcon />
+          </button>
           <button className="mr-2 mt-3 px-3">
             <FontAwesomeIcon
               onClick={deletRestauarant}
@@ -41,6 +98,16 @@ const index = ({ id, name, cuisine, img_url, category_id }: any) => {
               className="text-admin-inProductTrashBack"
             />
           </button>
+        </div>
+        <div className="flex flex-wrap  absolute top-[0px] left-[10%] z-20 justify-between w-5/6 m-auto mt-4">
+          <EditRestuarant
+            updateBtn={updateBtn}
+            setForm={setForm}
+            editForm={editForm}
+            setEditForm={setEditForm}
+            setIsActive={setIsActive}
+            isActive={isActive}
+          />
         </div>
       </div>
     </>
