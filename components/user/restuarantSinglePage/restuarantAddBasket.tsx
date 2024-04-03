@@ -18,7 +18,10 @@ interface Item {
 const RestuarantSingleBasket = () => {
   const router = useRouter();
   const [basketZustandData, setBasketZustandData] = useState<Item[]>([]);
+  const access_token = localStorage.getItem("access_token");
   const {
+    basketDataAll,
+    setBasketFetchAllData,
     basketData,
     setBasketFetchData,
     incrementApiCount,
@@ -27,12 +30,31 @@ const RestuarantSingleBasket = () => {
   } = useBasketFetch();
   useEffect(() => {
     setBasketFetchData();
+    setBasketFetchAllData();
   }, []);
-
   useEffect(() => {
     setBasketZustandData(basketData);
   }, [basketData]);
-
+  //Удаляем товары из корзины
+  const deleteOrder = (item: any) => {
+    axios
+      .delete("http://localhost:3000/api/basket/delete", {
+        data: { product_id: item.id },
+        headers: { Authorization: `Bearer ${access_token}` },
+      })
+      .then((result) => { setBasketFetchData(result.data.items); })
+      .catch((err) => {console.error("Error decrementing item count in basket:", err);});
+  };
+  //удалить все данные из корзины
+  const clearAllData = () => {
+    axios
+      .delete("http://localhost:3000/api/basket/clear", {
+        headers: { Authorization: `Bearer ${access_token}` },
+        data: { basket_id: basketDataAll.id },
+      })
+      .then(() => {clearBasket(); })
+      .catch((err) => { console.error("Error clearing basket:", err);});
+  };
   const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
@@ -73,35 +95,6 @@ const RestuarantSingleBasket = () => {
       })
       .catch((err) => {
         console.error("Error decrementing item count in basket:", err);
-      });
-  };
-  //Удаляем товары из корзины
-  const deleteOrder = (item: any) => {
-    const access_token = localStorage.getItem("access_token");
-    axios
-      .delete("http://localhost:3000/api/basket/delete", {
-        data: { product_id: item.id },
-        headers: { Authorization: `Bearer ${access_token}` },
-      })
-      .then((result) => {
-        setBasketFetchData(result.data.items);
-      })
-      .catch((err) => {
-        console.error("Error decrementing item count in basket:", err);
-      });
-  };
-
-  const clearAllData = () => {
-    const access_token = localStorage.getItem("access_token");
-    axios
-      .delete("http://localhost:3000/api/basket/clear", {
-        headers: { Authorization: `Bearer ${access_token}` },
-      })
-      .then(() => {
-        clearBasket();
-      })
-      .catch((err) => {
-        console.error("Error clearing basket:", err);
       });
   };
 

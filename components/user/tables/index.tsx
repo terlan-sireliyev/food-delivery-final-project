@@ -72,7 +72,7 @@ const index = ({
                     </p>
                     {orderActionOpenMenu === orderIndex && (
                       <>
-                        <div className=" bg-admin-colorLogin cursor-pointer border-[1px] w-1/2 border-admin-colorEacampLogo1 fixed rounded-regBtnRadius z-[20] p-2">
+                        <div className=" bg-admin-colorLogin cursor-pointer border-[1px] w-1/2  max-lg:w-[20%] border-admin-colorEacampLogo1 fixed max-lg:right-[0px] rounded-regBtnRadius z-[20] p-2">
                           <div className="p-2">
                             <button
                               onClick={() => showOrderClick(orderIndex)}
@@ -82,7 +82,7 @@ const index = ({
                             </button>
                           </div>
                           {showOrder === orderIndex && (
-                            <div className="bg-admin-colorLogin overflow-y-auto h-[290px]    fixed left-[27%] border-[1px] border-admin-colorEacampLogo1  top-[100px] w-1/2">
+                            <div className="bg-admin-colorLogin   overflow-y-auto h-[290px]    fixed left-[27%] border-[1px] border-admin-colorEacampLogo1  top-[100px] w-1/2  max-lg:w-[99%]  max-lg:left-[3px]">
                               <div className="bg-admin-bgCheck relative">
                                 <div className="p-3 flex justify-center items-center">
                                   <div

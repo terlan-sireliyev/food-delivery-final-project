@@ -5,7 +5,7 @@ import axios from "axios";
 import SliderComp from "../components/user/slider/slider";
 import FeaturesComp from "../components/user/features/features";
 import NewFoods from "../components/user/newFoods/newFoods";
-import Menu1 from "../components/user/menu1/menu1";
+import Menu1 from "../components/user/newFoods/menu1/menu1";
 import Menu2 from "../components/user/menu2/menu2";
 import { render } from "react-dom";
 const Home: NextPage = () => {

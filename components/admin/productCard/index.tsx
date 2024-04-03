@@ -2,8 +2,19 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import EditIcon from "@mui/icons-material/Edit";
 
-const index = ({ id, img_url, name, price, restuarant }: any) => {
+const index = ({
+  id,
+  img_url,
+  name,
+  price,
+  restuarant,
+  editProduct,
+  setEditForm,
+  editForm,
+  des,
+}: any) => {
   const deletClick = () => {
     axios
       .delete(`http://localhost:3000/api/products/${id}`)
@@ -20,27 +31,32 @@ const index = ({ id, img_url, name, price, restuarant }: any) => {
         <div className=" m-auto p-2 h-48 w-48 ">
           <img
             src={img_url}
-            alt="Have yor error"
+            alt="Product"
             className="w-full h-full m-auto object-contain"
           />
         </div>
         <div className="ml-2">
           <h3 className="group-hover:text-admin-colorLogin ">{name}</h3>
           <h2 className="group-hover:text-admin-colorLogin text-admin-inputBorder">
-            {restuarant}
+            {des}
           </h2>
         </div>
         <div className="mx-2 my-2 flex justify-between">
           <p className="group-hover:text-admin-colorLogin text-admin-inProductproPrice  text-productSize mt-2">
             ${price} Azn
           </p>
-          <button className="mr-2">
-            <FontAwesomeIcon
-              onClick={() => deletClick()}
-              icon={faTrashAlt}
-              className="text-admin-inProductTrashBack"
-            />
-          </button>
+          <div>
+            <button className="mr-2" onClick={() => editProduct(id)}>
+              <EditIcon />
+            </button>
+            <button className="mr-2">
+              <FontAwesomeIcon
+                onClick={() => deletClick()}
+                icon={faTrashAlt}
+                className="text-admin-inProductTrashBack"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </>

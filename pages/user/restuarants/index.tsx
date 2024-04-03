@@ -37,7 +37,7 @@ interface IndexProps {
 const Index: React.FC<IndexProps> = ({ AllCategory }) => {
   const { query } = useRouter();
   const [restuarantCard, setRestuarantCard] = useState<Restaurant[]>([]);
-
+  console.log("quer", query);
   useEffect(() => {
     axios
       .get("http://localhost:3000/api/restuarants")

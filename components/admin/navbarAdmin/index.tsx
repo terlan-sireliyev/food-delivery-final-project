@@ -6,6 +6,7 @@ import style from "../navbarAdmin/style.module.css";
 import axios from "axios";
 import OpenMenuLang from "../openMenuLang/index";
 import DropDownMenu from "../DropdownMenu";
+import EditProduct from "../editProduct/index";
 import Link from "next/link";
 const index = () => {
   const [dataProduct, setDataProduct] = useState([]);
@@ -70,6 +71,8 @@ const index = () => {
 
   return (
     <div className=" ">
+      {/* <EditProduct setForm={setForm} form={form} /> */}
+
       <div className="flex p-2 justify-between items-center bg-admin-navbarBG rounded-b-lg">
         <div className="mt-2 ml-4">
           <Link href="/admin/dashboard">

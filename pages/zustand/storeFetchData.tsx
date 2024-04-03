@@ -2,6 +2,8 @@ import axios from "axios";
 import { create } from "zustand";
 export const useBasketFetch = create<any>((set: any) => ({
   basketData: [],
+  basketDataAll: [],
+  //здесь мы получаем содержимое данных
   setBasketFetchData: async () => {
     const access_token = localStorage.getItem("access_token");
     try {
@@ -9,6 +11,16 @@ export const useBasketFetch = create<any>((set: any) => ({
         headers: { Authorization: `Bearer ${access_token}` },
       });
       set({ basketData: dataFetch.data.result.data.items });
+    } catch (error) {}
+  },
+  //здесь мы получаем сами данные
+  setBasketFetchAllData: async () => {
+    const access_token = localStorage.getItem("access_token");
+    try {
+      const dataFetchAll = await axios.get("http://localhost:3000/api/basket", {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      set({ basketDataAll: dataFetchAll.data.result.data });
     } catch (error) {
       console.log("yalnis var ");
     }
@@ -42,6 +54,6 @@ export const useBasketFetch = create<any>((set: any) => ({
       }
       return state;
     }),
-
+  //здесь мы удаляем все данные
   clearBasket: () => set({ basketData: [] }),
 }));

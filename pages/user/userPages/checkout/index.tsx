@@ -67,8 +67,8 @@ const index = () => {
   return (
     <div>
       <UserProfileLayout>
-        <div className="flex gap-2">
-          <div className="w-3/5 bg-user-navbarBGColor">
+        <div className="flex gap-2  max-lg:flex-col-reverse ">
+          <div className="w-3/5 max-lg:w-full bg-user-navbarBGColor">
             <label
               className="text-left mt-4  font-bold w-96 mx-auto block "
               htmlFor=""
@@ -120,7 +120,7 @@ const index = () => {
               Save
             </button>
           </div>
-          <div className="relative w-2/5 bg-user-navbarBGColor">
+          <div className="relative w-2/5 max-md:h-[auto] max-lg:w-full bg-user-navbarBGColor">
             <h1 className="mt-4 font-bold text-user-inSlider">Your Order</h1>
             {checkOut &&
               checkOut.map((item: any) => (
@@ -137,10 +137,12 @@ const index = () => {
                 </div>
               ))}
             <div>
-              <div className="absolute bottom-0 p-4">
+              <div className="absolute bottom-0 p-4 max-lg:relative">
                 <div className="flex my-2">
                   <p className="ml-2 font-bold text-user-inSlider">Total</p>
-                  <p className="fixed right-4">${totalAmount}</p>
+                  <p className="fixed max-lg:absolute right-4">
+                    ${totalAmount}
+                  </p>
                 </div>
               </div>
             </div>

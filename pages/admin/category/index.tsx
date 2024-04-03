@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import PageHeader from "../../../components/admin/pageHeader/index";
+import EditIcon from "@mui/icons-material/Edit";
 import style from "./category.module.css";
 import { FileUploader } from "../../../components/admin/FileUploader/index";
 import Head from "next/head";
@@ -16,19 +17,14 @@ import axios from "axios";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { columnsSecond } from "../../../components/admin/materialUI";
-
+import CategoryForm from "./categoryForm";
+import EditCategory from "../../../components/admin/editCategory/index";
 interface Category {
   id: string;
   img_url: string;
   name: string;
   slug: string;
 }
-// interface AllCategoryResponse {
-//   message: string;
-//   result: {
-//     data: Category[];
-//   };
-// }
 
 const Index = ({ AllCategory }: any) => {
   const {
@@ -106,6 +102,49 @@ const Index = ({ AllCategory }: any) => {
     setOpen((prev) => true);
   };
 
+  const [isActive, setIsActive] = useState(false);
+  const [editForm, setEditForm] = useState({
+    id: "",
+    name: "",
+    slug: "",
+    img_url: "",
+  });
+
+  const handleEdit = async (categoryId: string) => {
+    setIsActive(!isActive);
+
+    await axios
+      .get(`http://localhost:3000/api/category/${categoryId}`)
+      .then((res) => {
+        const { name, slug, img_url } = res.data.result.data;
+        setEditForm({
+          id: categoryId,
+          name: name,
+          slug: slug,
+          img_url: img_url,
+        });
+      })
+      .catch((err) => {
+        console.error("Error fetching offer:", err);
+        alert("Silinmedi");
+      });
+  };
+
+  const updateBtn = async (e: any) => {
+    e.preventDefault();
+    setIsActive(false);
+    // const access_token = localStorage.getItem("access_token");
+    try {
+      const { id, ...rest } = editForm;
+      const response = await axios.put(
+        `http://localhost:3000/api/category/${id}`,
+        rest
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <>
       <Head>
@@ -118,51 +157,23 @@ const Index = ({ AllCategory }: any) => {
         >
           Add Category
         </button>
+
         <div
           style={{ width: "50vw", height: "100vh" }}
           ref={ref}
           className={`${style.modal} ${
             open && style.open
-          } z-50 bg-admin-openMenu1 `}
+          } z-50 bg-admin-openMenu1 overflow-auto`}
         >
-          <form action="#">
-            <div className="flex justify-between p-5 ">
-              <div>
-                <h5 className="text-labelOpenMenu text-admin-colorEacampLogo2">
-                  Upload your img
-                </h5>
-                <div className="mt-4 w-32">
-                  <img src={form.img_url} className="w-full" />
-                </div>
-              </div>
-              <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">
-                <FileUploader setForm={setForm} />
-              </div>
-            </div>
-            <div className="flex justify-between p-5 ">
-              <h5 className="text-labelOpenMenu w-1/2 text-admin-colorEacampLogo2 text-left">
-                Add your description and necessary information
-              </h5>
-              <div className="bg-admin-openMenu2 w-1/2 p-5 h-96 rounded text-right ">
-                <InputAdd textName="Name" name="name" setForm={setForm} />
-                <InputAdd textName="Slug" name="slug" setForm={setForm} />
-              </div>
-            </div>
-            <div className="bg-admin-TextCheck p-5 ">
-              <button
-                className="bg-admin-openMenu2 text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-                onClick={closeMenu}
-              >
-                Cancel
-              </button>
-              <button
-                onClick={addProducts}
-                className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
-              >
-                Add
-              </button>
-            </div>
-          </form>
+          <CategoryForm
+            addProducts={addProducts}
+            closeMenu={closeMenu}
+            open={open}
+            form={form}
+            setForm={setForm}
+            ref={ref}
+            add={"add"}
+          />
         </div>
       </PageHeader>
       <div className="flex flex-wrap justify-between w-5/6 m-auto mt-4">
@@ -192,27 +203,28 @@ const Index = ({ AllCategory }: any) => {
                         {columnsSecond.map((column, index) => {
                           const value = row[column.id];
                           return (
-                            <>
-                              <TableCell key={index} align={column.align}>
-                                {column.id === "img_url" ? (
-                                  <img
-                                    className="w-24 h-14 m-auto"
-                                    src={value}
-                                    alt="Table image"
-                                  />
-                                ) : column.id === "delete" ? (
+                            <TableCell key={index} align={column.align}>
+                              {column.id === "img_url" ? (
+                                <img
+                                  className="w-24 h-14 m-auto"
+                                  src={value}
+                                  alt="Table image"
+                                />
+                              ) : column.id === "edit" ? (
+                                <>
+                                  <Button onClick={() => handleEdit(row.id)}>
+                                    <EditIcon />
+                                  </Button>
                                   <Button
-                                    onClick={() => {
-                                      deleteCategory(row.id);
-                                    }}
+                                    onClick={() => deleteCategory(row.id)}
                                   >
                                     <DeleteIcon />
                                   </Button>
-                                ) : (
-                                  value
-                                )}
-                              </TableCell>
-                            </>
+                                </>
+                              ) : (
+                                value
+                              )}
+                            </TableCell>
                           );
                         })}
                       </TableRow>
@@ -231,6 +243,16 @@ const Index = ({ AllCategory }: any) => {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
+        <div className="flex flex-wrap  absolute top-[34px] left-[10%] justify-between w-5/6 m-auto mt-4 z-20 ">
+          <EditCategory
+            setForm={setForm}
+            updateBtn={updateBtn}
+            setEditForm={setEditForm}
+            editForm={editForm}
+            setIsActive={setIsActive}
+            isActive={isActive}
+          />
+        </div>
       </div>
     </>
   );

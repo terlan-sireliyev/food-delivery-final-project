@@ -3,12 +3,11 @@ const index = ({ textName, type = "text", setForm, name }: any) => {
   const changeFucn = (e: any) => {
     const { name, value } = e.target;
 
-    setForm((prevInpVal: any) => (
-      {
-        ...prevInpVal,
-        [name]: value,
-      }));
-  }
+    setForm((prevInpVal: any) => ({
+      ...prevInpVal,
+      [name]: value,
+    }));
+  };
   return (
     <>
       <div className="text-left ">

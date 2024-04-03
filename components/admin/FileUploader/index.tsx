@@ -3,22 +3,31 @@ import style from "./style.module.css";
 import { fileStorage } from "../../../server/configs/firebase";
 import { getDownloadURL, uploadBytes, ref } from "firebase/storage";
 import { v4 } from "uuid";
-export const FileUploader = ({ setForm }: any) => {
+
+export const FileUploader = ({ setForm, setEditForm }: any) => {
   const hiddenFileInput = useRef<any>(null);
-  const handleClick = (event: any) => {
+
+  const handleClick = (e: any) => {
+    e.preventDefault();
     hiddenFileInput.current.click();
   };
-  /*firebase upload side start */
+
   const handleChange = async (event: any) => {
+    event.preventDefault();
     const file = event.target.files[0];
     const imageRef = ref(fileStorage, `images/${file.name + v4()}`);
-    uploadBytes(imageRef, file).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        setForm((prev: any) => ({ ...prev, img_url: url }));
-      });
-    });
+
+    try {
+      const snapshot = await uploadBytes(imageRef, file);
+      const url = await getDownloadURL(snapshot.ref);
+
+      setForm((prev: any) => ({ ...prev, img_url: url }));
+      setEditForm((prev: any) => ({ ...prev, img_url: url }));
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
   };
-  /*firebase upload side end */
+
   return (
     <>
       <button className={`${style.buttonUpload}`} onClick={handleClick}>

@@ -20,6 +20,7 @@ const index = () => {
   const [basketZustandData, setBasketZustandData] = useState<Item[]>([]);
   const router = useRouter();
   const {
+    basketDataAll,
     basketData,
     setBasketFetchData,
     incrementApiCount,
@@ -113,19 +114,17 @@ const index = () => {
     const access_token = localStorage.getItem("access_token");
     axios
       .delete("http://localhost:3000/api/basket/clear", {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
+        headers: { Authorization: `Bearer ${access_token}` },
+        data: { basket_id: basketDataAll.id },
       })
       .then(() => {
-        clearBasket(); // Clear the basket directly
-        alert("Success: Basket cleared");
+        clearBasket();
       })
       .catch((err) => {
         console.error("Error clearing basket:", err);
-        alert("Error: Unable to clear basket");
       });
   };
+
   return (
     <>
       <UserProfileLayout>
