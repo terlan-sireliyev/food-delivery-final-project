@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UserProfileLayout from "../../../../components/user/usersProfileLayout/userProfileLayout";
 import Link from "next/link";
-import { useBasketFetch } from "../../../zustand/storeFetchData";
+import useBasketFetch from "../../../zustand/storeFetchData";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import axios from "axios";

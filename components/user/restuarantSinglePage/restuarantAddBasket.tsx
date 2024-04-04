@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useBasketFetch } from "../../../pages/zustand/storeFetchData";
+import useBasketFetch from "../../../pages/zustand/storeFetchData";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import Link from "next/link";
@@ -42,8 +42,12 @@ const RestuarantSingleBasket = () => {
         data: { product_id: item.id },
         headers: { Authorization: `Bearer ${access_token}` },
       })
-      .then((result) => { setBasketFetchData(result.data.items); })
-      .catch((err) => {console.error("Error decrementing item count in basket:", err);});
+      .then((result) => {
+        setBasketFetchData(result.data.items);
+      })
+      .catch((err) => {
+        console.error("Error decrementing item count in basket:", err);
+      });
   };
   //удалить все данные из корзины
   const clearAllData = () => {
@@ -52,8 +56,12 @@ const RestuarantSingleBasket = () => {
         headers: { Authorization: `Bearer ${access_token}` },
         data: { basket_id: basketDataAll.id },
       })
-      .then(() => {clearBasket(); })
-      .catch((err) => { console.error("Error clearing basket:", err);});
+      .then(() => {
+        clearBasket();
+      })
+      .catch((err) => {
+        console.error("Error clearing basket:", err);
+      });
   };
   const [token, setToken] = useState<string | null>(null);
   useEffect(() => {

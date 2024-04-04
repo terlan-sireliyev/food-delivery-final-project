@@ -1,6 +1,6 @@
 import axios from "axios";
 import { create } from "zustand";
-export const useBasketFetch = create<any>((set: any) => ({
+const useBasketFetch = create<any>((set: any) => ({
   basketData: [],
   basketDataAll: [],
   //здесь мы получаем содержимое данных
@@ -57,3 +57,4 @@ export const useBasketFetch = create<any>((set: any) => ({
   //здесь мы удаляем все данные
   clearBasket: () => set({ basketData: [] }),
 }));
+export default useBasketFetch;

@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useBasket } from "../../zustand/store";
+import useBasket from "../../zustand/store";
 import RestaurantSingleHeader from "../../../components/user/restuarantSinglePage/restuarantSingleHeader";
 import RestuarantSingleProducts from "../../../components/user/restuarantSinglePage/restuarantSingleProducts";
 import RestuarantSingleBasket from "../../../components/user/restuarantSinglePage/restuarantAddBasket";
-import { useBasketFetch } from "../../zustand/storeFetchData";
+import useBasketFetch from "../../zustand/storeFetchData";
 import { useRouter } from "next/router";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

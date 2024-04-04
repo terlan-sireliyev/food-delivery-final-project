@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import style from "./styles.module.css";
-import { useBasketFetch } from "../../../pages/zustand/storeFetchData";
+import useBasketFetch from "../../../pages/zustand/storeFetchData";
 import { useRouter } from "next/router";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import CloseIcon from "@mui/icons-material/Close";

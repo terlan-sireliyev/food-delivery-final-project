@@ -1,7 +1,7 @@
 import axios from "axios";
 import { create } from "zustand";
 
-export const useBasket = create<any>((set: any) => ({
+const useBasket = create<any>((set: any) => ({
   basket: [] as { id: number; count: number }[],
   setBasket: (elements: any) => {
     set((state: any) => {
@@ -94,3 +94,4 @@ export const useBasket = create<any>((set: any) => ({
     });
   },
 }));
+export default useBasket;
