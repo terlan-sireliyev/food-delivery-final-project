@@ -19,7 +19,7 @@ const categoryForm = ({
             Upload your img
           </h5>
           <div className="mt-4 w-32">
-            <img src={form.img_url} className="w-full" />
+            <img src={form?.img_url} className="w-full" />
           </div>
         </div>
         <div className="bg-admin-openMenu2 p-5 rounded w-1/2 ">

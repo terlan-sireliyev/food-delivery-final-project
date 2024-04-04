@@ -10,23 +10,7 @@ const useBasket = create<any>((set: any) => ({
       };
     });
   },
-  // updateBasket: (newProduct: any) => {
-  //   set((state: any) => {
-  //     const currentProduct = state.basket.find(
-  //       (item:any) => item.id === newProduct.id
-  //     );
-  //     if (!currentProduct) {
-  //       return {
-  //         basket: [...state.basket, { ...newProduct, count: 1 }],
-  //       };
-  //     } else {
-  //       currentProduct.count += 1;
-  //       return {
-  //         basket: [...state.basket],
-  //       };
-  //     }
-  //   });
-  // },
+
   updateBasket: (newProduct: any) => {
     set((state: any) => {
       const findPro = state.basket.find(
@@ -81,12 +65,7 @@ const useBasket = create<any>((set: any) => ({
       const filterCard = state.basket.filter(
         (fil: any) => fil.id !== productId
       );
-      //  const filterCard= axios.delete(`http://localhost:3000/api/basket/delete}`).then((res) => {
-      //     console.log("silindi");
-      //   })
-      //   .catch((err) => {
-      //     alert("Silinmedi");
-      //   });
+
       return {
         ...state,
         basket: filterCard,
