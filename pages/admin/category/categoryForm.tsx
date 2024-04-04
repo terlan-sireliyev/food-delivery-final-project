@@ -9,7 +9,7 @@ const categoryForm = ({
   form,
   setForm,
   closeMenu,
-  addProducts,
+  addCategory,
 }: any) => {
   return (
     <form>
@@ -43,7 +43,7 @@ const categoryForm = ({
           Cancel
         </button>
         <button
-          onClick={addProducts}
+          onClick={addCategory}
           className="bg-admin-signBtnColor text-admin-TextCheck w-1/3 m-2 px-8 py-4 rounded"
         >
           {add}

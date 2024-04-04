@@ -31,7 +31,7 @@ const Index = ({ AllCategory }: any) => {
     slug: "",
   });
 
-  const addProducts = (e: any) => {
+  const addCategory = (e: any) => {
     e.preventDefault();
     axios
       .post("http://localhost:3000/api/category", {
@@ -142,7 +142,7 @@ const Index = ({ AllCategory }: any) => {
           } z-50 bg-admin-openMenu1 overflow-auto`}
         >
           <CategoryForm
-            addProducts={addProducts}
+            addCategory={addCategory}
             closeMenu={closeMenu}
             open={open}
             form={form}

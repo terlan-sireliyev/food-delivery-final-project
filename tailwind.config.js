@@ -73,6 +73,7 @@ module.exports = {
     },
     borderRadius: {
       borderSlider: "40px",
+      borderSliderCard: "15px",
       btnRaduis: "25px",
       iconsRadius: "50%",
       regBtnRadius: "5px",

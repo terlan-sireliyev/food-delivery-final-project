@@ -5,7 +5,7 @@ const Menu2 = () => {
       <div className="flex m-auto w-3/4  mt-24   max-lg:flex-col-reverse ">
         <div className="w-1/2 max-lg:w-full">
           <div className=" m-auto">
-            <div className="relative  w-[400px]   m-auto ">
+            <div className="relative  w-[400px] max-md:w-[360px]  m-auto ">
               <img
                 src="images/userImg/menus/g2.svg"
                 alt="Have your error"
