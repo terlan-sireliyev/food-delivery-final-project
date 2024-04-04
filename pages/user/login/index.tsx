@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import LoginForm from "../../../components/user/loginAndRegisterForm/loginForm";
 import { useRouter } from "next/router";
 const index = () => {
   const router = useRouter();
@@ -24,20 +27,35 @@ const index = () => {
       })
       .then((result) => {
         if (result.status === 200) {
+          toast("Sizin məlumatlar doğrudur");
+          setTimeout(() => {
+            router.push("/");
+          }, 3000);
           const {
             user: { access_token, refresh_token },
           } = result.data;
           localStorage.setItem("access_token", access_token);
           localStorage.setItem("refresh_token", refresh_token);
-          router.push("/");
         }
       })
       .catch((err: any) => {
-        console.log("Daxil ola bilmediniz!", err);
+        toast("Sizin email və ya parolunuz düzgün deyil ya da inputlar boşdur");
       });
   };
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex max-lg:flex-col-reverse mt-4 mb-4 ">
         <div className="flex max-lg:mt-12">
           <div className="relative flex max-lg:w-full  ">
@@ -53,7 +71,7 @@ const index = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col mx-auto">
+        <div className="flex flex-col mx-auto max-lg:mx-auto max-xl:ml-4">
           <div className="flex">
             <button className="hover:bg-user-navbarSignBgHover hover:text-admin-colorLogin mb-2 text-user-registerBtn px-6 py-2 rounded-regBtnRadius m-auto">
               <Link href="login">Login</Link>
@@ -62,28 +80,10 @@ const index = () => {
               <Link href="register">Register</Link>
             </button>
           </div>
-          <div className="flex flex-col gap-4">
-            <input
-              type="text"
-              name="email"
-              onChange={onchangeLogin}
-              className="focus:outline-none w-96   border  border-admin-inputBorder p-2"
-              placeholder="email"
-            />
-            <input
-              name="password"
-              onChange={onchangeLogin}
-              type="password"
-              className="focus:outline-none w-96  border  border-admin-inputBorder p-2"
-              placeholder="password"
-            />
-            <button
-              onClick={loginHandler}
-              className="hover:bg-user-navbarSignBgHover  hover:text-admin-colorLogin bg-user-registerBtn p-2 rounded-regBtnRadius"
-            >
-              Log in
-            </button>
-          </div>
+          <LoginForm
+            onchangeLogin={onchangeLogin}
+            loginHandler={loginHandler}
+          />
         </div>
       </div>
     </>

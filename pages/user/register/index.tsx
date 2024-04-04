@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { toast } from "react-toastify";
 import axios from "axios";
+import LoginAndRegisterForm from "../../../components/user/loginAndRegisterForm/index";
 import { useRouter } from "next/router";
 const Index = () => {
-  //register
   const router = useRouter();
   const [form, setForm] = useState<{
     name: string;
@@ -27,11 +28,14 @@ const Index = () => {
       })
       .then((res) => {
         if (res.status === 201) {
-          router.push("login");
+          toast("Təbriklər qeydiyyatdan keçdiniz !");
+          setTimeout(() => {
+            router.push("login");
+          }, 2000);
         }
       })
       .catch((err) => {
-        console.log(err);
+        toast("Qeydiyyatınız alınmadı");
       });
   };
   return (
@@ -51,7 +55,7 @@ const Index = () => {
             />
           </div>
         </div>
-        <div className="flex flex-col mx-auto">
+        <div className="flex flex-col mx-auto max-lg:mx-auto max-xl:ml-4">
           <div className="flex">
             <button className="hover:bg-user-navbarSignBgHover hover:text-admin-colorLogin mb-2  px-6 py-2 rounded-regBtnRadius m-auto">
               <Link href="login">Login</Link>
@@ -60,42 +64,10 @@ const Index = () => {
               <Link href="register">Register</Link>
             </button>
           </div>
-          <div className="flex flex-col gap-4">
-            <input
-              type="text"
-              name="name"
-              onChange={changeFunc}
-              className="focus:outline-none w-96 border border-admin-inputBorder p-2"
-              placeholder="name"
-            />
-            <input
-              type="text"
-              name="username"
-              onChange={changeFunc}
-              className="focus:outline-none w-96 border border-admin-inputBorder p-2"
-              placeholder="username"
-            />
-            <input
-              type="email"
-              name="email"
-              onChange={changeFunc}
-              className="focus:outline-none w-96 border border-admin-inputBorder p-2"
-              placeholder="email"
-            />
-            <input
-              type="password"
-              name="password"
-              onChange={changeFunc}
-              className="focus:outline-none w-96 border border-admin-inputBorder p-2"
-              placeholder="password"
-            />
-            <button
-              onClick={registerHandler}
-              className="hover:bg-user-navbarSignBgHover  hover:text-admin-colorLogin bg-user-registerBtn p-2 rounded-regBtnRadius"
-            >
-              Register
-            </button>
-          </div>
+          <LoginAndRegisterForm
+            registerHandler={registerHandler}
+            changeFunc={changeFunc}
+          />
         </div>
       </div>
     </>

@@ -6,7 +6,8 @@ import RestuarantSingleProducts from "../../../components/user/restuarantSingleP
 import RestuarantSingleBasket from "../../../components/user/restuarantSinglePage/restuarantAddBasket";
 import { useBasketFetch } from "../../zustand/storeFetchData";
 import { useRouter } from "next/router";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface Restaurant {
   name: string;
   img_url: string;
@@ -52,7 +53,10 @@ const SingleRestaurant = () => {
     updateBasket(id);
     const access_token = localStorage.getItem("access_token");
     if (!access_token) {
-      alert("siz login olmamisiniz");
+      toast.error(
+        "Səbətə məhsul əlavə etmək istəyirsinizsə o zaman şəxsi kabinetinizi yaradın!"
+      );
+    } else {
     }
     axios
       .post(
@@ -62,13 +66,37 @@ const SingleRestaurant = () => {
       )
       .then((result) => {
         setBasketFetchData(result.data.items);
+        result.data.items.forEach((el: any) => {
+          toast.success(`Uğurla ${el.name} adlı product əlavə edildi`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+        });
       })
       .catch((err) => {
-        console.error("Error adding item to basket:", err);
+        // toast("Qeydiyyatınız alınmadı");
       });
   };
   return (
     <>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div>
         <RestaurantSingleHeader dataSingle={data} />
       </div>
@@ -79,6 +107,7 @@ const SingleRestaurant = () => {
             addBasket={addBasket}
           />
         </div>
+
         <RestuarantSingleBasket />
       </div>
     </>

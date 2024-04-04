@@ -1,24 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import PageHeader from "../../../components/admin/pageHeader/index";
-import EditIcon from "@mui/icons-material/Edit";
 import style from "./category.module.css";
 import { FileUploader } from "../../../components/admin/FileUploader/index";
 import Head from "next/head";
 import InputAdd from "../../../components/admin/inputAdd/index";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import axios from "axios";
-import { Button } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { columnsSecond } from "../../../components/admin/materialUI";
+import TableCategory from "../../../components/admin/tableCategory/index";
 import CategoryForm from "./categoryForm";
 import EditCategory from "../../../components/admin/editCategory/index";
+import axios from "axios";
 interface Category {
   id: string;
   img_url: string;
@@ -32,8 +21,6 @@ const Index = ({ AllCategory }: any) => {
     result: { data },
   } = AllCategory;
 
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const [page, setPage] = useState<number>(0);
   const [form, setForm] = useState<{
     img_url: string;
     name: string;
@@ -73,17 +60,6 @@ const Index = ({ AllCategory }: any) => {
   const closeMenu = () => {
     setOpen(false);
   };
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-  //  end table
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -177,72 +153,11 @@ const Index = ({ AllCategory }: any) => {
         </div>
       </PageHeader>
       <div className="flex flex-wrap justify-between w-5/6 m-auto mt-4">
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columnsSecond.map((column, index) => (
-                    <TableCell
-                      className="font-bold"
-                      key={index}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {data
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  ?.map((row: any, index: number) => {
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                        {columnsSecond.map((column, index) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell key={index} align={column.align}>
-                              {column.id === "img_url" ? (
-                                <img
-                                  className="w-24 h-14 m-auto"
-                                  src={value}
-                                  alt="Table image"
-                                />
-                              ) : column.id === "edit" ? (
-                                <>
-                                  <Button onClick={() => handleEdit(row.id)}>
-                                    <EditIcon />
-                                  </Button>
-                                  <Button
-                                    onClick={() => deleteCategory(row.id)}
-                                  >
-                                    <DeleteIcon />
-                                  </Button>
-                                </>
-                              ) : (
-                                value
-                              )}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={data.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Paper>
+        <TableCategory
+          data={data}
+          deleteCategory={deleteCategory}
+          handleEdit={handleEdit}
+        />
         <div className="flex flex-wrap  absolute top-[34px] left-[10%] justify-between w-5/6 m-auto mt-4 z-20 ">
           <EditCategory
             setForm={setForm}
