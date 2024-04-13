@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import UserProfileLayout from "../../../../components/user/usersProfileLayout/userProfileLayout";
-import Link from "next/link";
 import UserInputAdd from "../../../../components/user/userInputAdd/index";
 import { FileUploader } from "../../../../components/admin/FileUploader";
 const index = () => {

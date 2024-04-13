@@ -4,7 +4,6 @@ import PageHeader from "../../../components/admin/pageHeader/index";
 import style from "./restaurant.module.css";
 import Head from "next/head";
 import axios from "axios";
-import { v4 } from "uuid";
 import PaginationOutlined from "../../../components/admin/materialUiPagination/index";
 import RestuarantForm from "../../../components/admin/restuarantForm/index";
 export default function index({ categoryDatas, restuarantDatas }: any) {
