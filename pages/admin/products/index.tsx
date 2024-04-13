@@ -14,11 +14,7 @@ export default function Index({ productDatas }: any) {
   const [productPagination, setProductPagination] = useState(
     productDatas.result.data
   );
-  // console.log(form);
-
-
   const [isActive, setIsActive] = useState(false);
-
   const [editForm, setEditForm] = useState({
     id: "",
     name: "",
@@ -55,11 +51,9 @@ export default function Index({ productDatas }: any) {
         price: price,
       });
     } catch (err) {
-      console.error("Error fetching offer:", err);
       alert("Silinmedi");
     }
   };
-  console.log("editform", editForm);
 
   const updateProducts = async (e: any) => {
     e.preventDefault();
@@ -70,9 +64,8 @@ export default function Index({ productDatas }: any) {
         `http://localhost:3000/api/products/${id}`,
         rest
       );
-      console.log(response.data);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
   return (
@@ -114,7 +107,6 @@ export default function Index({ productDatas }: any) {
           editForm={editForm}
           setIsActive={setIsActive}
           isActive={isActive}
-        // updateBtn={updateBtn}
         />
       </div>
     </>

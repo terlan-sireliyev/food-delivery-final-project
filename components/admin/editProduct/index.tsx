@@ -14,18 +14,17 @@ const Index = ({
   isActive,
   setIsActive,
 }: any) => {
-
   const closeOfferEdit = () => {
     setIsActive(false);
   };
   console.log("formEditComp", form);
 
-
   return (
     <>
       <div
-        className={`bg-admin-colorLogin m-auto my-4 w-3/4 border-4 border-admin-colorEacampLogo1 ${isActive ? style.actice : style.disNone
-          }`}
+        className={`bg-admin-colorLogin m-auto my-4 w-3/4 border-4 border-admin-colorEacampLogo1 ${
+          isActive ? style.actice : style.disNone
+        }`}
       >
         <div className="p-3 flex justify-center items-center">
           <div
