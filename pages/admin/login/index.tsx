@@ -27,8 +27,8 @@ const Login: React.FC = () => {
     //   localStorage.setItem("username", "terlan");
     //   localStorage.setItem("password", "terlan123");
     // }
-    inpUsernameRef.current?.value === ""
-    inpPasswordRef.current?.value === ""
+    inpUsernameRef.current?.value === "";
+    inpPasswordRef.current?.value === "";
   }, []);
 
   const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
