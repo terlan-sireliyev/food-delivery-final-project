@@ -1,3 +1,24 @@
+// "use client";
+// import { useState, useEffect } from "react";
+// import azLang from "../../../translations/az.json";
+// import enLang from "../../../translations/en.json";
+// import { useRouter } from "next/router";
+// const [lang, setLang] = useState(enLang);
+// const router = useRouter();
+// const YourComponent = () => {
+//   const [lang, setLang] = useState(enLang);
+//   const router = useRouter();
+
+//   useEffect(() => {
+//     if (router.locale === "az") {
+//       setLang(azLang);
+//     } else if (router.locale === "en") {
+//       setLang(enLang);
+//     }
+//   }, [router.locale]);
+
+//  };
+
 export const userNavbarLinks = [
   {
     id: 1,

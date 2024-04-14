@@ -6,6 +6,7 @@ import AdminLayout from "../components/admin/adminLayout";
 import RegNavbarComp from "../components/user/registerLayout/registerLayout";
 import UserLayout from "../components/user/userLayout/UserLayout";
 import "../styles/globals.css";
+
 import isAuth from "./isAuth";
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();

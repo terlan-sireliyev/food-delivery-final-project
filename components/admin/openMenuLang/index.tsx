@@ -1,16 +1,33 @@
+// Index.tsx
 import React from "react";
 import { useState } from "react";
 import style from "./style.module.css";
 import Image from "next/image";
+// import useLangStore from "../../../pages/zustand/zustandLang";
+import { useRouter } from "next/router";
+// Define an interface for the Zustand store
+// interface LangChangeStore {
+//   langValue: (language: any) => void;
+//   selectedLanguage: string; // Change the type to string
+// }
 
-const index = () => {
+const Index = () => {
+  // Explicitly specify the type of langChange
+  // const { setSelectedLanguage, getSelectedLanguage } = useLangStore();
   const [openLang, setOpenLang] = useState(false);
+  const router = useRouter();
   const openMenuLang = () => {
     setOpenLang(!openLang);
   };
+
   const commonClose = () => {
     setOpenLang(false);
   };
+
+  // const handleLanguageChange = (language) => {
+  //   setSelectedLanguage(language); // Update the selected language
+  //   console.log("Selected Language:", getSelectedLanguage()); // Log the updated language
+  // };
   return (
     <>
       <div
@@ -23,7 +40,7 @@ const index = () => {
           src="/images/langEn.svg"
           width={40}
           height={40}
-          alt="Picture of the author"
+          alt="English"
         />
         <div
           style={{ width: "85px", height: "150px" }}
@@ -32,28 +49,37 @@ const index = () => {
           } bg-admin-openMenu1 `}
         >
           <ul className="z-40">
-            <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
+            <li
+              className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
+              // onClick={() => handleLanguageChange("en")}
+            >
               <Image
                 src="/images/abs.svg"
                 width={40}
                 height={40}
-                alt="Picture of the author"
+                alt="English"
               />
             </li>
-            <li className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder">
+            <li
+              className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
+              // onClick={() => handleLanguageChange("ru")}
+            >
               <Image
                 src="/images/ru.svg"
                 width={40}
                 height={40}
-                alt="Picture of the author"
+                alt="Russian"
               />
             </li>
-            <li className="bg-admin-colorLogin p-3 rounded-b-lg hover:bg-admin-inputBorder">
+            <li
+              className="bg-admin-colorLogin p-3 rounded-b-lg hover:bg-admin-inputBorder"
+              // onClick={() => handleLanguageChange("az")}
+            >
               <Image
                 src="/images/az.svg"
                 width={40}
                 height={40}
-                alt="Picture of the author"
+                alt="Azerbaijani"
               />
             </li>
           </ul>
@@ -63,4 +89,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
