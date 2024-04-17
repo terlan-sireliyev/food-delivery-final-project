@@ -6,7 +6,7 @@ const RestuarantNavbar = ({ img_url, name, category_id }: any) => {
 
   return (
     <>
-      <nav className="list-none mt-4 p-2  m-auto text-left">
+      <nav className="list-none mt-2 p-2 pl-[9px]  m-auto text-left">
         <Link
           href={`/user/restuarants?category=${category_id}`}
           className={`flex items-center  px-3 py-2  rounded-regBtnRadius  ${

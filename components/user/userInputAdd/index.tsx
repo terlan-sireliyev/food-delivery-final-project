@@ -26,7 +26,7 @@ const Index = ({
             onChange={changeFucn}
             type={type}
             placeholder={placeholder}
-            className=" p-4 mt-2 w-full rounded "
+            className=" p-4 mt-2 w-full rounded border border-admin-colorEacampLogo1 "
           />
         </div>
       </div>

@@ -59,11 +59,11 @@ const Index: React.FC<IndexProps> = ({ AllCategory }) => {
   return (
     <>
       <div className="flex mt-4 max-lg:flex-col">
-        <div className="w-1/6 max-lg:hidden bg-user-navbarBGColor ">
+        <div className="w-1/6 max-lg:hidden pl-[5px] bg-user-navbarBGColor ">
           <nav className="list-none w-full mt-4 p-2  text-left">
             <Link
               className={`text-user-navbarSignBg font-bold rounded-regBtnRadius px-3 py-2 ${
-                !query.category && "bg-user-LinkColor"
+                !query.category && "bg-user-LinkColor block"
               }`}
               href="/user/restuarants"
             >

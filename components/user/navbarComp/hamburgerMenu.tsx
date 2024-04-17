@@ -10,7 +10,7 @@ import axios from "axios";
 const HamburgerMenu = ({ openHamburger, HamburgerMenuBtnClose }: any) => {
   const { pathname } = useRouter();
   const [token, setToken] = useState<string | null>(null);
-  const [userData, setUserData] = useState<any>(null);
+  // const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
@@ -24,7 +24,7 @@ const HamburgerMenu = ({ openHamburger, HamburgerMenuBtnClose }: any) => {
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");
     axios
-      .get("http://localhost:3000/api/user",{
+      .get("http://localhost:3000/api/user", {
         headers: { Authorization: `Bearer ${access_token}` },
       })
       .then((res) => {

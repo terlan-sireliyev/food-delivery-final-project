@@ -9,7 +9,7 @@ const UserProfileLayout = ({ children }: any) => {
         </div>
 
         <div className="mx-2 w-[85%] max-sm:w-[98%] max-lg:w-[80%] max-md:w-full ">
-          <div className="text-center ">{children}</div>
+          <div className="text-center max-md:pl-2 ">{children}</div>
         </div>
       </div>
     </div>

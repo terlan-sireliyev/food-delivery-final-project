@@ -7,8 +7,8 @@ const index = () => {
     <>
       <div className="">
         <UserProfileLayout>
-          <h1 className="text-left text-size1 font-bold ml-4">Your profile</h1>
-          <div>
+          <h1 className="text-left text-size1 font-bold ">Your profile</h1>
+          <div className="border border-admin-colorEacampLogo1 mt-2 mb-4">
             <FileUploader className="w-full bg-admin-bgCheck1" />
           </div>
           <div className="grid grid-cols-2 gap-4 max-2xl:grid-cols-2">
@@ -19,7 +19,7 @@ const index = () => {
               placeholder="Full Name"
             />
             <UserInputAdd
-              type="number"
+              type="text"
               textName="User Name"
               name="User_Name"
               placeholder="User Name"

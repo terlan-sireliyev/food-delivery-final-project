@@ -3,8 +3,13 @@ import Link from "next/link";
 import { userProfileLink } from "./linksMockData";
 import { useRouter } from "next/router";
 import LogoutIcon from "@mui/icons-material/Logout";
+// import logiut from '../../../pages/user/login/index'
 const index = () => {
   const router = useRouter();
+  const logOut = () => {
+    localStorage.removeItem("access_token"); //здесь мы удаляем Токен
+    router.push("user/login");
+  };
   return (
     <>
       <div>
@@ -29,8 +34,10 @@ const index = () => {
         <Link href="./">
           <div className="p-2 mt-3 rounded">
             <div className="flex gap-2 ml-4">
-              <LogoutIcon />
-              <p>Logout</p>
+              <button onClick={logOut} className="flex">
+                <LogoutIcon />
+                <p>Logout</p>
+              </button>
             </div>
           </div>
         </Link>
