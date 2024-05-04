@@ -8,7 +8,7 @@ const index = () => {
   const router = useRouter();
   const logOut = () => {
     localStorage.removeItem("access_token"); //здесь мы удаляем Токен
-    router.push("user/login");
+    router.push("/user/login");
   };
   return (
     <>
@@ -31,16 +31,16 @@ const index = () => {
             </Link>
           );
         })}
-        <Link href="./">
+        <button>
           <div className="p-2 mt-3 rounded">
-            <div className="flex gap-2 ml-4">
+            <div className="flex gap-2 ml-[-20px]">
               <button onClick={logOut} className="flex">
                 <LogoutIcon />
                 <p>Logout</p>
               </button>
             </div>
           </div>
-        </Link>
+        </button>
       </div>
     </>
   );

@@ -27,9 +27,12 @@ const index = () => {
             </Link>
           );
         })}
-        <Link href="/admin" onClick={()=>{
-          removeAuth()
-        }}>
+        <Link
+          href="/admin"
+          onClick={() => {
+            removeAuth();
+          }}
+        >
           <div className="p-2 mt-3 rounded">
             <FontAwesomeIcon icon={faList} className="mr-2" />
             Logout

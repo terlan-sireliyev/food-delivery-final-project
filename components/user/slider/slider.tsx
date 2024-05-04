@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import style from "./slider.module.css";
 import { Link } from "@mui/material";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const SliderComp = ({ offerData }: any) => {
+  const { t } = useTranslation();
   interface Offer {
     id: number;
     name: string;
@@ -39,7 +41,7 @@ const SliderComp = ({ offerData }: any) => {
                 href="/user/register"
                 className=" text-admin-colorLogin font-bold  hover:bg-user-navbarSignBgHover transition duration-400 rounded-btnRaduis  w-1/2 bg-user-navbarSignBg p-4 "
               >
-                <button>Register</button>
+                <button>{t("register")}</button>
               </Link>
               <Link
                 href="/user/restuarants"

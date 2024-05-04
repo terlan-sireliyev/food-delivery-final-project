@@ -1,5 +1,6 @@
 import React from "react";
 const Menu2 = () => {
+  // const { t, i18n } = useTranslation();
   return (
     <>
       <div className="flex m-auto w-3/4  mt-24   max-lg:flex-col-reverse ">

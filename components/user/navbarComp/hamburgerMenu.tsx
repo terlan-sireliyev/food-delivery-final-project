@@ -10,7 +10,6 @@ import axios from "axios";
 const HamburgerMenu = ({ openHamburger, HamburgerMenuBtnClose }: any) => {
   const { pathname } = useRouter();
   const [token, setToken] = useState<string | null>(null);
-  // const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
     const access_token = localStorage.getItem("access_token");

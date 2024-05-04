@@ -5,6 +5,7 @@ import style from "./style.module.css";
 import Image from "next/image";
 // import useLangStore from "../../../pages/zustand/zustandLang";
 import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
 // Define an interface for the Zustand store
 // interface LangChangeStore {
 //   langValue: (language: any) => void;
@@ -12,8 +13,11 @@ import { useRouter } from "next/router";
 // }
 
 const Index = () => {
-  // Explicitly specify the type of langChange
-  // const { setSelectedLanguage, getSelectedLanguage } = useLangStore();
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (language: any) => {
+    i18n.changeLanguage(language);
+  };
+
   const [openLang, setOpenLang] = useState(false);
   const router = useRouter();
   const openMenuLang = () => {
@@ -24,10 +28,6 @@ const Index = () => {
     setOpenLang(false);
   };
 
-  // const handleLanguageChange = (language) => {
-  //   setSelectedLanguage(language); // Update the selected language
-  //   console.log("Selected Language:", getSelectedLanguage()); // Log the updated language
-  // };
   return (
     <>
       <div
@@ -51,7 +51,7 @@ const Index = () => {
           <ul className="z-40">
             <li
               className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
-              // onClick={() => handleLanguageChange("en")}
+              onClick={() => changeLanguage("en")}
             >
               <Image
                 src="/images/abs.svg"
@@ -62,7 +62,7 @@ const Index = () => {
             </li>
             <li
               className="bg-admin-colorLogin p-3 hover:bg-admin-inputBorder"
-              // onClick={() => handleLanguageChange("ru")}
+              onClick={() => changeLanguage("ru")}
             >
               <Image
                 src="/images/ru.svg"
@@ -73,7 +73,7 @@ const Index = () => {
             </li>
             <li
               className="bg-admin-colorLogin p-3 rounded-b-lg hover:bg-admin-inputBorder"
-              // onClick={() => handleLanguageChange("az")}
+              onClick={() => changeLanguage("az")}
             >
               <Image
                 src="/images/az.svg"
